@@ -1,6 +1,10 @@
 # MobilizeAmerica API Pilot
 
-Note: This API is in alpha development, and while we will strive to minimize breaking changes and keep this document up-to-date, we expect there will be some iteration before we land on a public stable version. Please see the Changelog below for changes, and file any issues at this repository: https://github.com/mobilizeamerica/api/issues
+Note: This API is in alpha development, and while we will strive to minimize breaking changes and keep this document up-to-date, we expect there will be some iteration before we land on a public stable version. 
+
+Please see the Changelog below for changes, and file any issues [here](https://github.com/mobilizeamerica/api/issues)
+
+To stay updated on new releases or iterations, join the email list [here](https://groups.google.com/forum/#!forum/mobilizeamerica-api-users)
 
 # Overview
 ## API Entry Point
