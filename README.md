@@ -11,7 +11,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 
 All requests occur through `events.mobilizeamerica.io/api/v1`.
 
-# Format
+## Format
 
 APIs will return responses in JSON, with the following shared format.
 
@@ -23,7 +23,7 @@ APIs will return responses in JSON, with the following shared format.
 | `next`     | url          | The next page if it exists, otherwise `null`.                                                                                            |
 | `previous` | url          | The previous page if it exists, otherwise `null`.                                                                                        |
 
-# Authentication
+## Authentication
 
 For API routes which require authentication (not all do) you must access the API with a key which we will provide you. This key should be passed as the token in a bearer auth header, i.e.:
 
@@ -32,7 +32,7 @@ For API routes which require authentication (not all do) you must access the API
 
 All requests must be made over HTTPS. Requests made with malformed, missing or otherwise incorrect API keys will return HTTP status 403.
 
-# Errors
+## Errors
 
 Error responses will have an object value for the `error` field and `data` will be `null`. We will also return a relevant HTTP status code with each error response.
 
@@ -50,11 +50,11 @@ Here’s an example error response for `/api/v1/events?organization_id=hello`:
         }
     }
     
-# Paging
+## Paging
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
 
-# OSDI compliance
+## OSDI compliance
 
 OSDI is an exciting and important attempt to bring interoperability to the progressive data ecosystem, a cause we heartily support. However, there are a number of data model and format constraints of OSDI that made it a less-than-perfect fit for us and our consumers. While we have opted not to follow strict OSDI formats for our API responses at this stage, we have made our best effort to align field names and structure where possible. For example, many of the Event fields map directly onto OSDI field names. We hope this will make the job of anyone attempting to build an OSDI layer on top of our API easier.
 
@@ -77,7 +77,7 @@ OSDI is an exciting and important attempt to bring interoperability to the progr
 | `created_date`        | int    | Unix timestamp                                                                                                                                                                                |
 | `modified_date`       | int    | Unix timestamp                                                                                                                                                                                |
 
-# List all organizations
+## List all organizations
 
 Status: DRAFT
 
@@ -85,14 +85,14 @@ Return all active organizations on the platform. This endpoint is publicly acces
 
 Requires authentication: No
 
-## Request
+### Request
 `GET /api/v1/organizations`
 
-## Request Params
+### Request Params
 
 - `updated_since`: Unix timestamp of organizations to filter by `modified_date`
 
-## Response
+### Response
 `data` is an array of Organization objects.
 
     {
@@ -118,7 +118,7 @@ Requires authentication: No
     }
 
 
-# List all the organizations promoted by an organization
+## List all the organizations promoted by an organization
 
 Status: DRAFT
 
@@ -126,14 +126,14 @@ Fetches a list of all the organizations that an organization has promoted. This 
 
 Requires authentication: Yes
 
-## Request
+### Request
 `GET /api/v1/organizations/:organization_id/promoted_organizations`
 
-## Request Params
+### Request Params
 
 - None
 
-## Response
+### Response
 `data` is an array of Organization objects.
 
     {
@@ -177,7 +177,7 @@ Requires authentication: Yes
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
 
 
-## Timeslot
+### Timeslot
 
 | Field        | Type | Description    |
 | ------------ | ---- | -------------- |
@@ -186,7 +186,7 @@ Requires authentication: Yes
 | `end_date`   | int  | Unix timestamp |
 
 
-## Location
+### Location
 
 | Field                    | Type     | Description                                                                                                |
 | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
@@ -199,7 +199,7 @@ Requires authentication: Yes
 | `location.latitude`    | float    |                                                                                                            |
 | `location.longitude` | float    |                                                                                                            |
 
-# List all public events
+## List all public events
 
 Status: DRAFT
 
@@ -207,15 +207,15 @@ Fetch all public events on the platform.
 
 Requires authentication: No
 
-## Request
+### Request
 `GET /api/v1/events`
 
-## Request params
+### Request params
 
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 
-## Response
+### Response
 `data` is an array of Event objects.
 
     {
@@ -266,7 +266,7 @@ Requires authentication: No
       ]
     }
 
-# List organization events
+## List organization events
 
 Status: LIVE
 
@@ -274,14 +274,14 @@ Fetch all public events for an organization. This includes both events owned by 
 
 Requires authentication: No
 
-## Request
+### Request
 `GET /api/v1/organizations/:organization_id/events`
 
-## Request params
+### Request params
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 
-## Response
+### Response
 `data` is an array of Event objects.
 
     {
@@ -346,28 +346,28 @@ Requires authentication: No
 | `phone_numbers`    | Phone[]   | Array of length 1 with a phone number |
 | `postal_addresses` | Address[] | Array of length 1 with a zip code     |
 
-## Email
+### Email
 
 | Field     | Type   | Description   |
 | --------- | ------ | ------------- |
 | `primary` | bool   | Always true   |
 | `address` | string | Email address |
 
-## Phone
+### Phone
 
 | Field     | Type   | Description  |
 | --------- | ------ | ------------ |
 | `primary` | bool   | Always true  |
 | `number`  | string | Phone number |
 
-## Address
+### Address
 
 | Field         | Type   | Description |
 | ------------- | ------ | ----------- |
 | `primary`     | bool   | Always true |
 | `postal_code` | string | Zip code    |
 
-# List organization people
+## List organization people
 
 Status: DRAFT
 
@@ -375,14 +375,14 @@ Fetch all people (volunteers) who are affiliated with the organization
 
 Requires authentication: Yes
 
-## Request
+### Request
 `GET /api/v1/organizations/:organization_id/people`
 
-## Request params
+### Request params
 
 - `updated_since`: Unix timestamp to filter by Persons’ `modified_date`
 
-## Response
+### Response
 `data` is an array of Person objects.
 
 # Attendances
@@ -400,7 +400,7 @@ Requires authentication: Yes
 | `status`        | enum         | `REGISTERED`, `CANCELLED`, or `NO_SHOW`                                     |                                                                                                                             |
 | `referrer`      | Referrer     | UTM tracking information                                                    |                                                                                                                             |
 
-## Referrer
+### Referrer
 
 | Field          | Type   | Description |
 | -------------- | ------ | ----------- |
@@ -410,7 +410,7 @@ Requires authentication: Yes
 | `utm_term`     | string |             |
 | `utm_content`  | string |             |
 
-# List organization attendances
+## List organization attendances
 
 Status: DRAFT
 
@@ -418,17 +418,17 @@ Fetch all attendances which were either promoted by the organization or were for
 
 Requires authentication: Yes
 
-## Request
+### Request
 `GET /api/v1/organizations/:organization_id/attendances`
 
-## Request params
+### Request params
 
 - `updated_since`: Unix timestamp to filter by Attendances’ `modified_date`
 
-## Response
+### Response
 `data` is an array of Attendance objects.
 
-# List organization affiliated person’s attendances
+## List organization affiliated person’s attendances
 
 Status: DRAFT
 
@@ -436,14 +436,14 @@ Fetches all attendances that are either for that person with that organization, 
 
 Requires authentication: Yes
 
-## Request
+### Request
 `GET /api/v1/organizations/:organization_id/people/:person_id/attendances`
 
-## Request params
+### Request params
 
 - `updated_since`: Unix timestamp to filter by Attendances’ `modified_date`
 
-## Response
+### Response
 `data` is an array of Attendance objects.
 
 
