@@ -409,6 +409,7 @@ Requires authentication: Yes
 | `utm_campaign` | string |             |
 | `utm_term`     | string |             |
 | `utm_content`  | string |             |
+| `url`          | string |             |
 
 ## List organization attendances
 
@@ -449,9 +450,10 @@ Requires authentication: Yes
 
 # Changelog
 
-**2018-06-03**
+**2018-05-03**
 
 - Add endpoint to fetch promoted organizations 
 - Add endpoint to fetch affiliated people
 - Add endpoint to fetch attendences for an organization
 - Add endpoint to fetch attendences for a person
+- Added `url` to Referrer object
