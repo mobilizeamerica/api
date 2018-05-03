@@ -79,7 +79,7 @@ OSDI is an exciting and important attempt to bring interoperability to the progr
 
 ## List all organizations
 
-Status: DRAFT
+Status: LIVE
 
 Return all active organizations on the platform. This endpoint is publicly accessible.
 
@@ -120,7 +120,7 @@ Requires authentication: No
 
 ## List all the organizations promoted by an organization
 
-Status: DRAFT
+Status: LIVE
 
 Fetches a list of all the organizations that an organization has promoted. This endpoint is accessible only to members of the promoting organization.
 
@@ -201,7 +201,7 @@ Requires authentication: Yes
 
 ## List all public events
 
-Status: DRAFT
+Status: LIVE
 
 Fetch all public events on the platform.
 
@@ -369,7 +369,7 @@ Requires authentication: No
 
 ## List organization people
 
-Status: DRAFT
+Status: LIVE
 
 Fetch all people (volunteers) who are affiliated with the organization
 
@@ -412,7 +412,7 @@ Requires authentication: Yes
 
 ## List organization attendances
 
-Status: DRAFT
+Status: LIVE
 
 Fetch all attendances which were either promoted by the organization or were for events owned by the organization
 
@@ -428,11 +428,11 @@ Requires authentication: Yes
 ### Response
 `data` is an array of Attendance objects.
 
-## List organization affiliated person’s attendances
+## List organization’s affiliated person’s attendances
 
-Status: DRAFT
+Status: LIVE
 
-Fetches all attendances that are either for that person with that organization, or are for public events and were created after the affiliation between the person and the organization began
+Fetches all attendances that are either for that person with that organization, or are for public events and were created after the affiliation between the person and the organization began.
 
 Requires authentication: Yes
 
@@ -448,3 +448,10 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-06-03**
+
+- Add endpoint to fetch promoted organizations 
+- Add endpoint to fetch affiliated people
+- Add endpoint to fetch attendences for an organization
+- Add endpoint to fetch attendences for a person
