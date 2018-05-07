@@ -54,6 +54,10 @@ Here’s an example error response for `/api/v1/events?organization_id=hello`:
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
 
+## Comparison Filters
+
+Some endpoints will allow for filtering by comparing with a field within an object. In those cases, the format will be `field_name=cmp_####`. For example, to filter out events before Jan 1 2018 GMT, you can include `timeslot_start=gte_1514764800`. Multiple may also be used, e.g. `timeslot_start=gte_1514764800&timeslot_start=lt_1515110400`. The comparison operators are ≥ `gte`, > `gt`, ≤ `lte`, < `lt`. More may be added in the future.
+
 ## OSDI compliance
 
 OSDI is an exciting and important attempt to bring interoperability to the progressive data ecosystem, a cause we heartily support. However, there are a number of data model and format constraints of OSDI that made it a less-than-perfect fit for us and our consumers. While we have opted not to follow strict OSDI formats for our API responses at this stage, we have made our best effort to align field names and structure where possible. For example, many of the Event fields map directly onto OSDI field names. We hope this will make the job of anyone attempting to build an OSDI layer on top of our API easier.
@@ -220,6 +224,7 @@ Requires authentication: No
 
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+- `timeslot_start`: DRAFT Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 
 ### Response
 `data` is an array of Event objects.
@@ -286,6 +291,7 @@ Requires authentication: No
 ### Request params
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+- `timeslot_start`: DRAFT Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 
 ### Response
 `data` is an array of Event objects.
@@ -491,6 +497,12 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-05-08 DRAFT**
+
+- Add endpoint for deleted events
+- Add endpoint for deleted events for an organization and its promoted organizations
+- Add filtering by comparisons for timeslot start dates on events
 
 **2018-05-03**
 
