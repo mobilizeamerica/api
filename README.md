@@ -169,7 +169,7 @@ Requires authentication: Yes
 | `featured_image_url` | string       | Path to the image for the event                                                                                                                         |
 | `sponsor`            | Organization | The owning Organization, with the fields defined above                                                                                                  |
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
-| `location`         | Location     | The event location, or `null` if the event is virtual                                                                                                   |
+| `location`           | Location     | The event location, or `null` if the event is virtual                                                                                                   |
 | `timezone`           | string       | A timezone database string for the event, e.g., `America/New_York`.                                                                                     |
 | `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `OTHER`. This list may expand. |
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
@@ -193,11 +193,17 @@ Requires authentication: Yes
 | `venue`                  | string   | The name of the location, e.g., “Campaign HQ” or “Starbucks”                                               |
 | `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. |
 | `locality`               | string   | The city                                                                                                   |
-| `region`             | string   | The two-character state code                                                                               |
+| `region`                 | string   | The two-character state code                                                                               |
 | `postal_code`            | string   | The zipcode                                                                                                |
 | `location`               | object   | The geocoded location, or `null` if geocoding failed.                                                      |
-| `location.latitude`    | float    |                                                                                                            |
-| `location.longitude` | float    |                                                                                                            |
+| `location.latitude`      | float    |                                                                                                            |
+| `location.longitude`     | float    |                                                                                                            |
+
+### Deleted Event
+| Field          | Type | Description    |
+| -------------- | ---- | -------------- |
+| `id`           | int  |                |
+| `deleted_date` | int  | Unix timestamp |
 
 ## List all public events
 
@@ -264,7 +270,7 @@ Requires authentication: No
         },
         ...
       ]
-    }
+    }   
 
 ## List organization events
 
@@ -332,6 +338,42 @@ Requires authentication: No
       ]
     }
 
+## List deleted public events
+
+Status: DRAFT
+
+Fetch deleted public events on the platform.
+
+Requires authentication: No
+
+### Request
+`GET /api/v1/events/deleted`
+
+### Request params
+
+- `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
+- `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+
+### Response
+`data` is an array of Deleted Event objects.
+
+## List deleted organization events
+
+Status: DRAFT
+
+Fetch all deleted public events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization.
+
+Requires authentication: No
+
+### Request
+`GET /api/v1/organizations/:organization_id/events/deleted`
+
+### Request params
+
+- `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+
+### Response
+`data` is an array of Deleted Event objects.
 
 # People
 ## Person object
