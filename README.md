@@ -498,7 +498,7 @@ Requires authentication: Yes
 
 # Changelog
 
-**2018-05-08 **
+**2018-05-08**
 
 - Add endpoint for deleted events
 - Add endpoint for deleted events for an organization and its promoted organizations
