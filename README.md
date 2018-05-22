@@ -442,10 +442,11 @@ Requires authentication: Yes
 | `created_date`  | int          | Unix timestamp                                                              |                                                                                                                             |
 | `modified_date` | int          | Unix timestamp                                                              |                                                                                                                             |
 | `person`        | Person       | Person who attended the event                                               |                                                                                                                             |
-| `event`         | Event        | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted. |
-| `timeslot`      | Timeslot     | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.                 |
-| `sponsor`       | Organization | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.               |
+| `event`         | Event        | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted.  |
+| `timeslot`      | Timeslot     | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.              |
+| `sponsor`       | Organization | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.              |
 | `status`        | enum         | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
+| `attended`      | bool         | Whether the person actually attended or not                                 |                                                                                                                             |
 | `referrer`      | Referrer     | UTM tracking information                                                    |                                                                                                                             |
 
 ### Referrer
@@ -497,6 +498,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-05-23**
+- Add `attended` to Attendance object
 
 **2018-05-08**
 
