@@ -445,7 +445,7 @@ Requires authentication: Yes
 | `event`         | Event        | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted. |
 | `timeslot`      | Timeslot     | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.                 |
 | `sponsor`       | Organization | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.               |
-| `status`        | enum         | `REGISTERED`, `CANCELLED`, or `COMPLETED`                                   |                                                                                                                             |
+| `status`        | enum         | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
 | `referrer`      | Referrer     | UTM tracking information                                                    |                                                                                                                             |
 
 ### Referrer
