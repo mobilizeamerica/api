@@ -446,7 +446,7 @@ Requires authentication: Yes
 | `timeslot`      | Timeslot     | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.              |
 | `sponsor`       | Organization | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.              |
 | `status`        | enum         | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
-| `attended`      | bool         | Whether the person actually attended or not                                 |                                                                                                                             |
+| `attended`      | bool         | Whether the person actually attended or not. Will be `null` if not set.     |                                                                                                                             |
 | `referrer`      | Referrer     | UTM tracking information                                                    |                                                                                                                             |
 
 ### Referrer
