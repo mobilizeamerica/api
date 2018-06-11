@@ -393,6 +393,9 @@ Requires authentication: No
 | `email_addresses`  | Email[]   | Array of length 1 with an email       |
 | `phone_numbers`    | Phone[]   | Array of length 1 with a phone number |
 | `postal_addresses` | Address[] | Array of length 1 with a zip code     |
+| `sms_opt_in_status`| enum      | For the current organization; one of `UNSPECIFIED`, `OPT_IN` or `OPT_OUT` |
+
+##
 
 ### Email
 
@@ -498,6 +501,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-06-11**
+- Add `sms_opt_in_status` to Person object
 
 **2018-05-23**
 - Add `attended` to Attendance object
