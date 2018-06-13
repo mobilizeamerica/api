@@ -49,7 +49,7 @@ Here’s an example error response for `/api/v1/events?organization_id=hello`:
             }
         }
     }
-    
+
 ## Paging
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
@@ -171,6 +171,7 @@ Requires authentication: Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                      |
 | `description`        | string       | Long-form HTML description of the event                                                                                                                 |
 | `featured_image_url` | string       | Path to the image for the event                                                                                                                         |
+| `high_priority`      | bool         | Whether the event is marked high priority for the provided organization                                                                                 |
 | `sponsor`            | Organization | The owning Organization, with the fields defined above                                                                                                  |
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
 | `location`           | Location     | The event location, or `null` if the event is virtual                                                                                                   |
@@ -239,6 +240,7 @@ Requires authentication: No
           "title": "Example",
           "summary": "",
           "featured_image_url": "",
+          "high_priority": null,
           "sponsor": {
             Organization object
           },
@@ -306,6 +308,7 @@ Requires authentication: No
           "title": "Example",
           "summary": "",
           "featured_image_url": "",
+          "high_priority": true,
           "sponsor": {
             Organization object
           },
@@ -502,6 +505,9 @@ Requires authentication: Yes
 
 # Changelog
 
+**2018-06-14**
+- Add `high_priority` to Event object
+
 **2018-06-11**
 - Add `sms_opt_in_status` to Person object
 
@@ -516,7 +522,7 @@ Requires authentication: Yes
 
 **2018-05-03**
 
-- Add endpoint to fetch promoted organizations 
+- Add endpoint to fetch promoted organizations
 - Add endpoint to fetch affiliated people
 - Add endpoint to fetch attendences for an organization
 - Add endpoint to fetch attendences for a person
