@@ -226,6 +226,7 @@ Requires authentication: No
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
+- `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 
 ### Response
 `data` is an array of Event objects.
@@ -294,6 +295,7 @@ Requires authentication: No
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
+- `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 
 ### Response
 `data` is an array of Event objects.
@@ -504,6 +506,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-07-10**
+- Add `timeslot_end` filter to public events and organization events endpoints
 
 **2018-06-14**
 - Add `high_priority` to Event object
