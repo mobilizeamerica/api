@@ -507,7 +507,7 @@ Requires authentication: Yes
 
 # Changelog
 
-**2018-07-10**
+**2018-07-11**
 - Add `timeslot_end` filter to public events and organization events endpoints
 
 **2018-06-14**
