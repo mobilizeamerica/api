@@ -509,7 +509,7 @@ Requires authentication: Yes
 
 # Changelog
 
-**2018-08-08**
+**2018-08-09**
 - Add ability to pass "now" in place of a Unix timestamp in timestamp comparison filters
 
 **2018-07-11**
