@@ -58,6 +58,8 @@ All endpoints support paging, using the query params `per_page` and `page`. `per
 
 Some endpoints will allow for filtering by comparing with a field within an object. In those cases, the format will be `field_name=cmp_####`. For example, to filter out events before Jan 1 2018 GMT, you can include `timeslot_start=gte_1514764800`. Multiple may also be used, e.g. `timeslot_start=gte_1514764800&timeslot_start=lt_1515110400`. The comparison operators are ≥ `gte`, > `gt`, ≤ `lte`, < `lt`. More may be added in the future.
 
+For timestamp comparisons, the string "now" can be passed in place of a Unix timestamp to have the server compute the current time, e.g., `timeslot_start=gte_now`.
+
 ## OSDI compliance
 
 OSDI is an exciting and important attempt to bring interoperability to the progressive data ecosystem, a cause we heartily support. However, there are a number of data model and format constraints of OSDI that made it a less-than-perfect fit for us and our consumers. While we have opted not to follow strict OSDI formats for our API responses at this stage, we have made our best effort to align field names and structure where possible. For example, many of the Event fields map directly onto OSDI field names. We hope this will make the job of anyone attempting to build an OSDI layer on top of our API easier.
@@ -506,6 +508,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-08-08**
+- Add ability to pass `now` in place of a Unix timestamp for filtering
 
 **2018-07-11**
 - Add `timeslot_end` filter to public events and organization events endpoints
