@@ -510,7 +510,7 @@ Requires authentication: Yes
 # Changelog
 
 **2018-08-08**
-- Add ability to pass `now` in place of a Unix timestamp for filtering
+- Add ability to pass "now" in place of a Unix timestamp in timestamp comparison filters
 
 **2018-07-11**
 - Add `timeslot_end` filter to public events and organization events endpoints
