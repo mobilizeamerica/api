@@ -229,6 +229,8 @@ Requires authentication: No
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
+- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
+- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Event objects.
@@ -298,6 +300,8 @@ Requires authentication: No
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
+- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
+- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Event objects.
@@ -366,6 +370,8 @@ Requires authentication: No
 
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
+- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -384,6 +390,8 @@ Requires authentication: No
 ### Request params
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
+- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
+- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -508,6 +516,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-08-23**
+- Add filtering of events by zipcode and optional maxmium distance away from that zipcode
 
 **2018-08-09**
 - Add ability to pass "now" in place of a Unix timestamp in timestamp comparison filters
