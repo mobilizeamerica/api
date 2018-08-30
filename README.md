@@ -6,6 +6,70 @@ Please see the [Changelog](#changelog) below for changes, and file any issues [h
 
 To stay updated on new releases or iterations, join the email list [here](https://groups.google.com/forum/#!forum/mobilizeamerica-api-users)
 
+# Table of Contents
+- [MobilizeAmerica API Pilot](#mobilizeamerica-api-pilot)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+    - [API Entry Point](#api-entry-point)
+    - [Format](#format)
+    - [Authentication](#authentication)
+    - [Errors](#errors)
+    - [Paging](#paging)
+    - [Comparison Filters](#comparison-filters)
+    - [OSDI compliance](#osdi-compliance)
+- [Organizations](#organizations)
+    - [Organization object](#organization-object)
+    - [List all organizations](#list-all-organizations)
+        - [Request](#request)
+        - [Request Params](#request-params)
+        - [Response](#response)
+    - [List all the organizations promoted by an organization](#list-all-the-organizations-promoted-by-an-organization)
+        - [Request](#request-1)
+        - [Request Params](#request-params-1)
+        - [Response](#response-1)
+- [Events](#events)
+    - [Event object](#event-object)
+        - [Timeslot](#timeslot)
+        - [Location](#location)
+        - [Deleted Event](#deleted-event)
+    - [List all public events](#list-all-public-events)
+        - [Request](#request-2)
+        - [Request params](#request-params)
+        - [Response](#response-2)
+    - [List organization events](#list-organization-events)
+        - [Request](#request-3)
+        - [Request params](#request-params-1)
+        - [Response](#response-3)
+    - [List deleted public events](#list-deleted-public-events)
+        - [Request](#request-4)
+        - [Request params](#request-params-2)
+        - [Response](#response-4)
+    - [List deleted organization events](#list-deleted-organization-events)
+        - [Request](#request-5)
+        - [Request params](#request-params-3)
+        - [Response](#response-5)
+- [People](#people)
+    - [Person object](#person-object)
+        - [Email](#email)
+        - [Phone](#phone)
+        - [Address](#address)
+    - [List organization people](#list-organization-people)
+        - [Request](#request-6)
+        - [Request params](#request-params-4)
+        - [Response](#response-6)
+- [Attendances](#attendances)
+    - [Attendance object](#attendance-object)
+        - [Referrer](#referrer)
+    - [List organization attendances](#list-organization-attendances)
+        - [Request](#request-7)
+        - [Request params](#request-params-5)
+        - [Response](#response-7)
+    - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
+        - [Request](#request-8)
+        - [Request params](#request-params-6)
+        - [Response](#response-8)
+- [Changelog](#changelog)
+
 # Overview
 ## API Entry Point
 
@@ -282,7 +346,7 @@ Requires authentication: No
         },
         ...
       ]
-    }   
+    }
 
 ## List organization events
 
@@ -409,8 +473,6 @@ Requires authentication: No
 | `phone_numbers`    | Phone[]   | Array of length 1 with a phone number |
 | `postal_addresses` | Address[] | Array of length 1 with a zip code     |
 | `sms_opt_in_status`| enum      | For the current organization; one of `UNSPECIFIED`, `OPT_IN` or `OPT_OUT` |
-
-##
 
 ### Email
 
