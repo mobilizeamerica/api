@@ -259,19 +259,19 @@ Requires authentication: Yes
 
 ### Location
 
-| Field                          | Type     | Description                                                                                                |
-| ------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `venue`                        | string   | The name of the location, e.g., “Campaign HQ” or “Starbucks”                                               |
-| `address_lines`                | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. |
-| `locality`                     | string   | The city                                                                                                   |
-| `region`                       | string   | The two-character state code                                                                               |
-| `postal_code`                  | string   | The zipcode                                                                                                |
-| `location`                     | object   | The geocoded location, or `null` if geocoding failed.                                                      |
-| `location.latitude`            | float    |                                                                                                            |
-| `location.longitude`           | float    |                                                                                                            |
-| `congressional_district_value` | string   | The Congressional District (requires a valid street address)                                               |
-| `state_leg_district_value`     | string   | The State Lower House district (requires a valid street address)                                           |
-| `state_senate_district_value`  | string   | The State Upper House/State Senate district (requires a valid street address)                              |
+| Field                    | Type     | Description                                                                                                |
+| ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
+| `venue`                  | string   | The name of the location, e.g., “Campaign HQ” or “Starbucks”                                               |
+| `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. |
+| `locality`               | string   | The city                                                                                                   |
+| `region`                 | string   | The two-character state code                                                                               |
+| `postal_code`            | string   | The zipcode                                                                                                |
+| `location`               | object   | The geocoded location, or `null` if geocoding failed.                                                      |
+| `location.latitude`      | float    |                                                                                                            |
+| `location.longitude`     | float    |                                                                                                            |
+| `congressional_district` | string   | The Congressional district, or `null` if geocoding failed or no street address was provided                |
+| `state_leg_district`     | string   | The State Lower House district, or `null` if geocoding failed or no street address was provided            |
+| `state_senate_district`  | string   | The State Upper House/Senate district, or `null` if geocoding failed or no street address was provided     |
 
 ### Deleted Event
 | Field          | Type | Description    |
