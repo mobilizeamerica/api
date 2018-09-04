@@ -331,7 +331,7 @@ Requires authentication: No
           "location": {
               "venue": "",
               "address_lines": [
-                  "",
+                  "204 E 13th St",
                   ""
               ],
               "locality": "",
@@ -405,7 +405,7 @@ Requires authentication: No
           "location": {
               "venue": "",
               "address_lines": [
-                  "",
+                  "204 E 13th St",
                   ""
               ],
               "locality": "",
