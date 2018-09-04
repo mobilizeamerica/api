@@ -588,8 +588,11 @@ Requires authentication: Yes
 
 # Changelog
 
+**2018-09-04**
+- Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
+
 **2018-08-23**
-- Add filtering of events by zipcode and optional maxmium distance away from that zipcode
+- Add filtering of events by zipcode and optional maximum distance away from that zipcode
 
 **2018-08-09**
 - Add ability to pass "now" in place of a Unix timestamp in timestamp comparison filters
