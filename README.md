@@ -48,26 +48,39 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Request](#request-5)
         - [Request params](#request-params-3)
         - [Response](#response-5)
+    - [Create event](#create-event)
+        - [Request](#request-6)
+        - [Request body](#request-body)
+        - [Request body example](#request-body-example)
+        - [Response](#response-6)
+    - [Update event](#update-event)
+        - [Request](#request-7)
+        - [Request body](#request-body-1)
+        - [Request body example](#request-body-example-1)
+        - [Response](#response-7)
+    - [Delete event](#delete-event)
+        - [Request](#request-8)
+        - [Response](#response-8)
 - [People](#people)
     - [Person object](#person-object)
         - [Email](#email)
         - [Phone](#phone)
         - [Address](#address)
     - [List organization people](#list-organization-people)
-        - [Request](#request-6)
+        - [Request](#request-9)
         - [Request params](#request-params-4)
-        - [Response](#response-6)
+        - [Response](#response-9)
 - [Attendances](#attendances)
     - [Attendance object](#attendance-object)
         - [Referrer](#referrer)
     - [List organization attendances](#list-organization-attendances)
-        - [Request](#request-7)
+        - [Request](#request-10)
         - [Request params](#request-params-5)
-        - [Response](#response-7)
+        - [Response](#response-10)
     - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
-        - [Request](#request-8)
+        - [Request](#request-11)
         - [Request params](#request-params-6)
-        - [Response](#response-8)
+        - [Response](#response-11)
 - [Changelog](#changelog)
 
 # Overview
@@ -469,6 +482,146 @@ Requires authentication: No
 ### Response
 `data` is an array of Deleted Event objects.
 
+## Create event
+
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
+
+Create a new in-person Event for an given organization.
+
+Requires authentication: Yes
+
+### Request
+`POST /api/v1/organizations/:organization_id/events`
+
+### Request body
+
+| Field                | Type         | Description                                                                                                                                             | Required |
+| -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
+| `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
+| `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
+| `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
+| `timeslots`          | Timeslot[]   | Array of past and future timeslots. Timeslots must be in Unix time.                                                                                                                                     | Yes
+| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.   | Yes
+| `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
+| `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`.  | Yes
+| `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                                                                               | Yes
+
+### Request body example
+
+    {
+        "title": "Example",
+        "description": "example",
+        "timezone": "America/New_York",
+        "summary": "",
+        "timeslots": [
+            {
+                "start_date": 1537986600,
+                "end_date": 1537986601
+            },
+            {
+                "start_date": 1537986600,
+                "end_date": 1537986601,
+            }
+        ],
+        "location": {
+            "venue": "",
+            "address_lines": [
+                "",
+                ""
+            ],
+            "locality": "",
+            "region": "",
+            "postal_code": "10003"
+        },
+        "event_type": "CANVASS",
+        "visibility": "PUBLIC"
+    }
+
+### Response
+`data` will contain the newly created Event object.
+
+## Update event
+
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
+
+Update an in-person event for an organization. `event_id` refers to the `id` field in the Event object.
+
+Note that all editable fields must be specified, otherwise they will be removed (e.g. an existing `timeslot`) or set to null (e.g. the `summary` field).
+
+Requires authentication: Yes
+
+### Request
+`PUT /api/v1/organizations/:organization_id/events/:event_id`
+
+### Request body
+| Field                | Type         | Description                                                                                                                                             | Required |
+| -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
+| `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
+| `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
+| `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
+| `timeslots`          | Timeslot[]   | Array of past and future timeslots. Timeslots must be a valid Unix timestamp. Any existing timeslots that are not present in the `timeslots` array will be deleted. Existing timeslots may be updated by including the `id` field in the `timeslot` object.                                                                                                                                     | Yes
+| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object.                                       | Yes
+| `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
+| `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`.  | Yes
+| `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                                                                               | Yes
+
+### Request body example
+
+    {
+        "title": "Example",
+        "description": "example",
+        "timezone": "America/New_York",
+        "summary": "Short summary for my event",
+        "timeslots": [
+            {
+                "id": 2000,
+                "start_date": 1537986600,
+                "end_date": 1537986601
+            },
+            {
+                "start_date": 1537986600,
+                "end_date": 1537986601,
+            }
+        ],
+        "location": {
+            "venue": "Meet at Central Park",
+            "address_lines": [
+                "",
+                ""
+            ],
+            "locality": "New York City",
+            "region": "NY",
+            "postal_code": "10003"
+        },
+        "event_type": "CANVASS",
+        "visibility": "PUBLIC"
+    }
+
+### Response
+If the `event_id` does not identify an existing event, the endpoint will return a `404 Not Found` response.
+
+`data` will contain the updated Event object on a successful request.
+
+## Delete event
+
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
+
+Delete an in-person event for an organization.
+
+Requires authentication: Yes
+
+### Request
+`DELETE /api/v1/organizations/:organization_id/events/:event_id`
+
+### Response
+On success, the endpoint will return with status code `200 OK`.
+
 # People
 ## Person object
 | Field              | Type      | Description                           |
@@ -591,6 +744,11 @@ Requires authentication: Yes
 **2018-09-04**
 - Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
 
+**2018-09-03**
+- Add endpoint to create new event
+- Add endpoint to update existing event
+- Add endpoint to delete event
+
 **2018-08-23**
 - Add filtering of events by zipcode and optional maximum distance away from that zipcode
 
@@ -619,6 +777,6 @@ Requires authentication: Yes
 
 - Add endpoint to fetch promoted organizations
 - Add endpoint to fetch affiliated people
-- Add endpoint to fetch attendences for an organization
-- Add endpoint to fetch attendences for a person
+- Add endpoint to fetch attendances for an organization
+- Add endpoint to fetch attendances for a person
 - Added `url` to Referrer object
