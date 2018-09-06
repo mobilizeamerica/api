@@ -282,6 +282,9 @@ Requires authentication: Yes
 | `location`               | object   | The geocoded location, or `null` if geocoding failed.                                                      |
 | `location.latitude`      | float    |                                                                                                            |
 | `location.longitude`     | float    |                                                                                                            |
+| `congressional_district` | string   | The Congressional district, or `null` if geocoding failed or no street address was provided                |
+| `state_leg_district`     | string   | The State Lower House district, or `null` if geocoding failed or no street address was provided            |
+| `state_senate_district`  | string   | The State Upper House/Senate district, or `null` if geocoding failed or no street address was provided     |
 
 ### Deleted Event
 | Field          | Type | Description    |
@@ -341,7 +344,7 @@ Requires authentication: No
           "location": {
               "venue": "",
               "address_lines": [
-                  "",
+                  "204 E 13th St",
                   ""
               ],
               "locality": "",
@@ -350,7 +353,10 @@ Requires authentication: No
               "location": {
                   "latitude": 40.7322535,
                   "longitude": -73.9874105
-              }
+              },
+              "congressional_district_value": "12",
+              "state_leg_district_value": "66",
+              "state_senate_district_value": "27",
           },
           "event_type": "CANVASS",
           "created_date": 1,
@@ -412,7 +418,7 @@ Requires authentication: No
           "location": {
               "venue": "",
               "address_lines": [
-                  "",
+                  "204 E 13th St",
                   ""
               ],
               "locality": "",
@@ -421,7 +427,10 @@ Requires authentication: No
               "location": {
                   "latitude": 40.7322535,
                   "longitude": -73.9874105
-              }
+              },
+              "congressional_district_value": "12",
+              "state_leg_district_value": "66",
+              "state_senate_district_value": "27",
           },
           "event_type": "CANVASS",
           "created_date": 1,
@@ -731,6 +740,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-09-04**
+- Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
 
 **2018-09-03**
 - Add endpoint to create new event
