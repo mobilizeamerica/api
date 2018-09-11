@@ -741,6 +741,9 @@ Requires authentication: Yes
 
 # Changelog
 
+**2018-09-11**
+- Expanded list of available event types: CANVASS, PHONE_BANK, TEXT_BANK, MEETING, COMMUNITY, FUNDRAISER, MEET_GREET, HOUSE_PARTY, VOTER_REG, TRAINING, FRIEND_TO_FRIEND_OUTREACH, OTHER
+
 **2018-09-04**
 - Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
 
