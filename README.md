@@ -255,7 +255,7 @@ Requires authentication: Yes
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
 | `location`           | Location     | The event location, or `null` if the event is virtual                                                                                                   |
 | `timezone`           | string       | A timezone database string for the event, e.g., `America/New_York`.                                                                                     |
-| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `OTHER`. This list may expand. |
+| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`. This list may expand. |
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
@@ -740,6 +740,9 @@ Requires authentication: Yes
 
 
 # Changelog
+
+**2018-09-11**
+- Expanded list of available event types: CANVASS, PHONE_BANK, TEXT_BANK, MEETING, COMMUNITY, FUNDRAISER, MEET_GREET, HOUSE_PARTY, VOTER_REG, TRAINING, FRIEND_TO_FRIEND_OUTREACH, OTHER
 
 **2018-09-04**
 - Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
