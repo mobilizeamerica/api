@@ -759,7 +759,9 @@ Requires authentication: Yes
 
 ## Create organization event attendance
 
-Status: RESTRICTED?
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
 
 This event creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
 
@@ -938,6 +940,8 @@ Requires authentication: Yes
 ## Create organization affiliations
 
 Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
 
 This endpoint creates a new affiliation between the given person and organization, or updates a person’s contact information if an affiliation already exists. The person is matched and deduplicated by their email address.
 
