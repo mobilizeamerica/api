@@ -763,7 +763,7 @@ Status: RESTRICTED
 
 Please email support@mobilizeamerica.io to request access to this endpoint.
 
-This event creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
+This endpoint creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
 
 
 Requires authentication: Yes
@@ -775,7 +775,7 @@ Requires authentication: Yes
 
 | Field             | Type     | Description                                                                                                                                                                                                                                                                                                                                     | Required                       |
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| person            | Person   | Contains `given_name`, `family_name`, `email_address`, `phone_number`, and `zipcode` fields. All fields are required. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
+| person            | Person   | Contains `given_name`, `family_name`, `email_address`, `phone_number`, and `postal_code` fields. All fields are required. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in_status | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
 | timeslots         | int[]    | Array of `timeslot` IDs. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
 | referrer          | Referrer | Contains `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, and `url` fields. All fields are optional.                                                                                                                                                                                                                      | No                             |
@@ -789,7 +789,7 @@ Requires authentication: Yes
             "family_name": "mylastname",
             "email_address": "email@email.com",
             "phone_number": "1234567890",
-            "zipcode": "11111"
+            "postal_code": "11111"
         },
         "sms_opt_in_status": "OPT_IN",
         "timeslots": [
