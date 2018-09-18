@@ -31,6 +31,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Event object](#event-object)
         - [Timeslot](#timeslot)
         - [Location](#location)
+        - [Contact](#contact)
         - [Deleted Event](#deleted-event)
     - [List all public events](#list-all-public-events)
         - [Request](#request-2)
@@ -286,6 +287,17 @@ Requires authentication: Yes
 | `state_leg_district`     | string   | The State Lower House district, or `null` if geocoding failed or no street address was provided            |
 | `state_senate_district`  | string   | The State Upper House/Senate district, or `null` if geocoding failed or no street address was provided     |
 
+
+### Contact
+The Contact object will return `null` for unauthenticated requests.
+
+| Field            | Type    | Description                                     |
+| ---------------- | ------- | ----------------------------------------------- |
+| `name`           | string  | The name of the contact for the event.          |
+| `email_adddress` | string  | The email address of the contact for the event. |
+| `phone_number`   | string  | The phone number of the contact for the event.  |
+
+
 ### Deleted Event
 | Field          | Type | Description    |
 | -------------- | ---- | -------------- |
@@ -363,6 +375,11 @@ Requires authentication: No
           "modified_date": 1,
           "browser_url": "https://events.mobilizeamerica.io/event/1/"
         },
+         "contact": {
+          "name": "",
+          "email_address": "replyto@thisemail.org",
+          "phone_number": "1234567890"
+        },
         ...
       ]
     }
@@ -436,6 +453,11 @@ Requires authentication: No
           "created_date": 1,
           "modified_date": 1,
           "browser_url": "https://events.mobilizeamerica.io/event/1/"
+        },
+         "contact": {
+          "name": "",
+          "email_address": "replyto@thisemail.org",
+          "phone_number": "1234567890"
         },
         ...
       ]
@@ -536,7 +558,10 @@ Requires authentication: Yes
             "postal_code": "10003"
         },
         "event_type": "CANVASS",
-        "visibility": "PUBLIC"
+        "visibility": "PUBLIC",
+        "contact": {
+            "email_address": "replyto@thisemail.com"
+        }
     }
 
 ### Response
@@ -743,6 +768,9 @@ Requires authentication: Yes
 
 **2018-09-11**
 - Expanded list of available event types: CANVASS, PHONE_BANK, TEXT_BANK, MEETING, COMMUNITY, FUNDRAISER, MEET_GREET, HOUSE_PARTY, VOTER_REG, TRAINING, FRIEND_TO_FRIEND_OUTREACH, OTHER
+
+**2018-09-05**
+- Add contact information to Event object, returned only for authenticated requests
 
 **2018-09-04**
 - Add `congressional_district`, `state_leg_district`, and `state_senate_district` to Event Location object.
