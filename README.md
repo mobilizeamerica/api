@@ -78,10 +78,24 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Request](#request-10)
         - [Request params](#request-params-5)
         - [Response](#response-10)
-    - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
+    - [Create organization event attendance](#create-organization-event-attendance)
         - [Request](#request-11)
-        - [Request params](#request-params-6)
+        - [Request body](#request-body-2)
+        - [Person attendance object](#person-attendance-object)
+        - [Referrer object](#referrer-object)
+        - [Example request body](#example-request-body)
         - [Response](#response-11)
+        - [Response Body Example](#response-body-example)
+    - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
+        - [Request](#request-12)
+        - [Request params](#request-params-6)
+        - [Response](#response-12)
+- [Affiliation](#affiliation)
+    - [Create organization affiliations](#create-organization-affiliations)
+        - [Request](#request-13)
+        - [Request body](#request-body-3)
+        - [Request body example](#request-body-example-2)
+        - [Response](#response-13)
 - [Changelog](#changelog)
 
 # Overview
@@ -745,6 +759,185 @@ Requires authentication: Yes
 ### Response
 `data` is an array of Attendance objects.
 
+## Create organization event attendance
+
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
+
+This endpoint creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
+
+
+Requires authentication: Yes
+
+### Request
+`POST /api/v1/organizations/:organization_id/events/:event_id/attendances`
+
+### Request body
+
+| Field             | Type     | Description                                                                                                                                                                                                                                                                                                                                     | Required                       |
+| ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| person            | AttendancePerson   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
+| sms_opt_in_status | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
+| timeslots         | int[]    | Array of `timeslot` IDs. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
+| referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
+
+### Person attendance object
+
+| Field            | Type   | Description | Required
+| ---------------- | ------ | ----------- | --------
+| `given_name`     | string |             | Yes
+| `friendly_name`  | string |             | Yes
+| `email_address`  | string |             | Yes
+| `phone_number`   | string |             | Yes
+| `postal_code`    | string |             | Yes
+
+### Referrer object
+
+| Field          | Type   | Description | Required
+| -------------- | ------ | ----------- | --------
+| `utm_source`   | string |             | No
+| `utm_medium`   | string |             | No
+| `utm_campaign` | string |             | No
+| `utm_term`     | string |             | No
+| `utm_content`  | string |             | No
+| `url`          | string |             | No
+
+### Example request body
+
+    {
+        "person": {
+            "given_name": "myfirstname",
+            "family_name": "mylastname",
+            "email_address": "email@email.com",
+            "phone_number": "1234567890",
+            "postal_code": "11111"
+        },
+        "sms_opt_in_status": "OPT_IN",
+        "timeslots": [
+            {
+                "timeslot_id": 1
+            }
+        ],
+        "referrer": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "string",
+            "utm_term": "string",
+            "utm_content": "string",
+            "url": "string"
+        }
+    }
+
+### Response
+
+If the event, organization, or any timeslots do not refer to existing and valid objects, the endpoint will return a 400 Bad Request error with a reference to the invalid fields.
+
+On a successful request, the endpoint will return a 201 Created status code and the newly created Attendance object(s).
+
+### Response Body Example
+
+    {
+        "data": [
+            {
+                "id": 198,
+                "attended": null,
+                "created_date": 1536588703,
+                "modified_date": 1536588703,
+                "person": {
+                    "id": 57,
+                    "created_date": 1536249605,
+                    "modified_date": 1536588703,
+                    "given_name": "myfirstname",
+                    "family_name": "mylastname",
+                    "email_addresses": [
+                        {
+                            "primary": true,
+                            "address": "email@email.com"
+                        }
+                    ],
+                    "phone_numbers": [
+                        {
+                            "primary": true,
+                            "number": "1234567890"
+                        }
+                    ],
+                    "postal_addresses": [
+                        {
+                            "primary": true,
+                            "postal_code": "11111"
+                        }
+                    ],
+                    "sms_opt_in_status": "OPT_IN"
+                },
+                "event": {
+                    "id": 345,
+                    "description": "abacde",
+                    "timezone": "America/Chicago",
+                    "title": "abcdef",
+                    "summary": "",
+                    "featured_image_url": "",
+                    "sponsor": {
+                        "id": 15,
+                        "name": "My campaign",
+                        "slug": "campaign123",
+                        "is_coordinated": true,
+                        "is_independent": false,
+                        "is_primary_campaign": false,
+                        "state": "",
+                        "district": "",
+                        "candidate_name": "",
+                        "race_type": null,
+                        "event_feed_url": "events.campaign.com",
+                        "created_date": 1517329224,
+                        "modified_date": 1536160166
+                    },
+                    "timeslots": null,
+                    "location": {
+                        ...
+                    },
+                    "event_type": "TRAINING",
+                    "created_date": 1535987085,
+                    "modified_date": 1535987575,
+                    "browser_url": "events.campaign.com/event/345/",
+                    "high_priority": null,
+                    "contact": null
+                },
+                "timeslot": {
+                    "id": 1,
+                    "start_date": 1536679800,
+                    "end_date": 1536690600
+                },
+                "sponsor": {
+                    "id": 15,
+                    "name": "Campaign",
+                    "slug": "campaign123",
+                    "is_coordinated": true,
+                    "is_independent": false,
+                    "is_primary_campaign": false,
+                    "state": "",
+                    "district": "",
+                    "candidate_name": "",
+                    "race_type": null,
+                    "event_feed_url": "events.campaign.com",
+                    "created_date": 1517329224,
+                    "modified_date": 1536160166
+                },
+                "status": "REGISTERED",
+                "referrer": {
+                    "utm_source": null,
+                    "utm_medium": null,
+                    "utm_campaign": "string",
+                    "utm_term": "string",
+                    "utm_content": "string",
+                    "url": "string"
+                }
+            }
+        ],
+        "error": null
+    }
+
+
 ## List organization’s affiliated person’s attendances
 
 Status: LIVE
@@ -763,8 +956,65 @@ Requires authentication: Yes
 ### Response
 `data` is an array of Attendance objects.
 
+# Affiliation
+
+
+## Create organization affiliations
+
+Status: RESTRICTED
+
+Please email support@mobilizeamerica.io to request access to this endpoint.
+
+This endpoint creates a new affiliation between the given person and organization, or updates a person’s contact information if an affiliation already exists. The person is matched and deduplicated by their email address.
+
+Requires authentication: Yes
+
+### Request
+`POST /api/v1/organizations/:organization_id/affiliations`
+
+### Request body
+| Field             | Type   | Description                                       | Required |
+| ----------------- | ------ | ------------------------------------------------- | -------- |
+| given_name        | string | The first name of the person.                     | Yes      |
+| family_name       | string | The last name of the person.                      | Yes      |
+| email_address     | string | The email address of the person.                  | Yes      |
+| phone_number      | string | The phone number of the person.                   | Yes      |
+| address_line_1    | string | The first address line of the person’s location.  | No       |
+| address_line_2    | string | The second address line of the person’s location. | No       |
+| locality          | string | The city of the person’s location.                | No       |
+| region            | string | The U.S. state of the person’s location.          | No       |
+| postal_code       | string | The zipcode of the person’s location.             | Yes      |
+| sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
+
+
+### Request body example
+
+    {
+        "person": {
+            "given_name": "myfirstname",
+            "family_name": "mylastname",
+            "email_address": "email@email.com",
+            "phone_number": "1234567890",
+            "address_line_1": "123 Main St.",
+            "address_line_2": "",
+            "locality": "New York",
+            "region": "NY",
+            "postal_code": "10001"
+        },
+        "sms_opt_in_status": "OPT_IN"
+    }
+
+### Response
+
+If any required fields are missing or contain invalid values, the endpoint will return a 400 Bad Request with references to the invalid fields.
+
+On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2018-09-13**
+- Add endpoint to create new event attendance
+- Add endpoint to create new affiliation between a person and an organization
 
 **2018-09-11**
 - Expanded list of available event types: CANVASS, PHONE_BANK, TEXT_BANK, MEETING, COMMUNITY, FUNDRAISER, MEET_GREET, HOUSE_PARTY, VOTER_REG, TRAINING, FRIEND_TO_FRIEND_OUTREACH, OTHER
