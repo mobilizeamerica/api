@@ -81,6 +81,8 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Create organization event attendance](#create-organization-event-attendance)
         - [Request](#request-11)
         - [Request body](#request-body-2)
+        - [Person attendance object](#person-attendance-object)
+        - [Referrer object](#referrer-object)
         - [Example request body](#example-request-body)
         - [Response](#response-11)
         - [Response Body Example](#response-body-example)
@@ -775,11 +777,31 @@ Requires authentication: Yes
 
 | Field             | Type     | Description                                                                                                                                                                                                                                                                                                                                     | Required                       |
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| person            | Person   | Contains `given_name`, `family_name`, `email_address`, `phone_number`, and `postal_code` fields. All fields are required. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
+| person            | Person   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in_status | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
 | timeslots         | int[]    | Array of `timeslot` IDs. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
-| referrer          | Referrer | Contains `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, and `url` fields. All fields are optional.                                                                                                                                                                                                                      | No                             |
+| referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
 
+### Person attendance object
+
+| Field            | Type   | Description | Required
+| ---------------- | ------ | ----------- | --------
+| `given_name`     | string |             | Yes
+| `friendly_name`  | string |             | Yes
+| `email_address`  | string |             | Yes
+| `phone_number`   | string |             | Yes
+| `postal_code`    | string |             | Yes
+
+### Referrer object
+
+| Field          | Type   | Description | Required
+| -------------- | ------ | ----------- | --------
+| `utm_source`   | string |             | No
+| `utm_medium`   | string |             | No
+| `utm_campaign` | string |             | No
+| `utm_term`     | string |             | No
+| `utm_content`  | string |             | No
+| `url`          | string |             | No
 
 ### Example request body
 
