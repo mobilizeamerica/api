@@ -779,7 +779,7 @@ Requires authentication: Yes
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | person            | AttendancePerson   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in_status | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
-| timeslots         | int[]    | Array of `timeslot` IDs. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
+| timeslots         | Timeslot[]    | Array of `timeslot` objects. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
 | referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
 
 ### Person attendance object
@@ -787,7 +787,7 @@ Requires authentication: Yes
 | Field            | Type   | Description | Required
 | ---------------- | ------ | ----------- | --------
 | `given_name`     | string |             | Yes
-| `friendly_name`  | string |             | Yes
+| `family_name`  | string |             | Yes
 | `email_address`  | string |             | Yes
 | `phone_number`   | string |             | Yes
 | `postal_code`    | string |             | Yes
