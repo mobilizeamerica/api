@@ -596,6 +596,10 @@ Requires authentication: Yes
 ### Request
 `PUT /api/v1/organizations/:organization_id/events/:event_id`
 
+### Query params
+* send_update_notifications: Set this to `false` to skip notifications. Defaults to sending email notifications to attendees when certain fields such as the location and timeslots are updated.
+  * `PUT /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
+
 ### Request body
 | Field                | Type         | Description                                                                                                                                             | Required |
 | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
@@ -657,6 +661,10 @@ Requires authentication: Yes
 
 ### Request
 `DELETE /api/v1/organizations/:organization_id/events/:event_id`
+
+### Query params
+* send_update_notifications: Set this to `false` to skip notifications. Defaults to sending attendees notifications when the event is deleted.
+  *  `DELETE /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
 ### Response
 On success, the endpoint will return with status code `200 OK`.
@@ -1011,6 +1019,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2018-10-01**
+- Add query param `send_update_notifications` to Event update and delete
 
 **2018-09-13**
 - Add endpoint to create new event attendance
