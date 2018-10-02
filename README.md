@@ -35,19 +35,19 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Deleted Event](#deleted-event)
     - [List all public events](#list-all-public-events)
         - [Request](#request-2)
-        - [Request params](#request-params)
+        - [Request params](#request-params-2)
         - [Response](#response-2)
     - [List organization events](#list-organization-events)
         - [Request](#request-3)
-        - [Request params](#request-params-1)
+        - [Request params](#request-params-3)
         - [Response](#response-3)
     - [List deleted public events](#list-deleted-public-events)
         - [Request](#request-4)
-        - [Request params](#request-params-2)
+        - [Request params](#request-params-4)
         - [Response](#response-4)
     - [List deleted organization events](#list-deleted-organization-events)
         - [Request](#request-5)
-        - [Request params](#request-params-3)
+        - [Request params](#request-params-5)
         - [Response](#response-5)
     - [Create event](#create-event)
         - [Request](#request-6)
@@ -56,11 +56,13 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Response](#response-6)
     - [Update event](#update-event)
         - [Request](#request-7)
+        - [Request params](#request-params-6)
         - [Request body](#request-body-1)
         - [Request body example](#request-body-example-1)
         - [Response](#response-7)
     - [Delete event](#delete-event)
         - [Request](#request-8)
+        - [Request params](#request-params-7)
         - [Response](#response-8)
 - [People](#people)
     - [Person object](#person-object)
@@ -69,14 +71,14 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Address](#address)
     - [List organization people](#list-organization-people)
         - [Request](#request-9)
-        - [Request params](#request-params-4)
+        - [Request params](#request-params-8)
         - [Response](#response-9)
 - [Attendances](#attendances)
     - [Attendance object](#attendance-object)
         - [Referrer](#referrer)
     - [List organization attendances](#list-organization-attendances)
         - [Request](#request-10)
-        - [Request params](#request-params-5)
+        - [Request params](#request-params-9)
         - [Response](#response-10)
     - [Create organization event attendance](#create-organization-event-attendance)
         - [Request](#request-11)
@@ -88,7 +90,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Response Body Example](#response-body-example)
     - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
         - [Request](#request-12)
-        - [Request params](#request-params-6)
+        - [Request params](#request-params-10)
         - [Response](#response-12)
 - [Affiliation](#affiliation)
     - [Create organization affiliations](#create-organization-affiliations)
@@ -597,7 +599,7 @@ Requires authentication: Yes
 `PUT /api/v1/organizations/:organization_id/events/:event_id`
 
 ### Request Params
-* send_update_notifications: Set this to `false` to skip notifications. Defaults to sending email notifications to attendees when certain fields such as the location and timeslots are updated.
+* `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending email notifications to attendees when `location` or `timeslots` are updated.
   * `PUT /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
 ### Request body
@@ -663,7 +665,7 @@ Requires authentication: Yes
 `DELETE /api/v1/organizations/:organization_id/events/:event_id`
 
 ### Request Params
-* send_update_notifications: Set this to `false` to skip notifications. Defaults to sending attendees notifications when the event is deleted.
+* `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending attendees notifications when the event is deleted.
   *  `DELETE /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
 ### Response
