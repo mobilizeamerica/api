@@ -729,7 +729,7 @@ Requires authentication: Yes
 
 | Field           | Type         | Description                                                                 | Coordinated/Independent notes                                                                                               |
 | --------------- | ------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `id`            | int          |                                                                             |                                                                                                                             |
+| `id`            | int          |                                                                             | If the requesting organization is independent and the event’s organization is coordinated, this is omitted.                                                                                                                                                                                                               |
 | `created_date`  | int          | Unix timestamp                                                              |                                                                                                                             |
 | `modified_date` | int          | Unix timestamp                                                              |                                                                                                                             |
 | `person`        | Person       | Person who attended the event                                               |                                                                                                                             |
@@ -1021,6 +1021,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2018-10-08**
+- Omit `id` from attendance GET endpoints when the requesting organization is independent and the event's organization is coordinated
 
 **2018-10-01**
 - Add request param `send_update_notifications` to Event update and delete
