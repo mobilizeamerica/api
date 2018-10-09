@@ -680,7 +680,7 @@ On success, the endpoint will return with status code `200 OK`.
 | `modified_date`    | int       | Unix timestamp                        |
 | `given_name`       | string    | First name                            |
 | `family_name`      | string    | Last name                             |
-| `email_addresses`  | Email[]   | Array of length 1 with an email       |
+| `email_addresses`  | Email[]   | Array of length 1 with an email. (NB: See Email details below for exceptions.) |
 | `phone_numbers`    | Phone[]   | Array of length 1 with a phone number |
 | `postal_addresses` | Address[] | Array of length 1 with a zip code     |
 | `sms_opt_in_status`| enum      | For the current organization; one of `UNSPECIFIED`, `OPT_IN` or `OPT_OUT` |
@@ -691,6 +691,8 @@ On success, the endpoint will return with status code `200 OK`.
 | --------- | ------ | ------------- |
 | `primary` | bool   | Always true   |
 | `address` | string | Email address |
+
+Generally a Person will always have exactly one Email, since Person records in our system are uniquely identified by email address. The `email_addresses` list may be empty however if the Person is not affiliated with the requesting Organization, and the Person's affiliated Organization has restrictions on what volunteer data may be shared. This should generally only arise in the context of Attendance list endpoints, and not Person lists, since those should only return affiliated People anyway.
 
 ### Phone
 
