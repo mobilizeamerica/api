@@ -405,7 +405,7 @@ Requires authentication: No
 
 Status: LIVE
 
-Fetch all events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization.
+Fetch all events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization. By default, this endpoint will return only public events.
 
 Requires authentication: No
 
