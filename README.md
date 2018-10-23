@@ -276,6 +276,7 @@ Requires authentication: Yes
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
+| `visibility`         | enum         | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                               |
 
 
 ### Timeslot
@@ -404,7 +405,7 @@ Requires authentication: No
 
 Status: LIVE
 
-Fetch all public events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization.
+Fetch all events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization. By default, this endpoint will return only public events.
 
 Requires authentication: No
 
@@ -418,6 +419,7 @@ Requires authentication: No
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if the calling user is authenticated and has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned.
 
 ### Response
 `data` is an array of Event objects.
@@ -496,6 +498,7 @@ Requires authentication: No
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if the calling user is authenticated and has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -1023,6 +1026,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2018-10-23**
+- Add `visibility` to Event object and as a request param for organization events endpoints
 
 **2018-10-08**
 - Omit `id` from attendance GET endpoints when the requesting organization is independent and the event's organization is coordinated
