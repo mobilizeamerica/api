@@ -1028,7 +1028,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 # Changelog
 
 **2018-10-23**
-- Add `visibility` to Event object and as a request param for `GET /api/v1/organizations/:organization_id/events` and `GET /api/v1/organizations/:organization_id/events/deleted` endpoints
+- Add `visibility` to Event object and as a request param for organization events endpoints
 
 **2018-10-08**
 - Omit `id` from attendance GET endpoints when the requesting organization is independent and the event's organization is coordinated
