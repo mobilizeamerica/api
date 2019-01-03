@@ -563,7 +563,7 @@ Requires authentication: Yes
             },
             {
                 "start_date": 1537986600,
-                "end_date": 1537986601,
+                "end_date": 1537986601
             }
         ],
         "location": {
