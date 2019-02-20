@@ -277,7 +277,7 @@ Requires authentication: Yes
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
 | `visibility`         | enum         | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                               |
-
+| `created_by_distributed_organizing`      | bool          | Whether the event was created using our distributed organizing tool or not                                                                                                                                          |
 
 ### Timeslot
 
