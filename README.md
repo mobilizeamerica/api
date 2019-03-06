@@ -1027,6 +1027,9 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
+**2019-03-06**
+- Update references to website url (`https://events.mobilizeamerica.io` to `https://www.mobilize.us`)
+
 **2018-10-23**
 - Add `visibility` to Event object and as a request param for organization events endpoints
 
