@@ -103,7 +103,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 # Overview
 ## API Entry Point
 
-All requests occur through `events.mobilizeamerica.io/api/v1`.
+All requests occur through `https://www.mobilize.us/api/v1`.
 
 ## Format
 
@@ -209,7 +209,7 @@ Requires authentication: No
           "district": "",
           "candidate_name": "",
           "race_type": null,
-          "event_feed_url": "https://events.mobilizeamerica.io/example/",
+          "event_feed_url": "https://www.mobilize.us/example/",
           "created_date": 1524232122,
           "modified_date": 1524232122
         },
@@ -250,7 +250,7 @@ Requires authentication: Yes
           "district": "",
           "candidate_name": "",
           "race_type": null,
-          "event_feed_url": "https://events.mobilizeamerica.io/example/",
+          "event_feed_url": "https://www.mobilize.us/example/",
           "created_date": 1524232122,
           "modified_date": 1524232122
         },
@@ -390,7 +390,7 @@ Requires authentication: No
           "event_type": "CANVASS",
           "created_date": 1,
           "modified_date": 1,
-          "browser_url": "https://events.mobilizeamerica.io/event/1/"
+          "browser_url": "https://www.mobilize.us/event/1/"
         },
          "contact": {
           "name": "",
@@ -470,7 +470,7 @@ Requires authentication: No
           "event_type": "CANVASS",
           "created_date": 1,
           "modified_date": 1,
-          "browser_url": "https://events.mobilizeamerica.io/event/1/"
+          "browser_url": "https://www.mobilize.us/event/1/"
         },
          "contact": {
           "name": "",
