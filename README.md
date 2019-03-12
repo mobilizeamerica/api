@@ -103,7 +103,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 # Overview
 ## API Entry Point
 
-All requests occur through `https://www.mobilize.us/api/v1`.
+All requests occur through `https://api.mobilize.us/v1`.
 
 ## Format
 
@@ -130,7 +130,7 @@ All requests must be made over HTTPS. Requests made with malformed, missing or o
 
 Error responses will have an object value for the `error` field and `data` will be `null`. We will also return a relevant HTTP status code with each error response.
 
-Here’s an example error response for `/api/v1/events?organization_id=hello`:
+Here’s an example error response for `/v1/events?organization_id=hello`:
 
 
     {
@@ -186,7 +186,7 @@ Return all active organizations on the platform. This endpoint is publicly acces
 Requires authentication: No
 
 ### Request
-`GET /api/v1/organizations`
+`GET /v1/organizations`
 
 ### Request Params
 
@@ -227,7 +227,7 @@ Fetches a list of all the organizations that an organization has promoted. This 
 Requires authentication: Yes
 
 ### Request
-`GET /api/v1/organizations/:organization_id/promoted_organizations`
+`GET /v1/organizations/:organization_id/promoted_organizations`
 
 ### Request Params
 
@@ -330,7 +330,7 @@ Fetch all public events on the platform.
 Requires authentication: No
 
 ### Request
-`GET /api/v1/events`
+`GET /v1/events`
 
 ### Request params
 
@@ -410,7 +410,7 @@ Fetch all events for an organization. This includes both events owned by the org
 Requires authentication: No
 
 ### Request
-`GET /api/v1/organizations/:organization_id/events`
+`GET /v1/organizations/:organization_id/events`
 
 ### Request params
 
@@ -490,7 +490,7 @@ Fetch deleted public events on the platform.
 Requires authentication: No
 
 ### Request
-`GET /api/v1/events/deleted`
+`GET /v1/events/deleted`
 
 ### Request params
 
@@ -512,7 +512,7 @@ Fetch all deleted public events for an organization. This includes both events o
 Requires authentication: No
 
 ### Request
-`GET /api/v1/organizations/:organization_id/events/deleted`
+`GET /v1/organizations/:organization_id/events/deleted`
 
 ### Request params
 
@@ -534,7 +534,7 @@ Create a new in-person Event for an given organization.
 Requires authentication: Yes
 
 ### Request
-`POST /api/v1/organizations/:organization_id/events`
+`POST /v1/organizations/:organization_id/events`
 
 ### Request body
 
@@ -599,11 +599,11 @@ Note that all editable fields must be specified, otherwise they will be removed 
 Requires authentication: Yes
 
 ### Request
-`PUT /api/v1/organizations/:organization_id/events/:event_id`
+`PUT /v1/organizations/:organization_id/events/:event_id`
 
 ### Request Params
 * `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending email notifications to attendees when `location` or `timeslots` are updated.
-  * `PUT /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
+  * `PUT /v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
 ### Request body
 | Field                | Type         | Description                                                                                                                                             | Required |
@@ -665,11 +665,11 @@ Delete an in-person event for an organization.
 Requires authentication: Yes
 
 ### Request
-`DELETE /api/v1/organizations/:organization_id/events/:event_id`
+`DELETE /v1/organizations/:organization_id/events/:event_id`
 
 ### Request Params
 * `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending attendees notifications when the event is deleted.
-  *  `DELETE /api/v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
+  *  `DELETE /v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
 ### Response
 On success, the endpoint will return with status code `200 OK`.
@@ -720,7 +720,7 @@ Fetch all people (volunteers) who are affiliated with the organization
 Requires authentication: Yes
 
 ### Request
-`GET /api/v1/organizations/:organization_id/people`
+`GET /v1/organizations/:organization_id/people`
 
 ### Request params
 
@@ -765,7 +765,7 @@ Fetch all attendances which were either promoted by the organization or were for
 Requires authentication: Yes
 
 ### Request
-`GET /api/v1/organizations/:organization_id/attendances`
+`GET /v1/organizations/:organization_id/attendances`
 
 ### Request params
 
@@ -786,7 +786,7 @@ This endpoint creates a new signup for a given person and future event timeslot.
 Requires authentication: Yes
 
 ### Request
-`POST /api/v1/organizations/:organization_id/events/:event_id/attendances`
+`POST /v1/organizations/:organization_id/events/:event_id/attendances`
 
 ### Request body
 
@@ -962,7 +962,7 @@ Fetches all attendances that are either for that person with that organization, 
 Requires authentication: Yes
 
 ### Request
-`GET /api/v1/organizations/:organization_id/people/:person_id/attendances`
+`GET /v1/organizations/:organization_id/people/:person_id/attendances`
 
 ### Request params
 
@@ -985,7 +985,7 @@ This endpoint creates a new affiliation between the given person and organizatio
 Requires authentication: Yes
 
 ### Request
-`POST /api/v1/organizations/:organization_id/affiliations`
+`POST /v1/organizations/:organization_id/affiliations`
 
 ### Request body
 | Field             | Type   | Description                                       | Required |
@@ -1026,6 +1026,11 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-03-12**
+- Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
+  `https://api.mobilize.us/v1`. The old version will continue to work (as will
+  `events.mobilizeamerica.io/api/v1`) until Sept. 1, 2018.
 
 **2019-03-06**
 - Update references to website url (`https://events.mobilizeamerica.io` to `https://www.mobilize.us`)
