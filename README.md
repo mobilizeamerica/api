@@ -527,7 +527,7 @@ Requires authentication: No
 
 Status: RESTRICTED
 
-Please email support@mobilizeamerica.io to request access to this endpoint.
+Please email support@mobilize.us to request access to this endpoint.
 
 Create a new in-person Event for an given organization.
 
@@ -590,7 +590,7 @@ Requires authentication: Yes
 
 Status: RESTRICTED
 
-Please email support@mobilizeamerica.io to request access to this endpoint.
+Please email support@mobilize.us to request access to this endpoint.
 
 Update an in-person event for an organization. `event_id` refers to the `id` field in the Event object.
 
@@ -658,7 +658,7 @@ If the `event_id` does not identify an existing event, the endpoint will return 
 
 Status: RESTRICTED
 
-Please email support@mobilizeamerica.io to request access to this endpoint.
+Please email support@mobilize.us to request access to this endpoint.
 
 Delete an in-person event for an organization.
 
@@ -778,7 +778,7 @@ Requires authentication: Yes
 
 Status: RESTRICTED
 
-Please email support@mobilizeamerica.io to request access to this endpoint.
+Please email support@mobilize.us to request access to this endpoint.
 
 This endpoint creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
 
@@ -978,7 +978,7 @@ Requires authentication: Yes
 
 Status: RESTRICTED
 
-Please email support@mobilizeamerica.io to request access to this endpoint.
+Please email support@mobilize.us to request access to this endpoint.
 
 This endpoint creates a new affiliation between the given person and organization, or updates a person’s contact information if an affiliation already exists. The person is matched and deduplicated by their email address.
 
@@ -1031,6 +1031,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 - Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
   `https://api.mobilize.us/v1`. The old version will continue to work (as will
   `events.mobilizeamerica.io/api/v1`) until Sept. 1, 2018.
+- Update references to support email (`support@mobilizeamerica.io` to `support@mobilizeus`).
 
 **2019-03-06**
 - Update references to website url (`https://events.mobilizeamerica.io` to `https://www.mobilize.us`)
