@@ -1030,7 +1030,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 **2019-03-12**
 - Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
   `https://api.mobilize.us/v1`. The old version will continue to work (as will
-  `events.mobilizeamerica.io/api/v1`) until Sept. 1, 2018.
+  `events.mobilizeamerica.io/api/v1`) until Sept. 1, 2019.
 - Update references to support email (`support@mobilizeamerica.io` to `support@mobilize.us`).
 
 **2019-03-06**
