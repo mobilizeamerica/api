@@ -88,6 +88,10 @@ To stay updated on new releases or iterations, join the email list [here](https:
         - [Example request body](#example-request-body)
         - [Response](#response-11)
         - [Response Body Example](#response-body-example)
+    - [List organization’s affiliated person’s attendances](#list-organizations-affiliated-persons-attendances)
+        - [Request](#request-12)
+        - [Request params](#request-params-10)
+        - [Response](#response-12)
 - [Affiliation](#affiliation)
     - [Create organization affiliations](#create-organization-affiliations)
         - [Request](#request-13)
@@ -949,6 +953,24 @@ On a successful request, the endpoint will return a 201 Created status code and 
     }
 
 
+## List organization’s affiliated person’s attendances
+
+Status: LIVE
+
+Fetches all attendances that are either for that person with that organization, or are for public events and were created after the affiliation between the person and the organization began.
+
+Requires authentication: Yes
+
+### Request
+`GET /v1/organizations/:organization_id/people/:person_id/attendances`
+
+### Request params
+
+- `updated_since`: Unix timestamp to filter by Attendances’ `modified_date`
+
+### Response
+`data` is an array of Attendance objects.
+
 # Affiliation
 
 
@@ -1004,9 +1026,6 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
-
-**2019-04-03**
-- Deprecate (unused) API endpoint GET /v1/organizations/:organization_id/people/:person_id/attendances
 
 **2019-03-12**
 - Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
