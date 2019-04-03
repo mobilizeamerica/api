@@ -1006,7 +1006,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 # Changelog
 
 **2019-04-03**
-- Deprecate (unused) API endpoint GET /v1/organizations/:organization_id/people/:person_id/attendances
+- Remove (unused) API endpoint GET `/v1/organizations/:organization_id/people/:person_id/attendances`
 
 **2019-03-12**
 - Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
