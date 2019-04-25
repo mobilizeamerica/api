@@ -19,6 +19,7 @@ description of each field.
 - [Table of Contents](#table-of-contents)
 - [SQL Views](#sql-views)
   - [Events](#events)
+  - [Participations](#participations)
   - [Timeslots](#timeslots)
 
 # SQL Views
@@ -105,6 +106,52 @@ The `events` view includes events owned by the Organization and events owned by 
 | reviewed_by__email_address | citext | User's email address |
 | reviewed_by__phone_number | varchar(15) | User's phone number |
 | reviewed_by__postal_code | varchar(10) | User's zip code |
+
+## Participations
+
+The `participations` view contains information about a volunteer's individual signup to a specific
+timeslot for an event. This data is referred to as `Attendances` in the Public API. Participations
+that originated from an event signup page in another organization's feed are also displayed, but
+some of the fields will be masked.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The participation's primary key |
+| created_date | timestamptz | Timestamp that the participation was created |
+| modified_date | timestamptz | Timestamp that the participation was last updated |
+| person_id | integer | Unique identifier of the User who signed up for this participation |
+| person__created_date | timestamptz | Timestamp the User was created |
+| person__modified_date | timestamptz | Timestamp the User was last updated |
+| person__given_name | varchar(255) | User's current first name |
+| person__family_name | varchar(255) | User's current last name |
+| person__email_address | citext | User's current email address |
+| person__phone_number | varchar(15) | User's current phone number |
+| person__postal_code | varchar(10) | User's current zip code |
+| event_id | integer | Foreign Key to the related Event |
+| timeslot_id | integer | Foreign Key to the related Timeslot. This is `null` if the organization and the affiliated organization are cross firewall. |
+| override_start_date | timestamptz | Time that an event's start was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
+| override_end_date | timestamptz | Time that an event's end was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
+| organization_id | integer | Unique identifier of the Organization that owns the event. This may be the same organization that is querying the view or an organization that it is promoting. |
+| organization__name | varchar(100) | The public-facing name of the organization |
+| organization__slug | citext | The URL-safe string for the organization |
+| affiliation_id | integer | Unique identifier of the Organization whose feed the User signed up for the event on. This may be the same as the `organization_id` that owns the event. |
+| affiliation__name | varchar(100) | The public-facing name of the organization |
+| affiliation__slug | citext | The URL-safe string for the organization |
+| participation_status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED` |
+| attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. |
+| experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND` |
+| experience_feedback_text | text | The user-reported qualitative feedback on the event. |
+| referrer__utm_source | varchar | Value of the `utm_source` parameter in the url that was used to sign up for the event. `null` for promoted events. |
+| referrer__utm_medium | varchar | Value of the `utm_medium` parameter in the url that was used to sign up for the event. `null` for promoted events. |
+| referrer__utm_campaign | varchar | Value of the `utm_campaign` parameter in the url that was used to sign up for the event. `null` for promoted events. |
+| referrer__utm_term | varchar | Value of the `utm_term` parameter in the url that was used to sign up for the event. `null` for promoted events. |
+| referrer__utm_content | varchar | Value of the `utm_content` parameter in the url that was used to sign up for the event. `null` for promoted events. |
+| referrer__url | varchar | Value of the url used to sign up for the event. `null` for promoted events. |
+| email_at_signup | citext | The email address the user entered when signing up |
+| given_name_at_signup | varchar(100) | The first name the user entered when signing up |
+| family_name_at_signup | varchar(100) | The last name the user entered when signing up |
+| phone_number_at_signup | varchar(20) | The phone number the user entered when signing up |
+| postal_code_at_signup | varchar(10) | The zip code the user entered when signing up |
 
 ## Timeslots
 
