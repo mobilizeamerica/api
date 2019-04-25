@@ -1,16 +1,27 @@
-# MobilizeAmerica SQL Data Dictionary
+# MobilizeAmerica SQL Mirror - Data Dictionary
 
-Data Dictionary for customers who have the SQL database add-on. Please contact our sales team if you
-are interested in purchasing this add-on.
+The MobilizeAmerica SQL mirror is a feature we offer to our customers that enables them to access their
+raw data. Our application has several CRM integrations and the ability to perform CSV exports, but
+customers with sophisticated data operations may find it more convenient to extract data from our SQL
+mirror. Use cases include performing analytics, creating dashboards and reports, and loading data into
+data warehouses or Business Intelligence tools.
+
+The data is continuously updated from our application's database in real-time so your queries will
+always return the most current data, just like when you query the API.
+
+Below you will find a comprehensive Data Dictionary of all the SQL views we currently provide with a
+description of each field.
+
+---
 
 # Table of Contents
 - [MobilizeAmerica SQL Data Dictionary](#mobilizeamerica-sql-data-dictionary)
 - [Table of Contents](#table-of-contents)
-- [Views](#views)
+- [SQL Views](#sql-views)
   - [Events](#events)
   - [Timeslots](#timeslots)
 
-# Views
+# SQL Views
 
 ## Events
 
