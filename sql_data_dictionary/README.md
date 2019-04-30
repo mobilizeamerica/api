@@ -106,8 +106,8 @@ The `events` view includes events owned by the Organization and events owned by 
 
 The `participations` view contains information about a volunteer's individual signup to a specific
 timeslot for an event. This data is referred to as `Attendances` in the Public API. Participations
-that originated from an event signup page in another organization's feed are also displayed, but
-some of the fields will be masked.
+that originated from an event signup page in another organization's feed are also displayed (when the
+viewing organization is the org in the `affiliation_id`), but some of the fields will be masked.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
@@ -121,20 +121,20 @@ some of the fields will be masked.
 | user__email_address | citext | User's current email address |
 | user__phone_number | varchar(15) | User's current phone number |
 | user__postal_code | varchar(10) | User's current zip code |
-| event_id | integer | Foreign Key to the related Event |
-| timeslot_id | integer | Foreign Key to the related Timeslot. This is `null` if the organization and the affiliated organization are cross firewall. |
+| event_id | integer | Foreign Key to the related Event. This field is `null` if the organization and the affiliated organization are cross firewall. |
+| timeslot_id | integer | Foreign Key to the related Timeslot. This field is `null` if the organization and the affiliated organization are cross firewall. |
 | override_start_date | timestamptz | Time that an event's start was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
 | override_end_date | timestamptz | Time that an event's end was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
-| organization_id | integer | Unique identifier of the Organization that owns the event. This may be the same organization that is querying the view or an organization that it is promoting. |
-| organization__name | varchar(100) | The public-facing name of the organization |
-| organization__slug | citext | The URL-safe string for the organization |
-| affiliation_id | integer | Unique identifier of the Organization whose feed the User signed up for the event on. This may be the same as the `organization_id` that owns the event. |
-| affiliation__name | varchar(100) | The public-facing name of the organization |
-| affiliation__slug | citext | The URL-safe string for the organization |
+| organization_id | integer | Unique identifier of the Organization that owns the event. This may be the same organization that is querying the view or an organization that it is promoting. This field is `null` if the event owner is cross firewall. |
+| organization__name | varchar(100) | The public-facing name of the organization. This field is `null` if the event owner is cross firewall. |
+| organization__slug | citext | The URL-safe string for the organization. This field is `null` if the event owner is cross firewall. |
+| affiliation_id | integer | Unique identifier of the Organization whose feed the User signed up for the event on. This may be the same as the `organization_id` that owns the event. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
+| affiliation__name | varchar(100) | The public-facing name of the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
+| affiliation__slug | citext | The URL-safe string for the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
 | participation_status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED` |
 | attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. |
 | experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND` |
-| experience_feedback_text | text | The user-reported qualitative feedback on the event. |
+| experience_feedback_text | text | The user-reported qualitative feedback on the event. This field is `null` if the viewing organization and the organization that owns the event are cross firewall. |
 | referrer__utm_source | varchar | Value of the `utm_source` parameter in the url that was used to sign up for the event. `null` for promoted events. |
 | referrer__utm_medium | varchar | Value of the `utm_medium` parameter in the url that was used to sign up for the event. `null` for promoted events. |
 | referrer__utm_campaign | varchar | Value of the `utm_campaign` parameter in the url that was used to sign up for the event. `null` for promoted events. |
