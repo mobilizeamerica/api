@@ -46,7 +46,6 @@ The `events` view includes events owned by the Organization and events owned by 
 | organization__state | varchar(2) | The two-letter code of the state the organization is in. May be empty. |
 | organization__district | varchar(100) | The district the organization is in, e.g., `14`. May refer to different districts depending on the value of race_type. |
 | organization__candidate_name | varchar(100) | The name of the candidate this organization represents. May be empty. |
-| organization__created_date | timestamptz | Timestamp that the organization was created |
 | organization__modified_date | timestamptz | Timestamp that the organization was last modified |
 | location__is_private | boolean | Whether or not the location fields are visible to the public |
 | location__venue | varchar(250) | The name of the location, e.g., "Campaign HQ" or "Starbucks" |
@@ -57,7 +56,6 @@ The `events` view includes events owned by the Organization and events owned by 
 | location__postal_code | varchar(10) | The zip code |
 | location__lat | numeric(10, 7) | The latitude of the location or null if geocoding failed or has not yet completed |
 | location__lon | numeric(10, 7) | The longitude of the location or null if geocoding failed or has not yet completed |
-| location__created_date | timestamptz | Timestamp that the location was created |
 | location__modified_date | timestamptz | Timestamp that the location was last updated |
 | location__congressional_district | varchar(50) | The congressional district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts) |
 | location__state_leg_district | varchar(50) | The state lower house district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts)|
@@ -82,7 +80,6 @@ The `events` view includes events owned by the Organization and events owned by 
 | referrer__utm_content | varchar | Value of the `utm_content` parameter for the url the host used to create the distributed organizing event. `null` for promoted events and non-distributed organizing events. |
 | referrer__url | varchar | Value of the url the host used to create the distributed organizing event. `null` for promoted events and non-distributed organizing events. |
 | owner_id | integer | Unique identifier of the User who currently owns the event. The following `owner__` fields are `null` for promoted events. |
-| owner__created_date | timestamptz | Timestamp the User was created |
 | owner__modified_date | timestamptz | Timestamp the User was updated |
 | owner__given_name | varchar(255) | User's first name |
 | owner__family_name | varchar(255) | User's last name |
@@ -90,7 +87,6 @@ The `events` view includes events owned by the Organization and events owned by 
 | owner__phone_number | varchar(15) | User's phone number |
 | owner__postal_code | varchar(10) | User's zip code |
 | creator_id | integer | Unique identifier of the User who created the event. The following `creator__` fields are `null` for promoted events. |
-| creator__created_date | timestamptz | Timestamp the User was created |
 | creator__modified_date | timestamptz | Timestamp the User was updated |
 | creator__given_name | varchar(255) | User's first name |
 | creator__family_name | varchar(255) | User's last name |
@@ -99,7 +95,6 @@ The `events` view includes events owned by the Organization and events owned by 
 | creator__postal_code | varchar(10) | User's zip code |
 | reviewed_date | timestamptz | The timestamp that the admin reviewed the event, updating its `approval_status` |
 | reviewed_by_id | integer | Unique identifier of the User who reviewed the event. The following `reviewed_by__` fields are `null` for promoted events. |
-| reviewed_by__created_date | timestamptz | Timestamp the User was created |
 | reviewed_by__modified_date | timestamptz | Timestamp the User was updated |
 | reviewed_by__given_name | varchar(255) | User's first name |
 | reviewed_by__family_name | varchar(255) | User's last name |
@@ -119,14 +114,13 @@ some of the fields will be masked.
 | id | integer | The participation's primary key |
 | created_date | timestamptz | Timestamp that the participation was created |
 | modified_date | timestamptz | Timestamp that the participation was last updated |
-| person_id | integer | Unique identifier of the User who signed up for this participation |
-| person__created_date | timestamptz | Timestamp the User was created |
-| person__modified_date | timestamptz | Timestamp the User was last updated |
-| person__given_name | varchar(255) | User's current first name |
-| person__family_name | varchar(255) | User's current last name |
-| person__email_address | citext | User's current email address |
-| person__phone_number | varchar(15) | User's current phone number |
-| person__postal_code | varchar(10) | User's current zip code |
+| user_id | integer | Unique identifier of the User who signed up for this participation |
+| user__modified_date | timestamptz | Timestamp the User was last updated |
+| user__given_name | varchar(255) | User's current first name |
+| user__family_name | varchar(255) | User's current last name |
+| user__email_address | citext | User's current email address |
+| user__phone_number | varchar(15) | User's current phone number |
+| user__postal_code | varchar(10) | User's current zip code |
 | event_id | integer | Foreign Key to the related Event |
 | timeslot_id | integer | Foreign Key to the related Timeslot. This is `null` if the organization and the affiliated organization are cross firewall. |
 | override_start_date | timestamptz | Time that an event's start was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
