@@ -282,6 +282,7 @@ Requires authentication: Yes
 | `id`         | int  |                |
 | `start_date` | int  | Unix timestamp |
 | `end_date`   | int  | Unix timestamp |
+| `is_full`    | bool | Whether the timeslot is full. Only present on the [event list](#list-all-public-events) and [organization event list](#list-organization-events) endpoints; `null` elsewhere. |
 
 
 ### Location
@@ -1004,6 +1005,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-05-13**
+- Add `is_full` to Timeslot
 
 **2019-04-03**
 - Remove (unused) API endpoint GET `/v1/organizations/:organization_id/people/:person_id/attendances`
