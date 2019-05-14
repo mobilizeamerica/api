@@ -21,6 +21,7 @@ description of each field.
   - [Events](#events)
   - [Participations](#participations)
   - [Timeslots](#timeslots)
+- [Changelog](#changelog)
 
 # SQL Views
 
@@ -161,3 +162,10 @@ Only timeslots for events owned by the organization or promoted by the organizat
 | created_date | timestamptz | Time that the timeslot was created |
 | modified_date | timestamptz | Time that the timeslot was last updated |
 | deleted_date | timestamptz | Time that the timeslot was deleted. `null` if not deleted. |
+| max_attendees | integer | Maximum attendees for the timeslot, if set. `null` if the Timeslot is from a promoted event. |
+
+
+# Changelog
+
+**2019-05-14**
+- Add `max_attendees` to `timeslots` view
