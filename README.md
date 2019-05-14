@@ -337,6 +337,7 @@ Requires authentication: No
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 
 ### Response
 `data` is an array of Event objects.
@@ -417,6 +418,7 @@ Requires authentication: No
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if the calling user is authenticated and has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned.
+- `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 
 ### Response
 `data` is an array of Event objects.
@@ -1006,8 +1008,9 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
-**2019-05-13**
+**2019-05-14**
 - Add `is_full` to Timeslot
+- Add `exclude_full` filter option on public events and organization events endpoints
 
 **2019-04-03**
 - Remove (unused) API endpoint GET `/v1/organizations/:organization_id/people/:person_id/attendances`
