@@ -282,7 +282,7 @@ Requires authentication: Yes
 | `id`         | int  |                |
 | `start_date` | int  | Unix timestamp |
 | `end_date`   | int  | Unix timestamp |
-| `is_full`    | bool | Whether the timeslot is full. Only present on the [event list](#list-all-public-events) and [organization event list](#list-organization-events) endpoints; `null` elsewhere. |
+| `is_full`    | bool | Whether the timeslot is full |
 
 
 ### Location
