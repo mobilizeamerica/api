@@ -15,13 +15,12 @@ description of each field.
 ---
 
 # Table of Contents
-- [MobilizeAmerica SQL Mirror - Data Dictionary](#mobilizeamerica-sql-mirror---data-dictionary)
+- [MobilizeAmerica SQL Data Dictionary](#mobilizeamerica-sql-data-dictionary)
 - [Table of Contents](#table-of-contents)
 - [SQL Views](#sql-views)
   - [Events](#events)
   - [Participations](#participations)
   - [Timeslots](#timeslots)
-  - [Sms Opt Ins](#sms-opt-ins)
 - [Changelog](#changelog)
 
 # SQL Views
@@ -165,22 +164,8 @@ Only timeslots for events owned by the organization or promoted by the organizat
 | deleted_date | timestamptz | Time that the timeslot was deleted. `null` if not deleted. |
 | max_attendees | integer | Maximum attendees for the timeslot, if set. `null` if the Timeslot is from a promoted event. |
 
-## Sms Opt Ins
-
-The `sms_opt_ins` view contains information about which volunteers have opted in to sms communication with the given organization.
-
-| column name | type | description |
-| ----------- | ---- | ----------- |
-| id | integer | The primary key |
-| created_date | timestamptz | Time that the opt in information was first collected |
-| modified_date | timestamptz | Time that the opt in information was last updated |
-| sms_opt_in_status | varchar | The user's opt in status. One of: `UNSPECIFIED`, `OPT_IN`, `OPT_OUT` |
-| user_id | integer | Unique identifier of the User whose opt in information this represents |
-| user__phone_number | varchar(20) | User's current phone number. NB: this may not match the phone we display on participations as `user__phone_number` but this is more accurate as the phone the opt in was collected on |
-| organization_id | integer | Unique identifier of the Organization whose opt in this is for |
 
 # Changelog
 
 **2019-05-14**
 - Add `max_attendees` to `timeslots` view
-- Add `sms_opt_ins` view
