@@ -176,11 +176,13 @@ The `sms_opt_ins` view contains information about which volunteers have opted in
 | modified_date | timestamptz | Time that the opt in information was last updated |
 | sms_opt_in_status | varchar | The user's opt in status. One of: `UNSPECIFIED`, `OPT_IN`, `OPT_OUT` |
 | user_id | integer | Unique identifier of the User whose opt in information this represents |
-| user__phone_number | varchar(20) | User's current phone number. NB: this may not match the phone we display on participations as `user__phone_number` but this is more accurate as the phone the opt in was collected on |
+| user__phone_number | varchar(20) | User's current phone number. Note: this may not match the phone we display on participations as `user__phone_number` but this is the phone the opt in was collected on |
 | organization_id | integer | Unique identifier of the Organization whose opt in this is for |
 
 # Changelog
 
+**2019-05-30**
+- Add `sms_opt_ins` view
+
 **2019-05-14**
 - Add `max_attendees` to `timeslots` view
-- Add `sms_opt_ins` view
