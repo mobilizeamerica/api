@@ -172,6 +172,7 @@ OSDI is an exciting and important attempt to bring interoperability to the progr
 | `event_feed_url`      | string | The public event feed for this organization.                                                                                                                                                  |
 | `created_date`        | int    | Unix timestamp                                                                                                                                                                                |
 | `modified_date`       | int    | Unix timestamp                                                                                                                                                                                |
+| `org_type`            | string | One of `CAMPAIGN`, `STATE_PARTY`, `COORDINATED`, `INDEPENDENT` New options may be added.                                                                                                      |
 
 ## List all organizations
 
@@ -273,7 +274,9 @@ Requires authentication: Yes
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
 | `visibility`         | enum         | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                               |
+| `address_visibility` | enum         | The visibility of the event's address (which may be different from the visibility of the event itself). One of `PUBLIC`, `PRIVATE`.                     |
 | `created_by_volunteer_host`      | bool          | Whether the event was created by a volunteer host using our distributed organizing tool or not                                                                                                                                          |
+| `virtual_action_url` | string       | The url the event redirects to if it's an unshifted virtual event. Otherwise, `null`.                                                                   |
 
 ### Timeslot
 
@@ -289,8 +292,8 @@ Requires authentication: Yes
 
 | Field                    | Type     | Description                                                                                                |
 | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `venue`                  | string   | The name of the location, e.g., “Campaign HQ” or “Starbucks”                                               |
-| `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. |
+| `venue`                  | string   | The name of the location, e.g., “Campaign HQ” or “Starbucks”. If the location is private, it will be the string `This event’s address is private. Sign up for more details` |
+| `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. If the location is private, the first line will be the string `This event’s address is private. Sign up for more details` |
 | `locality`               | string   | The city                                                                                                   |
 | `region`                 | string   | The two-character state code                                                                               |
 | `postal_code`            | string   | The zipcode                                                                                                |
@@ -1007,6 +1010,11 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-06-04**
+- Add org_type to Organization object
+- Add virtual_action_url and address_visibility to Event type
+- Change address_lines and venue for Location objects where the location is private 
 
 **2019-05-14**
 - Add `is_full` to Timeslot
