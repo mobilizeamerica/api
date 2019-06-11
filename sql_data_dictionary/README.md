@@ -181,6 +181,9 @@ The `sms_opt_ins` view contains information about which volunteers have opted in
 
 # Changelog
 
+**2019-06-11**
+- Clarify cross-firewall behavior on `participations` view for `attended`, `experience_feedback_type`, `participation_status` columns
+
 **2019-05-30**
 - Add `sms_opt_ins` view
 
