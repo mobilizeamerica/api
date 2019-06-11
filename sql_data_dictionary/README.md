@@ -133,9 +133,9 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | affiliation_id | integer | Unique identifier of the Organization whose feed the User signed up for the event on. This may be the same as the `organization_id` that owns the event. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
 | affiliation__name | varchar(100) | The public-facing name of the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
 | affiliation__slug | citext | The URL-safe string for the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
-| participation_status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED` |
-| attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. |
-| experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND` |
+| participation_status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED`. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND`. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
 | experience_feedback_text | text | The user-reported qualitative feedback on the event. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
 | referrer__utm_source | varchar | Value of the `utm_source` parameter in the url that was used to sign up for the event. `null` for promoted events. |
 | referrer__utm_medium | varchar | Value of the `utm_medium` parameter in the url that was used to sign up for the event. `null` for promoted events. |
