@@ -341,6 +341,8 @@ Requires authentication: No
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
+- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 
 ### Response
 `data` is an array of Event objects.
@@ -422,6 +424,8 @@ Requires authentication: No
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if the calling user is authenticated and has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned.
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
+- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 
 ### Response
 `data` is an array of Event objects.
@@ -1011,10 +1015,13 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
+**2019-06-12**
+- Add `is_virtual` and `event_types` filter params to [list public events](#list-all-public-events) and [list organization events](#list-organization-events) endpoints.
+
 **2019-06-04**
-- Add org_type to Organization object
-- Add virtual_action_url and address_visibility to Event type
-- Change address_lines and venue for Location objects where the location is private 
+- Add `org_type` to Organization object
+- Add `virtual_action_url` and `address_visibility` to Event type
+- Change `address_lines` and `venue` for Location objects where the location is private 
 
 **2019-05-14**
 - Add `is_full` to Timeslot
@@ -1026,7 +1033,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 **2019-03-12**
 - Update API entrypoint URL from `https://www.mobilize.us/api/v1` to
   `https://api.mobilize.us/v1`. The old version will continue to work (as will
-  `events.mobilizeamerica.io/api/v1`) until Sept. 1, 2019.
+  `https://events.mobilizeamerica.io/api/v1`) until Sept. 1, 2019.
 - Update references to support email (`support@mobilizeamerica.io` to `support@mobilize.us`).
 
 **2019-03-06**
