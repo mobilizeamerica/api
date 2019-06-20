@@ -1,6 +1,4 @@
-# MobilizeAmerica API Pilot
-
-**Note: This API is in alpha development, and while we will strive to minimize breaking changes and keep this document up-to-date, we expect there will be some iteration before we land on a public stable version.**
+# MobilizeAmerica API
 
 Please see the [Changelog](#changelog) below for changes, and file any issues [here](https://github.com/mobilizeamerica/api/issues)
 
