@@ -5,7 +5,7 @@ Please see the [Changelog](#changelog) below for changes, and file any issues [h
 To stay updated on new releases or iterations, join the email list [here](https://groups.google.com/forum/#!forum/mobilizeamerica-api-users)
 
 # Table of Contents
-- [MobilizeAmerica API Pilot](#mobilizeamerica-api-pilot)
+- [MobilizeAmerica API](#mobilizeamerica-api)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [API Entry Point](#api-entry-point)
