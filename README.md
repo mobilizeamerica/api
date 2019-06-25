@@ -275,6 +275,7 @@ Requires authentication: Yes
 | `address_visibility` | enum         | The visibility of the event's address (which may be different from the visibility of the event itself). One of `PUBLIC`, `PRIVATE`.                     |
 | `created_by_volunteer_host`      | bool          | Whether the event was created by a volunteer host using our distributed organizing tool or not                                                                                                                                          |
 | `virtual_action_url` | string       | The url the event redirects to if it's an unshifted virtual event. Otherwise, `null`.                                                                   |
+| `contact`            | Contact      | The contact information for the event |
 
 ### Timeslot
 
@@ -305,12 +306,14 @@ Requires authentication: Yes
 
 ### Contact
 The Contact object will return `null` for unauthenticated requests.
+Note that the name, email address, and phone number may differ from the contact information of the owner if they have been set specifically for the event.
 
 | Field            | Type    | Description                                     |
 | ---------------- | ------- | ----------------------------------------------- |
 | `name`           | string  | The name of the contact for the event.          |
 | `email_adddress` | string  | The email address of the contact for the event. |
 | `phone_number`   | string  | The phone number of the contact for the event.  |
+| `owner_user_id`  | int     | The user_id of the user who owns the event.     |
 
 
 ### Deleted Event
@@ -1014,6 +1017,10 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-06-25**
+- Add `owner_user_id` to Contact object
+- Update doc to clarify that `contact` is a field on Event object (this was previously the behavior, but it was missing from the documentation)
 
 **2019-06-13**
 - Add `person_id` and `user_id` to [Person object](#person-object)
