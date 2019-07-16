@@ -55,6 +55,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | location__address_line_2 | varchar(250) | The second line of the address |
 | location__locality | varchar(250) | The city |
 | location__region | varchar(2) | The two-character state code |
+| location__country | varchar(2) | The [ISO-3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code; note that U.S. territories have distinct country codes, e.g., Puerto Rico is `PR` |
 | location__postal_code | varchar(10) | The zip code |
 | location__lat | numeric(10, 7) | The latitude of the location or null if geocoding failed or has not yet completed |
 | location__lon | numeric(10, 7) | The longitude of the location or null if geocoding failed or has not yet completed |
@@ -180,6 +181,9 @@ The `sms_opt_ins` view contains information about which volunteers have opted in
 | organization_id | integer | Unique identifier of the Organization whose opt in this is for |
 
 # Changelog
+
+**2019-07-16**
+- Add `location__country` to `events` view
 
 **2019-06-11**
 - Clarify cross-firewall behavior on `participations` view for `attended`, `experience_feedback_type`, `participation_status` columns
