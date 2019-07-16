@@ -54,8 +54,8 @@ The `events` view includes events owned by the Organization and events owned by 
 | location__address_line_1 | varchar(250) | The first line of the address |
 | location__address_line_2 | varchar(250) | The second line of the address |
 | location__locality | varchar(250) | The city |
-| location__region | varchar(2) | The two-character state code |
-| location__country | varchar(2) | The [ISO-3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code; note that U.S. territories have distinct country codes, e.g., Puerto Rico is `PR` |
+| location__region | varchar(2) | The two-character state code (one of the 50 U.S. states or `DC` for Washington, D.C.) |
+| location__country | varchar(2) | The [ISO-3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code; note that U.S. territories and commonwealths have distinct country codes, e.g., Puerto Rico is `PR` |
 | location__postal_code | varchar(10) | The zip code |
 | location__lat | numeric(10, 7) | The latitude of the location or null if geocoding failed or has not yet completed |
 | location__lon | numeric(10, 7) | The longitude of the location or null if geocoding failed or has not yet completed |
