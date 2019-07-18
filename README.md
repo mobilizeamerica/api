@@ -295,7 +295,7 @@ Requires authentication: Yes
 | `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. If the location is private, the first line will be the string `This event’s address is private. Sign up for more details` |
 | `locality`               | string   | The city                                                                                                   |
 | `region`                 | string   | The two-character state code                                                                               |
-| `country`                 | string   | An [ISO-3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that U.S. territories and commonwealths have their own country codes; e.g., Puerto Rico is `PR`. For create and update requests, the field is optional and defaults to `US`. Currently, only `US` is acccepted.  |
+| `country`                 | string   | An [ISO-3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that U.S. territories and commonwealths have their own country codes; e.g., Puerto Rico is `PR`. For create and update requests, the field is optional and defaults to `US`. Currently, only `US` is accepted.  |
 | `postal_code`            | string   | The zipcode                                                                                                |
 | `location`               | object   | The geocoded location, or `null` if geocoding failed.                                                      |
 | `location.latitude`      | float    |                                                                                                            |
