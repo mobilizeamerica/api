@@ -295,6 +295,7 @@ Requires authentication: Yes
 | `address_lines`          | string[] | The lines of the address. Should always have exactly two values in our system, which may be empty strings. If the location is private, the first line will be the string `This event’s address is private. Sign up for more details` |
 | `locality`               | string   | The city                                                                                                   |
 | `region`                 | string   | The two-character state code                                                                               |
+| `country`                 | string   | An [ISO-3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that U.S. territories and commonwealths have their own country codes; e.g., Puerto Rico is `PR`. For create and update requests, the field is optional and defaults to `US`. Currently, only `US` is acccepted.  |
 | `postal_code`            | string   | The zipcode                                                                                                |
 | `location`               | object   | The geocoded location, or `null` if geocoding failed.                                                      |
 | `location.latitude`      | float    |                                                                                                            |
@@ -551,7 +552,7 @@ Requires authentication: Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots. Timeslots must be in Unix time.                                                                                                                                     | Yes
-| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.   | Yes
+| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.  | Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`.  | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                                                                               | Yes
@@ -619,7 +620,7 @@ Requires authentication: Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots. Timeslots must be a valid Unix timestamp. Any existing timeslots that are not present in the `timeslots` array will be deleted. Existing timeslots may be updated by including the `id` field in the `timeslot` object.                                                                                                                                     | Yes
-| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object.                                       | Yes
+| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object. | Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`.  | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                                                                               | Yes
@@ -1017,6 +1018,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-07-18**
+- Add `country` to [Location object](#location-object)
 
 **2019-06-25**
 - Add `owner_user_id` to Contact object
