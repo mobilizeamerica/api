@@ -559,7 +559,7 @@ Requires authentication: Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `OTHER`.  | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                                                                               | Yes
-| `accessibility_status` | string     | The level of compliance with the [Americans with Disabilities Act](https://www.access-board.gov/guidelines-and-standards/buildings-and-sites/about-the-ada-standards/guide-to-the-ada-standards/single-file-version) for the event venue, one of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`. If you set this to `ACCESSIBLE`, you are responsible for ensuring that your venue meets ADA standards. | Yes
+| `accessibility_status` | string     | The level of compliance with the [Americans with Disabilities Act](https://www.access-board.gov/guidelines-and-standards/buildings-and-sites/about-the-ada-standards/guide-to-the-ada-standards/single-file-version) for the event venue, one of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`. If you set this to `ACCESSIBLE`, you are responsible for ensuring that your venue meets ADA standards. | No
 | `accessibility_notes`  | string     | Notes with additional information about accessibility at the event location, including the availability of ramps and wheelchair-accessible restrooms, the height of door thresholds, the number of stairs, and the nature of any parking or seating arrangements. This is helpful even for venues that are not fully ADA accessible.| No
 
 ### Request body example
@@ -1025,6 +1025,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-07-22**
+- Change `accessibility_status` to not required for Event POST/PUT requests.
 
 **2019-07-19**
 - Add `accessibility_status` and `accessibility_notes` to [Event object](#event-object)
