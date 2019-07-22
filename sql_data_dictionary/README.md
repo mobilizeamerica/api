@@ -64,7 +64,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | location__state_leg_district | varchar(50) | The state lower house district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts)|
 | location__state_senate_district | varchar(50) | The state upper house district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts)|
 | timezone | varchar(100) |	A timezone database string for the event, e.g., `America/New_York` |
-| event_type | varchar | The type of event. One of: `ADVOCACY_CALL`, `CANVASS`, `COMMUNITY`, `FRIEND_TO_FRIEND_OUTREACH`, `FUNDRAISER`, `HOUSE_PARTY`, `MEET_GREET`, `MEETING`, `OTHER`, `PHONE_BANK`, `TEXT_BANK`, `TRAINING`, `VOTER_REG` |
+| event_type | varchar | The type of event. One of: `ADVOCACY_CALL`, `CANVASS`, `COMMUNITY`, `DEBATE_WATCH_PARTY`, `FRIEND_TO_FRIEND_OUTREACH`, `FUNDRAISER`, `HOUSE_PARTY`, `MEET_GREET`, `MEETING`, `OTHER`, `PHONE_BANK`, `TEXT_BANK`, `TRAINING`, `VOTER_REG` |
 | browser_url | text | Canonical URL of the event |
 | created_date | timestamptz | Timestamp that the event was created |
 | modified_date | timestamptz | Timestamp that the event was last updated |
@@ -181,6 +181,9 @@ The `sms_opt_ins` view contains information about which volunteers have opted in
 | organization_id | integer | Unique identifier of the Organization whose opt in this is for |
 
 # Changelog
+
+**2019-07-22**
+- Add `DEBATE_WATCH_PARTY` as a possible event type in `events` view
 
 **2019-07-16**
 - Add `location__country` to `events` view
