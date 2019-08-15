@@ -30,6 +30,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Timeslot](#timeslot)
     - [Location](#location)
     - [Contact](#contact)
+    - [Tag](#tag)
     - [Deleted Event](#deleted-event)
   - [List all public events](#list-all-public-events)
     - [Request](#request-2)
@@ -278,6 +279,7 @@ Requires authentication: Yes
 | `contact`            | Contact      | The contact information for the event |
 | `accessibility_status`           | enum          | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `null`           |
 | `accessibility_notes`| string       | Additional details about accessibility status and accomodations at the venue                                                                            |
+| `tags`               | Tag[]        | Array of associated tags                                                                                                                                |
 
 ### Timeslot
 
@@ -317,6 +319,14 @@ Note that the name, email address, and phone number may differ from the contact 
 | `email_adddress` | string  | The email address of the contact for the event. |
 | `phone_number`   | string  | The phone number of the contact for the event.  |
 | `owner_user_id`  | int     | The user_id of the user who owns the event.     |
+
+
+### Tag
+
+| Field        | Type   | Description          |
+| ------------ | ------ | -------------------- |
+| `id`         | int    |                      |
+| `name`       | string | Text name of the tag |
 
 
 ### Deleted Event
@@ -1028,6 +1038,10 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
+**2019-08-15**
+- Introduce [Tag object](#tag)
+- Add `tags` to [Event object](#event-object)
+
 **2019-07-23**
 - Document `ADVOCACY_CALL` event type, and clarify that the write APIs do not currently accept it
 
@@ -1040,7 +1054,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 - Add `accessibility_status` and `accessibility_notes` to [Event object](#event-object)
 
 **2019-07-18**
-- Add `country` to [Location object](#location-object)
+- Add `country` to [Location object](#location)
 
 **2019-06-25**
 - Add `owner_user_id` to Contact object
