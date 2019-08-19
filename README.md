@@ -357,6 +357,7 @@ Requires authentication: No
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 - `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
+- `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 
 ### Response
 `data` is an array of Event objects.
@@ -440,6 +441,7 @@ Requires authentication: No
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 - `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
+- `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 
 ### Response
 `data` is an array of Event objects.
@@ -1037,6 +1039,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-08-19**
+- Allow [public events](#list-all-public-events) and [organization events](#list-organization-events) to be filtered by `tag_id`
 
 **2019-08-15**
 - Introduce [Tag object](#tag)
