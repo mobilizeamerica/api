@@ -581,25 +581,25 @@ Requires authentication: Yes
         "title": "Example",
         "description": "example",
         "timezone": "America/New_York",
-        "summary": "",
+        "summary": "This is an event",
         "timeslots": [
             {
-                "start_date": 1537986600,
-                "end_date": 1537986601
+                "start_date": 1576774800,
+                "end_date": 1576782000
             },
             {
-                "start_date": 1537986600,
-                "end_date": 1537986601
+              "start_date": 1576861200,
+              "end_date": 1576868400
             }
         ],
         "location": {
-            "venue": "",
+            "venue": "Starbucks",
             "address_lines": [
-                "",
+                "315 7th Ave",
                 ""
             ],
-            "locality": "",
-            "region": "",
+            "locality": "New York",
+            "region": "NY",
             "postal_code": "10003"
         },
         "event_type": "CANVASS",
@@ -609,7 +609,7 @@ Requires authentication: Yes
         },
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts."
-    }
+}
 
 ### Response
 `data` will contain the newly created Event object.
@@ -656,12 +656,12 @@ Requires authentication: Yes
         "timeslots": [
             {
                 "id": 2000,
-                "start_date": 1537986600,
-                "end_date": 1537986601
+                "start_date": 1576774900,
+                "end_date": 1576782100
             },
             {
-                "start_date": 1537986600,
-                "end_date": 1537986601,
+                "start_date": 1576861300,
+                "end_date": 1576868500
             }
         ],
         "location": {
@@ -675,8 +675,12 @@ Requires authentication: Yes
             "postal_code": "10003"
         },
         "event_type": "CANVASS",
-        "visibility": "PUBLIC"
+        "visibility": "PUBLIC",
+        "contact": {
+            "email_address": "replyto@thisemail.com"
+        }
     }
+    
 
 ### Response
 If the `event_id` does not identify an existing event, the endpoint will return a `404 Not Found` response.
