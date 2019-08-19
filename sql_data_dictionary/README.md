@@ -22,6 +22,7 @@ description of each field.
   - [Participations](#participations)
   - [Timeslots](#timeslots)
   - [Sms Opt Ins](#sms-opt-ins)
+  - [Event Tags](#event-tags)
 - [Changelog](#changelog)
 
 # SQL Views
@@ -180,7 +181,25 @@ The `sms_opt_ins` view contains information about which volunteers have opted in
 | user__phone_number | varchar(20) | User's current phone number. Note: this may not match the phone we display on participations as `user__phone_number` but this is the phone the opt in was collected on |
 | organization_id | integer | Unique identifier of the Organization whose opt in this is for |
 
+## Event Tags
+
+The `event_tags` view contains information about what tags have been applied to events. Only tags for events owned or promoted by the organization are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the event-tag relation |
+| created_date | timestamptz | Time that the tag was added to the event |
+| modified_date | timestamptz | Time that the event-tag relation was last updated |
+| deleted_date | timestamptz | Time that the tag was removed from the event. `null` if not removed. |
+| event_id | integer | Foreign Key to the Event this tag relation belongs to |
+| tag_id | integer | Unique identifier of the tag |
+| tag__name | citext | Name of the tag |
+
 # Changelog
+
+**2019-08-19**
+- Add [`event_tags`](#event-tags) view
+- Fix a bug where some timeslots for promoted events that had not yet been approved were included in the [`timeslots`](#timeslots) view
 
 **2019-07-22**
 - Add `DEBATE_WATCH_PARTY` as a possible event type in `events` view
