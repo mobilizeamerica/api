@@ -268,7 +268,7 @@ Requires authentication: Yes
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
 | `location`           | Location     | The event location, or `null` if the event is virtual                                                                                                   |
 | `timezone`           | string       | A timezone database string for the event, e.g., `America/New_York`.                                                                                     |
-| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `ADVOCACY_CALL`, `OTHER`. This list may expand. |
+| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `ADVOCACY_CALL`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `OTHER`. This list may expand. |
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
@@ -1043,6 +1043,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-08-30**
+- Add new `event_type` options to [Event object](#event-object): `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`
 
 **2019-08-19**
 - Allow [public events](#list-all-public-events) and [organization events](#list-organization-events) to be filtered by `tag_id`
