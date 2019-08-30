@@ -1045,7 +1045,7 @@ On a successful request, the endpoint will return a 201 Created status code if t
 # Changelog
 
 **2019-08-30**
-- Added new `event_type` options to [Event object](#event-object): `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`
+- Add new `event_type` options to [Event object](#event-object): `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`
 
 **2019-08-19**
 - Allow [public events](#list-all-public-events) and [organization events](#list-organization-events) to be filtered by `tag_id`
