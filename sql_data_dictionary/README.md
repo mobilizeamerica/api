@@ -247,7 +247,7 @@ The `van_signups` view contains information about VAN signups that have been syn
 
 ## VAN Persons
 
-The `van_persons` view contains information about VAN persons that have been synced to Mobilize. Only VAN events that belong to the organization's VAN committee are included.
+The `van_persons` view contains information about VAN persons that have been synced to Mobilize. Only VAN persons that belong to the organization's VAN committee are included.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
