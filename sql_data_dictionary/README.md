@@ -23,6 +23,10 @@ description of each field.
   - [Timeslots](#timeslots)
   - [Sms Opt Ins](#sms-opt-ins)
   - [Event Tags](#event-tags)
+  - [VAN Events](#van-events)
+  - [VAN Shifts](#van-shifts)
+  - [VAN Signups](#van-signups)
+  - [VAN Persons](#van-persons)
 - [Changelog](#changelog)
 
 # SQL Views
@@ -195,7 +199,73 @@ The `event_tags` view contains information about what tags have been applied to 
 | tag_id | integer | Unique identifier of the tag |
 | tag__name | citext | Name of the tag |
 
+## VAN Views
+The following views map roughly to VAN Event, Shift, Signup, and Person [objects](https://developers.ngpvan.com/van-api#events). The following views will only be populated if the organization has a VAN committee set.
+
+## VAN Events
+
+The `van_events` view contains information about VAN events that have been synced to Mobilize. Only VAN events that belong to the organization's VAN committee are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the VAN event |
+| created_date | timestamptz | Time that the VAN event was first synced |
+| modified_date | timestamptz | Time that the VAN event was last updated |
+| van_id | integer | The ID of the VAN event as seen in VAN |
+| committee_id | integer | The VAN committee to which this event belongs |
+| event_id | integer | Foreign Key to the Event to which this event belongs |
+
+
+## VAN Shifts
+
+The `van_shifts` view contains information about VAN shifts that have been synced to Mobilize. Only VAN shifts that belong to the organization's VAN committee are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the VAN shift |
+| created_date | timestamptz | Time that the VAN shift was first synced |
+| modified_date | timestamptz | Time that the VAN shift was last updated |
+| van_id | integer | The ID of the VAN shift as seen in VAN |
+| van_event_van_id | integer | The ID of the shift's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
+| timeslot_id | integer | Foreign Key to the Timeslot this VAN shift belongs to |
+| committee_id | integer | The VAN committee ID to which this shift belongs |
+
+## VAN Signups
+
+The `van_signups` view contains information about VAN signups that have been synced to Mobilize. Only VAN signups that belong to the organization's VAN committee are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the VAN signup |
+| created_date | timestamptz | Time that the VAN signup was first synced |
+| modified_date | timestamptz | Time that the VAN signup was last updated |
+| timeslot_id | integer | Foreign Key to the Timeslot this VAN signup belongs to |
+| user_id | integer | The ID of the User associated with this VAN person; will match the `user_id` on the associated Participation |
+| participation_id | integer | Foreign Key to the Participation this VAN signup belongs to |
+| signup_type | varchar | The type of signup. One of `PARTICIPATION`, `EVENT_OWNER` |
+| van_id | integer | The ID of the VAN signup as seen in VAN |
+| van_event_van_id | integer | The ID of the signup's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
+| van_shift_van_id | integer | The ID of the signup's VAN shift as seen in VAN; Foreign Key to the `van_id` field in the `van_shifts` view |
+| van_person_van_id | integer | The ID of the signup's VAN person as seen in VAN; Foreign Key to the `van_id` field in the `van_persons` view |
+| committee_id | integer | The VAN committee ID to which this signup belongs |
+
+## VAN Persons
+
+The `van_persons` view contains information about VAN persons that have been synced to Mobilize. Only VAN persons that belong to the organization's VAN committee are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the VAN person |
+| created_date | timestamptz | Time that the VAN person was first synced |
+| modified_date | timestamptz | Time that the VAN person was last updated |
+| van_id | integer | The ID of the VAN person as seen in VAN |
+| committee_id | integer | The VAN committee ID to which this person belongs |
+| user_id | integer | The ID of the User associated with this VAN person |
+
 # Changelog
+
+**2019-09-19**
+- Add [`van_events`](#van-events), [`van_shifts`](#van-shifts), [`van_signups`](#van-signups), and [`van_persons`](#van-persons) views
 
 **2019-08-19**
 - Add [`event_tags`](#event-tags) view
