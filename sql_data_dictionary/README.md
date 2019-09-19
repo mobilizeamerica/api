@@ -199,6 +199,9 @@ The `event_tags` view contains information about what tags have been applied to 
 | tag_id | integer | Unique identifier of the tag |
 | tag__name | citext | Name of the tag |
 
+## VAN Views
+The following views map roughly to VAN Event, Shift, Signup, and Person [objects](https://developers.ngpvan.com/van-api#events). The following views will only be populated if the organization has a VAN committee set.
+
 ## VAN Events
 
 The `van_events` view contains information about VAN events that have been synced to Mobilize. Only VAN events that belong to the organization's VAN committee are included.
@@ -212,6 +215,7 @@ The `van_events` view contains information about VAN events that have been synce
 | committee_id | integer | The VAN committee to which this event belongs |
 | event_id | integer | Foreign Key to the Event to which this event belongs |
 
+
 ## VAN Shifts
 
 The `van_shifts` view contains information about VAN shifts that have been synced to Mobilize. Only VAN shifts that belong to the organization's VAN committee are included.
@@ -224,7 +228,7 @@ The `van_shifts` view contains information about VAN shifts that have been synce
 | van_id | integer | The ID of the VAN shift as seen in VAN |
 | van_event_van_id | integer | The ID of the shift's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
 | timeslot_id | integer | Foreign Key to the Timeslot this VAN shift belongs to |
-| committee_id | integer | The VAN committee to which this shift belongs |
+| committee_id | integer | The VAN committee ID to which this shift belongs |
 
 ## VAN Signups
 
@@ -236,14 +240,14 @@ The `van_signups` view contains information about VAN signups that have been syn
 | created_date | timestamptz | Time that the VAN signup was first synced |
 | modified_date | timestamptz | Time that the VAN signup was last updated |
 | timeslot_id | integer | Foreign Key to the Timeslot this VAN signup belongs to |
-| user_id | integer | Foreign Key to the User this VAN signup belongs to |
+| user_id | integer | The ID of the User associated with this VAN person; will match the `user_id` on the associated Participation |
 | participation_id | integer | Foreign Key to the Participation this VAN signup belongs to |
 | signup_type | varchar | The type of signup. One of `PARTICIPATION`, `EVENT_OWNER` |
 | van_id | integer | The ID of the VAN signup as seen in VAN |
 | van_event_van_id | integer | The ID of the signup's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
 | van_shift_van_id | integer | The ID of the signup's VAN shift as seen in VAN; Foreign Key to the `van_id` field in the `van_shifts` view |
 | van_person_van_id | integer | The ID of the signup's VAN person as seen in VAN; Foreign Key to the `van_id` field in the `van_persons` view |
-| committee_id | integer | The VAN committee to which this signup belongs |
+| committee_id | integer | The VAN committee ID to which this signup belongs |
 
 ## VAN Persons
 
@@ -255,8 +259,8 @@ The `van_persons` view contains information about VAN persons that have been syn
 | created_date | timestamptz | Time that the VAN person was first synced |
 | modified_date | timestamptz | Time that the VAN person was last updated |
 | van_id | integer | The ID of the VAN person as seen in VAN |
-| committee_id | integer | The VAN committee to which this person belongs |
-| user_id | integer | Foreign Key to the User associated with this VAN person |
+| committee_id | integer | The VAN committee ID to which this person belongs |
+| user_id | integer | The ID of the User associated with this VAN person |
 
 # Changelog
 
