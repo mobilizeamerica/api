@@ -222,9 +222,9 @@ The `van_shifts` view contains information about VAN shifts that have been synce
 | created_date | timestamptz | Time that the VAN shift was first synced |
 | modified_date | timestamptz | Time that the VAN shift was last updated |
 | van_id | integer | The ID of the VAN shift as seen in VAN |
-| van_event_van_id | integer | The ID of the VAN event to which this shift belongs as seen in VAN |
+| van_event_van_id | integer | The ID of the shift's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
 | timeslot_id | integer | Foreign Key to the Timeslot this VAN shift belongs to |
-| committee_id | integer | The VAN committee to which this shift belongs|
+| committee_id | integer | The VAN committee to which this shift belongs |
 
 ## VAN Signups
 
@@ -240,10 +240,10 @@ The `van_signups` view contains information about VAN signups that have been syn
 | participation_id | integer | Foreign Key to the Participation this VAN signup belongs to |
 | signup_type | varchar | The type of signup. One of `PARTICIPATION`, `EVENT_OWNER` |
 | van_id | integer | The ID of the VAN signup as seen in VAN |
-| van_event_van_id | integer | The ID of the VAN event as seen in VAN |
-| van_shift_van_id | integer | The ID of the VAN shift as seen in VAN |
-| van_person_van_id | integer | The ID of the VAN person as seen in VAN |
-| committee_id | integer | The VAN committee to which this signup belongs|
+| van_event_van_id | integer | The ID of the signup's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
+| van_shift_van_id | integer | The ID of the signup's VAN shift as seen in VAN; Foreign Key to the `van_id` field in the `van_shifts` view |
+| van_person_van_id | integer | The ID of the signup's VAN person as seen in VAN; Foreign Key to the `van_id` field in the `van_persons` view |
+| committee_id | integer | The VAN committee to which this signup belongs |
 
 ## VAN Persons
 
