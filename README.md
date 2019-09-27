@@ -31,6 +31,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Location](#location)
     - [Contact](#contact)
     - [Tag](#tag)
+    - [EventCampaign](#eventcampaign)
     - [Deleted Event](#deleted-event)
   - [List all public events](#list-all-public-events)
     - [Request](#request-2)
@@ -280,6 +281,7 @@ Requires authentication: Yes
 | `accessibility_status`           | enum          | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `null`           |
 | `accessibility_notes`| string       | Additional details about accessibility status and accomodations at the venue                                                                            |
 | `tags`               | Tag[]        | Array of associated tags                                                                                                                                |
+| `event_campaign`               | EventCampaign        | The associated distributed organizing event campaign, if applicable. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
 
 ### Timeslot
 
@@ -327,6 +329,14 @@ Note that the name, email address, and phone number may differ from the contact 
 | ------------ | ------ | -------------------- |
 | `id`         | int    |                      |
 | `name`       | string | Text name of the tag |
+
+### EventCampaign
+
+| Field        | Type   | Description          |
+| ------------ | ------ | -------------------- |
+| `id`         | int    |                      |
+| `slug`       | string | The public-facing slug of the event campaign. |
+| `event_create_page_url` | string | The URL of the public-facing event creation page for the event campaign. |
 
 
 ### Deleted Event
@@ -1043,6 +1053,9 @@ If any required fields are missing or contain invalid values, the endpoint will 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
 # Changelog
+
+**2019-09-25**
+- Add `event_campaign` on the [Event object](#event-object), and the associated [EventCampaign object](#eventcampaign).
 
 **2019-08-30**
 - Add new `event_type` options to [Event object](#event-object): `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`
