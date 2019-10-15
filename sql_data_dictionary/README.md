@@ -109,6 +109,11 @@ The `events` view includes events owned by the Organization and events owned by 
 | reviewed_by__email_address | citext | User's email address |
 | reviewed_by__phone_number | varchar(15) | User's phone number |
 | reviewed_by__postal_code | varchar(10) | User's zip code |
+| accessibility_notes | varchar | Additional details about accessibility status and accommodations at the venue |
+| accessibility_status | varchar | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `UNKNOWN` |
+| is_virtual | boolean | If `true`, the event is a Virtual event. If `false`, it is an In-Person event. |
+| event_campaign_id | integer | Unique identifier of the Event Campaign that the event belongs to |
+| event_campaign__slug | citext | The URL-safe string for the Event Campaign. This slug is unique for the organization. |
 
 ## Participations
 
@@ -263,6 +268,9 @@ The `van_persons` view contains information about VAN persons that have been syn
 | user_id | integer | The ID of the User associated with this VAN person |
 
 # Changelog
+
+**2019-10-15**
+- Add `accessibility_notes`, `accessibility_status`, `is_virtual`, `event_campaign_id`, and `event_campaign__slug` to [`events`](#events) view
 
 **2019-09-19**
 - Add [`van_events`](#van-events), [`van_shifts`](#van-shifts), [`van_signups`](#van-signups), and [`van_persons`](#van-persons) views
