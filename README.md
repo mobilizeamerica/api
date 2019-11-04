@@ -9,22 +9,22 @@ To stay updated on new releases or iterations, join the email list [here](https:
 - [MobilizeAmerica API](#mobilizeamerica-api)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
-  - [API Entry Point](#api-entry-point)
+  - [API entry point](#api-entry-point)
   - [Format](#format)
   - [Authentication](#authentication)
   - [Errors](#errors)
   - [Paging](#paging)
-  - [Comparison Filters](#comparison-filters)
+  - [Comparison filters](#comparison-filters)
   - [OSDI compliance](#osdi-compliance)
 - [Organizations](#organizations)
   - [Organization object](#organization-object)
   - [List all organizations](#list-all-organizations)
     - [Request](#request)
-    - [Request Params](#request-params)
+    - [Request params](#request-params)
     - [Response](#response)
   - [List all the organizations promoted by an organization](#list-all-the-organizations-promoted-by-an-organization)
     - [Request](#request-1)
-    - [Request Params](#request-params-1)
+    - [Request params](#request-params-1)
     - [Response](#response-1)
 - [Events](#events)
   - [Event object](#event-object)
@@ -36,27 +36,27 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Deleted Event](#deleted-event)
   - [List all public events](#list-all-public-events)
     - [Request](#request-2)
-    - [Request params](#request-params)
+    - [Request params](#request-params-2)
     - [Response](#response-2)
   - [Get an event](#get-an-event)
     - [Request](#request-3)
-    - [Request params](#request-params-1)
+    - [Request params](#request-params-3)
     - [Response](#response-3)
   - [List organization events](#list-organization-events)
     - [Request](#request-4)
-    - [Request params](#request-params-2)
+    - [Request params](#request-params-4)
     - [Response](#response-4)
   - [Get an organization event](#get-an-organization-event)
     - [Request](#request-5)
-    - [Request params](#request-params-3)
+    - [Request params](#request-params-5)
     - [Response](#response-5)
   - [List deleted public events](#list-deleted-public-events)
     - [Request](#request-6)
-    - [Request params](#request-params-4)
+    - [Request params](#request-params-6)
     - [Response](#response-6)
   - [List deleted organization events](#list-deleted-organization-events)
     - [Request](#request-7)
-    - [Request params](#request-params-5)
+    - [Request params](#request-params-7)
     - [Response](#response-7)
   - [Create event](#create-event)
     - [Request](#request-8)
@@ -65,13 +65,13 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Response](#response-8)
   - [Update event](#update-event)
     - [Request](#request-9)
-    - [Request Params](#request-params-2)
+    - [Request params](#request-params-8)
     - [Request body](#request-body-1)
     - [Request body example](#request-body-example-1)
     - [Response](#response-9)
   - [Delete event](#delete-event)
     - [Request](#request-10)
-    - [Request Params](#request-params-3)
+    - [Request params](#request-params-9)
     - [Response](#response-10)
 - [People](#people)
   - [Person object](#person-object)
@@ -80,14 +80,14 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Address](#address)
   - [List organization people](#list-organization-people)
     - [Request](#request-11)
-    - [Request params](#request-params-6)
+    - [Request params](#request-params-10)
     - [Response](#response-11)
 - [Attendances](#attendances)
   - [Attendance object](#attendance-object)
     - [Referrer](#referrer)
   - [List organization attendances](#list-organization-attendances)
     - [Request](#request-12)
-    - [Request params](#request-params-7)
+    - [Request params](#request-params-11)
     - [Response](#response-12)
   - [Create organization event attendance](#create-organization-event-attendance)
     - [Request](#request-13)
@@ -96,7 +96,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Referrer object](#referrer-object)
     - [Request body example](#request-body-example-2)
     - [Response](#response-13)
-    - [Response Body Example](#response-body-example)
+    - [Response body example](#response-body-example)
 - [Affiliation](#affiliation)
   - [Create organization affiliations](#create-organization-affiliations)
     - [Request](#request-14)
@@ -106,7 +106,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 - [Changelog](#changelog)
 
 # Overview
-## API Entry Point
+## API entry point
 
 All requests occur through `https://api.mobilize.us/v1`.
 
@@ -153,7 +153,7 @@ Here’s an example error response for `/v1/events?organization_id=hello`:
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
 
-## Comparison Filters
+## Comparison filters
 
 Some endpoints will allow for filtering by comparing with a field within an object. In those cases, the format will be `field_name=cmp_####`. For example, to filter out events before Jan 1 2018 GMT, you can include `timeslot_start=gte_1514764800`. Multiple may also be used, e.g. `timeslot_start=gte_1514764800&timeslot_start=lt_1515110400`. The comparison operators are ≥ `gte`, > `gt`, ≤ `lte`, < `lt`. More may be added in the future.
 
@@ -194,7 +194,7 @@ Requires authentication: No
 ### Request
 `GET /v1/organizations`
 
-### Request Params
+### Request params
 
 - `updated_since`: Unix timestamp of organizations to filter by `modified_date`
 
@@ -235,7 +235,7 @@ Requires authentication: Yes
 ### Request
 `GET /v1/organizations/:organization_id/promoted_organizations`
 
-### Request Params
+### Request params
 
 - None
 
@@ -796,7 +796,7 @@ Requires authentication: Yes
 ### Request
 `PUT /v1/organizations/:organization_id/events/:event_id`
 
-### Request Params
+### Request params
 * `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending email notifications to attendees when `location` or `timeslots` are updated.
   * `PUT /v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
@@ -867,7 +867,7 @@ Requires authentication: Yes
 ### Request
 `DELETE /v1/organizations/:organization_id/events/:event_id`
 
-### Request Params
+### Request params
 * `send_update_notifications`: Defaults to `true`. Set this to `false` to skip notifications. Defaults to sending attendees notifications when the event is deleted.
   *  `DELETE /v1/organizations/:organization_id/events/:event_id?send_update_notifications=false`
 
@@ -1052,7 +1052,7 @@ If the event, organization, or any timeslots do not refer to existing and valid 
 
 On a successful request, the endpoint will return a 201 Created status code and the newly created Attendance object(s).
 
-### Response Body Example
+### Response body example
 
     {
         "data": [
