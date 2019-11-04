@@ -5,6 +5,7 @@ Please see the [Changelog](#changelog) below for changes, and file any issues [h
 To stay updated on new releases or iterations, join the email list [here](https://groups.google.com/forum/#!forum/mobilizeamerica-api-users)
 
 # Table of Contents
+
 - [MobilizeAmerica API](#mobilizeamerica-api)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
@@ -37,63 +38,71 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-2)
     - [Request params](#request-params)
     - [Response](#response-2)
-  - [List organization events](#list-organization-events)
+  - [Get an event](#get-an-event)
     - [Request](#request-3)
     - [Request params](#request-params-1)
     - [Response](#response-3)
-  - [List deleted public events](#list-deleted-public-events)
+  - [List organization events](#list-organization-events)
     - [Request](#request-4)
     - [Request params](#request-params-2)
     - [Response](#response-4)
-  - [List deleted organization events](#list-deleted-organization-events)
+  - [Get an organization event](#get-an-organization-event)
     - [Request](#request-5)
     - [Request params](#request-params-3)
     - [Response](#response-5)
-  - [Create event](#create-event)
+  - [List deleted public events](#list-deleted-public-events)
     - [Request](#request-6)
+    - [Request params](#request-params-4)
+    - [Response](#response-6)
+  - [List deleted organization events](#list-deleted-organization-events)
+    - [Request](#request-7)
+    - [Request params](#request-params-5)
+    - [Response](#response-7)
+  - [Create event](#create-event)
+    - [Request](#request-8)
     - [Request body](#request-body)
     - [Request body example](#request-body-example)
-    - [Response](#response-6)
+    - [Response](#response-8)
   - [Update event](#update-event)
-    - [Request](#request-7)
+    - [Request](#request-9)
     - [Request Params](#request-params-2)
     - [Request body](#request-body-1)
     - [Request body example](#request-body-example-1)
-    - [Response](#response-7)
+    - [Response](#response-9)
   - [Delete event](#delete-event)
-    - [Request](#request-8)
+    - [Request](#request-10)
     - [Request Params](#request-params-3)
-    - [Response](#response-8)
+    - [Response](#response-10)
 - [People](#people)
   - [Person object](#person-object)
     - [Email](#email)
     - [Phone](#phone)
     - [Address](#address)
   - [List organization people](#list-organization-people)
-    - [Request](#request-9)
-    - [Request params](#request-params-4)
-    - [Response](#response-9)
+    - [Request](#request-11)
+    - [Request params](#request-params-6)
+    - [Response](#response-11)
 - [Attendances](#attendances)
   - [Attendance object](#attendance-object)
     - [Referrer](#referrer)
   - [List organization attendances](#list-organization-attendances)
-    - [Request](#request-10)
-    - [Request params](#request-params-5)
-    - [Response](#response-10)
+    - [Request](#request-12)
+    - [Request params](#request-params-7)
+    - [Response](#response-12)
   - [Create organization event attendance](#create-organization-event-attendance)
-    - [Request](#request-11)
+    - [Request](#request-13)
     - [Request body](#request-body-2)
     - [Person attendance object](#person-attendance-object)
     - [Referrer object](#referrer-object)
-    - [Example request body](#example-request-body)
-    - [Response](#response-11)
+    - [Request body example](#request-body-example-2)
+    - [Response](#response-13)
     - [Response Body Example](#response-body-example)
 - [Affiliation](#affiliation)
   - [Create organization affiliations](#create-organization-affiliations)
-    - [Request](#request-12)
+    - [Request](#request-14)
     - [Request body](#request-body-3)
-    - [Request body example](#request-body-example-2)
-    - [Response](#response-12)
+    - [Request body example](#request-body-example-3)
+    - [Response](#response-14)
 - [Changelog](#changelog)
 
 # Overview
@@ -387,47 +396,119 @@ Requires authentication: No
             Organization object
           },
           "timeslots": [
-              {
-                  "id": 1,
-                  "start_date": 2,
-                  "end_date": 3
-              },
-              {
-                  "id": 2,
-                  "start_date": 3,
-                  "end_date": 4
-              }
+            {
+              "id": 1,
+              "start_date": 2,
+              "end_date": 3
+            },
+            {
+              "id": 2,
+              "start_date": 3,
+              "end_date": 4
+            },
           ],
           "location": {
-              "venue": "",
-              "address_lines": [
-                  "204 E 13th St",
-                  ""
-              ],
-              "locality": "",
-              "region": "",
-              "postal_code": "10003",
-              "location": {
-                  "latitude": 40.7322535,
-                  "longitude": -73.9874105
-              },
-              "congressional_district_value": "12",
-              "state_leg_district_value": "66",
-              "state_senate_district_value": "27",
+            "venue": "",
+            "address_lines": [
+              "204 E 13th St",
+              ""
+            ],
+            "locality": "",
+            "region": "",
+            "postal_code": "10003",
+            "location": {
+              "latitude": 40.7322535,
+              "longitude": -73.9874105
+            },
+            "congressional_district_value": "12",
+            "state_leg_district_value": "66",
+            "state_senate_district_value": "27",
           },
           "event_type": "CANVASS",
           "created_date": 1,
           "modified_date": 1,
           "browser_url": "https://www.mobilize.us/event/1/"
-        },
-         "contact": {
-          "name": "",
-          "email_address": "replyto@thisemail.org",
-          "phone_number": "1234567890"
+          "contact": {
+            "name": "",
+            "email_address": "replyto@thisemail.org",
+            "phone_number": "1234567890"
+          },
         },
         ...
       ]
     }
+
+## Get an event
+
+    Status: LIVE
+
+    Fetch an event on the platform by id.
+
+    Requires authentication: No
+
+### Request
+    `GET /v1/events/:eventId`
+
+### Request params
+
+    None
+
+### Response
+    `data` is the returned Event object.
+
+        {
+          ...,
+          "data": {
+            "id": 1,
+            "description": "example",
+            "timezone": "America/New_York",
+            "title": "Example",
+            "summary": "",
+            "featured_image_url": "",
+            "high_priority": null,
+            "sponsor": {
+              Organization object
+            },
+            "timeslots": [
+              {
+                "id": 1,
+                "start_date": 2,
+                "end_date": 3
+              },
+              {
+                "id": 2,
+                "start_date": 3,
+                "end_date": 4
+              },
+            ],
+            "location": {
+              "venue": "",
+              "address_lines": [
+                "204 E 13th St",
+                ""
+              ],
+              "locality": "",
+              "region": "",
+              "postal_code": "10003",
+              "location": {
+                "latitude": 40.7322535,
+                "longitude": -73.9874105
+              },
+              "congressional_district_value": "12",
+              "state_leg_district_value": "66",
+              "state_senate_district_value": "27",
+            },
+            "event_type": "CANVASS",
+            "created_date": 1,
+            "modified_date": 1,
+            "browser_url": "https://www.mobilize.us/event/1/"
+            "contact": {
+              "name": "",
+              "email_address": "replyto@thisemail.org",
+              "phone_number": "1234567890"
+            },
+          },
+        }
 
 ## List organization events
 
@@ -471,48 +552,124 @@ Requires authentication: No
             Organization object
           },
           "timeslots": [
-              {
-                  "id": 1,
-                  "start_date": 2,
-                  "end_date": 3
-              },
-              {
-                  "id": 2,
-                  "start_date": 3,
-                  "end_date": 4
-              }
+            {
+              "id": 1,
+              "start_date": 2,
+              "end_date": 3
+            },
+            {
+              "id": 2,
+              "start_date": 3,
+              "end_date": 4
+            }
           ],
           "location": {
+            "venue": "",
+            "address_lines": [
+              "204 E 13th St",
+              ""
+            ],
+            "locality": "New York",
+            "region": "NY",
+            "country": "US",
+            "postal_code": "10003",
+            "location": {
+              "latitude": 40.7322535,
+              "longitude": -73.9874105
+            },
+            "congressional_district_value": "12",
+            "state_leg_district_value": "66",
+            "state_senate_district_value": "27",
+          },
+          "event_type": "CANVASS",
+          "created_date": 1,
+          "modified_date": 1,
+          "browser_url": "https://www.mobilize.us/event/1/"
+          "contact": {
+            "name": "",
+            "email_address": "replyto@thisemail.org",
+            "phone_number": "1234567890"
+          },
+        },
+        ...
+      ]
+    }
+
+## Get an organization event
+
+    Status: LIVE
+
+    Fetch a single event for an organization. This can be an event owned by the organization
+    (as indicated by the `organization` field on the event object) or an event of another
+    organization promoted by the specified organization. If the event requested is neither
+    owned nor promoted by this organization, the endpoint will return a `404 NOT FOUND`.
+
+    Requires authentication: No
+
+### Request
+    `GET /v1/organizations/:organization_id/events/:eventId`
+
+### Request params
+
+    None
+
+### Response
+    `data` is the Event object requested.
+
+        {
+          ...,
+          "data": {
+            "id": 1,
+            "description": "example",
+            "timezone": "America/New_York",
+            "title": "Example",
+            "summary": "",
+            "featured_image_url": "",
+            "high_priority": true,
+            "sponsor": {
+              Organization object
+            },
+            "timeslots": [
+              {
+                "id": 1,
+                "start_date": 2,
+                "end_date": 3
+              },
+              {
+                "id": 2,
+                "start_date": 3,
+                "end_date": 4
+              }
+            ],
+            "location": {
               "venue": "",
               "address_lines": [
-                  "204 E 13th St",
-                  ""
+                "204 E 13th St",
+                ""
               ],
               "locality": "New York",
               "region": "NY",
               "country": "US",
               "postal_code": "10003",
               "location": {
-                  "latitude": 40.7322535,
-                  "longitude": -73.9874105
+                "latitude": 40.7322535,
+                "longitude": -73.9874105
               },
               "congressional_district_value": "12",
               "state_leg_district_value": "66",
               "state_senate_district_value": "27",
+            },
+            "event_type": "CANVASS",
+            "created_date": 1,
+            "modified_date": 1,
+            "browser_url": "https://www.mobilize.us/event/1/"
+            "contact": {
+              "name": "",
+              "email_address": "replyto@thisemail.org",
+              "phone_number": "1234567890"
+            },
           },
-          "event_type": "CANVASS",
-          "created_date": 1,
-          "modified_date": 1,
-          "browser_url": "https://www.mobilize.us/event/1/"
-        },
-         "contact": {
-          "name": "",
-          "email_address": "replyto@thisemail.org",
-          "phone_number": "1234567890"
-        },
-        ...
-      ]
-    }
+        }
 
 ## List deleted public events
 
@@ -690,7 +847,7 @@ Requires authentication: Yes
             "email_address": "replyto@thisemail.com"
         }
     }
-    
+
 
 ### Response
 If the `event_id` does not identify an existing event, the endpoint will return a `404 Not Found` response.
@@ -863,7 +1020,7 @@ Requires authentication: Yes
 | `utm_content`  | string |             | No
 | `url`          | string |             | No
 
-### Example request body
+### Request body example
 
     {
         "person": {
@@ -1054,8 +1211,11 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
+**2019-11-04**
+- Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
+
 **2019-10-31**
-- Add a new `event_type` options [Event object](#event-object): `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, 
+- Add new `event_type` options [Event object](#event-object): `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`,
 
 **2019-09-25**
 - Add `event_campaign` on the [Event object](#event-object), and the associated [EventCampaign object](#eventcampaign).
