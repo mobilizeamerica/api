@@ -447,7 +447,7 @@ Requires authentication: No
     Requires authentication: No
 
 ### Request
-    `GET /v1/events/:eventId`
+    `GET /v1/events/:event_id`
 
 ### Request params
 
@@ -607,7 +607,7 @@ Requires authentication: No
     Requires authentication: No
 
 ### Request
-    `GET /v1/organizations/:organization_id/events/:eventId`
+    `GET /v1/organizations/:organization_id/events/:event_id`
 
 ### Request params
 
