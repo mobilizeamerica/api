@@ -362,7 +362,8 @@ Fetch all public events on the platform.
 
 Requires authentication: No*
 
-If you have privileged data access to the returned events, you'll need to send an authenticated request to see that data.
+If you have privileged data access (e.g. contact details and private location information) to the
+returned events, you'll need to send an authenticated request to see that data.
 
 ### Request
 `GET /v1/events`
@@ -448,7 +449,8 @@ Fetch a public event on the platform by id.
 
 Requires authentication: No*
 
-If you have privileged data access to the returned event, you'll need to send an authenticated request to see that data.
+If you have privileged data access (e.g. contact details and private location information) to the
+returned event, you'll need to send an authenticated request to see that data.
 
 ### Request
 
@@ -520,12 +522,16 @@ None
 
 Status: LIVE
 
-Fetch all events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization. By default, this endpoint will return only public events.
+Fetch all events for an organization. This includes both events owned by the organization
+(as indicated by the `organization` field on the event object) and events of other organizations
+promoted by this specified organization. By default, this endpoint will return only public events.
 
 Requires authentication: No*
 
-While authentication is not required for this endpoint, if it’s not provided then private events will be excluded
-from the results. Additionally, if you have privileged data access to the returned events, you’ll need to send an authenticated request to see that data.
+While authentication is not required for this endpoint, if it’s not provided then private events
+will be excluded from the results. Additionally, if you have privileged data access (e.g. contact
+details, private location information, and event campaign details) to the returned events, you’ll
+need to send an authenticated request to see that data.
 
 ### Request
 `GET /v1/organizations/:organization_id/events`
@@ -615,7 +621,9 @@ owned nor promoted by this organization, the endpoint will return a `404 NOT FOU
 
 Requires authentication: No*
 
-If you have privileged data access to the returned event, you'll need to send an authenticated request to see that data.
+If you have privileged data access (e.g. contact details, private location information, and event
+campaign details) to the returned event, you'll need to send an authenticated request to see that
+data.
 
 ### Request
 `GET /v1/organizations/:organization_id/events/:event_id`
