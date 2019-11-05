@@ -358,7 +358,8 @@ Note that the name, email address, and phone number may differ from the contact 
 
 Status: LIVE
 
-Fetch all public events on the platform.
+Fetch all public events on the platform. To list an organization’s private events, send an
+authenticated request to the [organization events list](#list-organization-events) endpoint instead.
 
 Requires authentication: No*
 
@@ -445,7 +446,8 @@ returned events, you'll need to send an authenticated request to see that data.
 
 Status: LIVE
 
-Fetch a public event on the platform by id.
+Fetch a public event on the platform by id. This endpoint will 404 if a private event is requested -
+to fetch a private event, use the [organization event endpoint](#get-an-organization-event) instead.
 
 Requires authentication: No*
 
