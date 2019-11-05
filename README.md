@@ -38,7 +38,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-2)
     - [Request params](#request-params-2)
     - [Response](#response-2)
-  - [Get an event](#get-an-event)
+  - [Get a public event](#get-a-public-event)
     - [Request](#request-3)
     - [Request params](#request-params-3)
     - [Response](#response-3)
@@ -358,9 +358,13 @@ Note that the name, email address, and phone number may differ from the contact 
 
 Status: LIVE
 
-Fetch all public events on the platform.
+Fetch all public events on the platform. To list an organization’s private events, send an
+authenticated request to the [organization events list](#list-organization-events) endpoint instead.
 
-Requires authentication: No
+Requires authentication: No*
+
+If you have privileged data access (e.g. contact details and private location information) to the
+returned events, you'll need to send an authenticated request to see that data.
 
 ### Request
 `GET /v1/events`
@@ -438,85 +442,98 @@ Requires authentication: No
       ]
     }
 
-## Get an event
+## Get a public event
 
-    Status: LIVE
+Status: LIVE
 
-    Fetch an event on the platform by id.
+Fetch a public event on the platform by id. This endpoint will 404 if a private event is requested -
+to fetch a private event, use the [organization event endpoint](#get-an-organization-event) instead.
 
-    Requires authentication: No
+Requires authentication: No*
+
+If you have privileged data access (e.g. contact details and private location information) to the
+returned event, you'll need to send an authenticated request to see that data.
 
 ### Request
-    `GET /v1/events/:event_id`
+
+`GET /v1/events/:event_id`
 
 ### Request params
 
-    None
+None
 
 ### Response
-    `data` is the returned Event object.
 
-        {
-          ...,
-          "data": {
+`data` is the returned Event object.
+
+    {
+      ...,
+      "data": {
+        "id": 1,
+        "description": "example",
+        "timezone": "America/New_York",
+        "title": "Example",
+        "summary": "",
+        "featured_image_url": "",
+        "high_priority": null,
+        "sponsor": {
+          Organization object
+        },
+        "timeslots": [
+          {
             "id": 1,
-            "description": "example",
-            "timezone": "America/New_York",
-            "title": "Example",
-            "summary": "",
-            "featured_image_url": "",
-            "high_priority": null,
-            "sponsor": {
-              Organization object
-            },
-            "timeslots": [
-              {
-                "id": 1,
-                "start_date": 2,
-                "end_date": 3
-              },
-              {
-                "id": 2,
-                "start_date": 3,
-                "end_date": 4
-              },
-            ],
-            "location": {
-              "venue": "",
-              "address_lines": [
-                "204 E 13th St",
-                ""
-              ],
-              "locality": "",
-              "region": "",
-              "postal_code": "10003",
-              "location": {
-                "latitude": 40.7322535,
-                "longitude": -73.9874105
-              },
-              "congressional_district_value": "12",
-              "state_leg_district_value": "66",
-              "state_senate_district_value": "27",
-            },
-            "event_type": "CANVASS",
-            "created_date": 1,
-            "modified_date": 1,
-            "browser_url": "https://www.mobilize.us/event/1/"
-            "contact": {
-              "name": "",
-              "email_address": "replyto@thisemail.org",
-              "phone_number": "1234567890"
-            },
+            "start_date": 2,
+            "end_date": 3
           },
-        }
+          {
+            "id": 2,
+            "start_date": 3,
+            "end_date": 4
+          },
+        ],
+        "location": {
+          "venue": "",
+          "address_lines": [
+            "204 E 13th St",
+            ""
+          ],
+          "locality": "",
+          "region": "",
+          "postal_code": "10003",
+          "location": {
+            "latitude": 40.7322535,
+            "longitude": -73.9874105
+          },
+          "congressional_district_value": "12",
+          "state_leg_district_value": "66",
+          "state_senate_district_value": "27",
+        },
+        "event_type": "CANVASS",
+        "created_date": 1,
+        "modified_date": 1,
+        "browser_url": "https://www.mobilize.us/event/1/"
+        "contact": {
+          "name": "",
+          "email_address": "replyto@thisemail.org",
+          "phone_number": "1234567890"
+        },
+      },
+    }
 
 ## List organization events
 
 Status: LIVE
 
-Fetch all events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization. By default, this endpoint will return only public events.
+Fetch all events for an organization. This includes both events owned by the organization
+(as indicated by the `organization` field on the event object) and events of other organizations
+promoted by this specified organization. By default, this endpoint will return only public events.
 
-Requires authentication: No
+Requires authentication: No*
+
+While authentication is not required for this endpoint, if it’s not provided then private events
+will be excluded from the results. Additionally, if you have privileged data access (e.g. contact
+details, private location information, and event campaign details) to the returned events, you’ll
+need to send an authenticated request to see that data.
 
 ### Request
 `GET /v1/organizations/:organization_id/events`
@@ -597,79 +614,83 @@ Requires authentication: No
 
 ## Get an organization event
 
-    Status: LIVE
+Status: LIVE
 
-    Fetch a single event for an organization. This can be an event owned by the organization
-    (as indicated by the `organization` field on the event object) or an event of another
-    organization promoted by the specified organization. If the event requested is neither
-    owned nor promoted by this organization, the endpoint will return a `404 NOT FOUND`.
+Fetch a single event for an organization. This can be an event owned by the organization
+(as indicated by the `organization` field on the event object) or an event of another
+organization promoted by the specified organization. If the event requested is neither
+owned nor promoted by this organization, the endpoint will return a `404 NOT FOUND`.
 
-    Requires authentication: No
+Requires authentication: No*
+
+If you have privileged data access (e.g. contact details, private location information, and event
+campaign details) to the returned event, you'll need to send an authenticated request to see that
+data.
 
 ### Request
-    `GET /v1/organizations/:organization_id/events/:event_id`
+`GET /v1/organizations/:organization_id/events/:event_id`
 
 ### Request params
 
-    None
+None
 
 ### Response
-    `data` is the Event object requested.
+`data` is the Event object requested.
 
-        {
-          ...,
-          "data": {
+    {
+      ...,
+      "data": {
+        "id": 1,
+        "description": "example",
+        "timezone": "America/New_York",
+        "title": "Example",
+        "summary": "",
+        "featured_image_url": "",
+        "high_priority": true,
+        "sponsor": {
+          Organization object
+        },
+        "timeslots": [
+          {
             "id": 1,
-            "description": "example",
-            "timezone": "America/New_York",
-            "title": "Example",
-            "summary": "",
-            "featured_image_url": "",
-            "high_priority": true,
-            "sponsor": {
-              Organization object
-            },
-            "timeslots": [
-              {
-                "id": 1,
-                "start_date": 2,
-                "end_date": 3
-              },
-              {
-                "id": 2,
-                "start_date": 3,
-                "end_date": 4
-              }
-            ],
-            "location": {
-              "venue": "",
-              "address_lines": [
-                "204 E 13th St",
-                ""
-              ],
-              "locality": "New York",
-              "region": "NY",
-              "country": "US",
-              "postal_code": "10003",
-              "location": {
-                "latitude": 40.7322535,
-                "longitude": -73.9874105
-              },
-              "congressional_district_value": "12",
-              "state_leg_district_value": "66",
-              "state_senate_district_value": "27",
-            },
-            "event_type": "CANVASS",
-            "created_date": 1,
-            "modified_date": 1,
-            "browser_url": "https://www.mobilize.us/event/1/"
-            "contact": {
-              "name": "",
-              "email_address": "replyto@thisemail.org",
-              "phone_number": "1234567890"
-            },
+            "start_date": 2,
+            "end_date": 3
           },
-        }
+          {
+            "id": 2,
+            "start_date": 3,
+            "end_date": 4
+          }
+        ],
+        "location": {
+          "venue": "",
+          "address_lines": [
+            "204 E 13th St",
+            ""
+          ],
+          "locality": "New York",
+          "region": "NY",
+          "country": "US",
+          "postal_code": "10003",
+          "location": {
+            "latitude": 40.7322535,
+            "longitude": -73.9874105
+          },
+          "congressional_district_value": "12",
+          "state_leg_district_value": "66",
+          "state_senate_district_value": "27",
+        },
+        "event_type": "CANVASS",
+        "created_date": 1,
+        "modified_date": 1,
+        "browser_url": "https://www.mobilize.us/event/1/"
+        "contact": {
+          "name": "",
+          "email_address": "replyto@thisemail.org",
+          "phone_number": "1234567890"
+        },
+      },
+    }
 
 ## List deleted public events
 
