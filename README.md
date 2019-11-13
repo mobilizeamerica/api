@@ -108,7 +108,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 # Overview
 ## API entry point
 
-All requests occur through `https://api.mobilize.us/v1`.
+All requests occur through `https://api.mobilize.io/v1/`.
 
 ## Format
 
