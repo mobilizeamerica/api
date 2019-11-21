@@ -294,6 +294,8 @@ Requires authentication: Yes
 
 ### Timeslot
 
+When [creating events](#create-event), note that only `start_date` and `end_date` should be provided.
+
 | Field        | Type | Description    |
 | ------------ | ---- | -------------- |
 | `id`         | int  |                |
@@ -323,6 +325,9 @@ Requires authentication: Yes
 ### Contact
 The Contact object will return `null` for unauthenticated requests.
 Note that the name, email address, and phone number may differ from the contact information of the owner if they have been set specifically for the event.
+
+When [creating events](#create-event), note that `owner_user_id` should not be supplied.
+
 
 | Field            | Type    | Description                                     |
 | ---------------- | ------- | ----------------------------------------------- |
@@ -754,7 +759,7 @@ Requires authentication: Yes
 | `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
-| `timeslots`          | Timeslot[]   | Array of past and future timeslots. Timeslots must be in Unix time.                                                                                                                                     | Yes
+| `timeslots`          | Timeslot[]   | Array of past and future [Timeslots](#timeslot), containing only `start_date` and `end_date` fields. Timeslots must be in Unix time.                                                                                                                                     | Yes
 | `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.  | Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. Note that creating events with event type `ADVOCACY_CALL` is not currently supported in the API. | Yes
