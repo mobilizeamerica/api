@@ -89,20 +89,23 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-12)
     - [Request params](#request-params-11)
     - [Response](#response-12)
-  - [Create organization event attendance](#create-organization-event-attendance)
+  - [List organization attendances for an event](#list-organization-attendances-for-an-event)
     - [Request](#request-13)
+    - [Response](#response-14)
+  - [Create organization event attendance](#create-organization-event-attendance)
+    - [Request](#request-14)
     - [Request body](#request-body-2)
     - [Person attendance object](#person-attendance-object)
     - [Referrer object](#referrer-object)
     - [Request body example](#request-body-example-2)
-    - [Response](#response-13)
+    - [Response](#response-14)
     - [Response body example](#response-body-example)
 - [Affiliation](#affiliation)
   - [Create organization affiliations](#create-organization-affiliations)
-    - [Request](#request-14)
+    - [Request](#request-15)
     - [Request body](#request-body-3)
     - [Request body example](#request-body-example-3)
-    - [Response](#response-14)
+    - [Response](#response-15)
 - [Changelog](#changelog)
 
 # Overview
@@ -984,6 +987,12 @@ Requires authentication: Yes
 | `utm_content`  | string |             |
 | `url`          | string |             |
 
+## Get an organization attendance
+
+Status: LIVE
+
+Fetch a single attendance for an organization.
+
 ## List organization attendances
 
 Status: LIVE
@@ -998,6 +1007,20 @@ Requires authentication: Yes
 ### Request params
 
 - `updated_since`: Unix timestamp to filter by Attendances’ `modified_date`
+
+### Response
+`data` is an array of Attendance objects.
+
+## List organization attendances for an event
+
+STATUS: LIVE
+
+Featch all attendances for the given event if the event is either promoted by the organization or owned by the organization
+
+Requires authentication: Yes
+
+### Request
+`GET /v1/organizations/:organization_id/events/:event_id/attendances`
 
 ### Response
 `data` is an array of Attendance objects.
@@ -1235,7 +1258,33 @@ If any required fields are missing or contain invalid values, the endpoint will 
 
 On a successful request, the endpoint will return a 201 Created status code if the person record was created, a 200 No Content result if the person record was updated, and the affected Affiliation object.
 
+# Images
+
+## Upload images
+
+Status: LIVE
+
+This endpoint uploads an image to Mobilize and returns the Mobilize-hosted image URL. This URL can then be used as the `featured_image_url` when creating or updating an Event.
+
+This endpoint accepts the `multipart/form-data` content type.
+
+### Request
+`POST /v1/images`
+
+### Request body
+| Field             | Type   | Description                                       | Required |
+| ----------------- | ------ | ------------------------------------------------- | -------- |
+| file              | File   | The image to upload.                              | Yes      |
+| file_name         | string | An optional name for the file; if not provided, will be inferred from the file's name.  | No      |
+
+###
+
+
 # Changelog
+**2019-12-05**
+- Add [single attendance](#get-attendance) and [attendances by event](#list-organization-event-attendances) endpoints
+- Add endpoint to upload an image and retrieve its Mobilize-hosted URL
+- Allow setting an image URL when creating an updating an event
 
 **2019-11-04**
 - Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
