@@ -779,6 +779,7 @@ Requires authentication: Yes
 | `accessibility_status` | string     | The level of compliance with the [Americans with Disabilities Act](https://www.access-board.gov/guidelines-and-standards/buildings-and-sites/about-the-ada-standards/guide-to-the-ada-standards/single-file-version) for the event venue, one of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`. If you set this to `ACCESSIBLE`, you are responsible for ensuring that your venue meets ADA standards. | No
 | `accessibility_notes`  | string     | Notes with additional information about accessibility at the event location, including the availability of ramps and wheelchair-accessible restrooms, the height of door thresholds, the number of stairs, and the nature of any parking or seating arrangements. This is helpful even for venues that are not fully ADA accessible.| No
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
+| `tag_ids`              | int[]       | Array of ids of [Tags](#Tags) to apply to the event                                                                                                                                                    | No
 
 ### Request body example
 
@@ -815,6 +816,7 @@ Requires authentication: Yes
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
         "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg"
+        "tag_ids": [3,34]
 }
 
 ### Response
@@ -1303,13 +1305,14 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2019-12-09**
+- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
+- Update [event creation](#create-event) to include an optional list of `tag_ids`
+
 **2019-12-05**
 - Add [single attendance](#get-an-organization-attendance) and [attendances by event](#list-organization-attendances-for-an-event) endpoints
 - Add endpoint to upload an image and retrieve its Mobilize-hosted URL
 - Allow setting an image URL when creating an updating an event
-
-**2019-12-09**
-- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
 
 **2019-11-04**
 - Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
