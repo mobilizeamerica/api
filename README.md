@@ -1299,7 +1299,7 @@ Requires authentication: Yes
 
 # Changelog
 **2019-12-05**
-- Add [single attendance](#get-attendance) and [attendances by event](#list-organization-event-attendances) endpoints
+- Add [single attendance](#get-an-organization-attendance) and [attendances by event](#list-organization-attendances-for-an-event) endpoints
 - Add endpoint to upload an image and retrieve its Mobilize-hosted URL
 - Allow setting an image URL when creating an updating an event
 
