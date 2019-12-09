@@ -1305,13 +1305,14 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2019-12-09**
+- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
+- Update [event creation](#create-event) to include an optional list of `tag_ids`
+
 **2019-12-05**
 - Add [single attendance](#get-an-organization-attendance) and [attendances by event](#list-organization-attendances-for-an-event) endpoints
 - Add endpoint to upload an image and retrieve its Mobilize-hosted URL
 - Allow setting an image URL when creating an updating an event
-
-**2019-12-09**
-- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
 
 **2019-11-04**
 - Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
