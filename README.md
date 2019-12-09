@@ -109,6 +109,11 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request body](#request-body-3)
     - [Request body example](#request-body-example-3)
     - [Response](#response-16)
+- [Images](#images)
+  - [Upload images](#upload-images)
+    - [Request](#request-17)
+    - [Request body](#request-body-4)
+    - [Response](#response-17)
 - [Changelog](#changelog)
 
 # Overview
