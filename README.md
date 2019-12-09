@@ -85,7 +85,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 - [Attendances](#attendances)
   - [Attendance object](#attendance-object)
     - [Referrer](#referrer)
-  - [Get an organization attendance][#get-an-organization-attendance]
+  - [Get an organization attendance](#get-an-organization-attendance)
     - [Request](#request-12)
     - [Response](#response-12)
   - [List organization attendances](#list-organization-attendances)
