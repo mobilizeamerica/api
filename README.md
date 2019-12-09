@@ -1032,7 +1032,7 @@ Requires authentication: Yes
 | `given_name`     | string |             | Yes
 | `family_name`  | string |             | Yes
 | `email_address`  | string |             | Yes
-| `phone_number`   | string |             | Yes
+| `phone_number`   | string |             | No
 | `postal_code`    | string |             | Yes
 
 ### Referrer object
