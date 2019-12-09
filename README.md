@@ -1075,7 +1075,7 @@ Requires authentication: Yes
 | `given_name`     | string |             | Yes
 | `family_name`  | string |             | Yes
 | `email_address`  | string |             | Yes
-| `phone_number`   | string |             | Yes
+| `phone_number`   | string |             | No
 | `postal_code`    | string |             | Yes
 
 ### Referrer object
@@ -1307,6 +1307,9 @@ Requires authentication: Yes
 - Add [single attendance](#get-an-organization-attendance) and [attendances by event](#list-organization-attendances-for-an-event) endpoints
 - Add endpoint to upload an image and retrieve its Mobilize-hosted URL
 - Allow setting an image URL when creating an updating an event
+
+**2019-12-09**
+- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
 
 **2019-11-04**
 - Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
