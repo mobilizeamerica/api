@@ -1237,6 +1237,9 @@ On a successful request, the endpoint will return a 201 Created status code if t
 
 # Changelog
 
+**2019-12-09**
+- Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
+
 **2019-11-04**
 - Add [single event](#get-an-event) and [single organization event]($get-an-organization-event) endpoints
 
