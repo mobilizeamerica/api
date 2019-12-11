@@ -815,7 +815,7 @@ Requires authentication: Yes
         },
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
-        "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg"
+        "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
         "tag_ids": [3,34]
 }
 
@@ -888,7 +888,7 @@ Requires authentication: Yes
         "visibility": "PUBLIC",
         "contact": {
             "email_address": "replyto@thisemail.com"
-        }
+        },
         "tag_ids": [2, 34]
     }
 
