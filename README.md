@@ -815,7 +815,7 @@ Requires authentication: Yes
         },
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
-        "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg"
+        "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
         "tag_ids": [3,34]
 }
 
@@ -854,7 +854,7 @@ Requires authentication: Yes
 | `contact`            | Contact      | A [Contact object](#contact) containing contact info for the event. | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.   | Yes
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
-
+| `tag_ids`              | int[]       | Array of tag ids to be applied to the event. Any existing tags that are not present in the `tag_ids` array will be deleted.                                   | No
 
 ### Request body example
 
@@ -888,7 +888,8 @@ Requires authentication: Yes
         "visibility": "PUBLIC",
         "contact": {
             "email_address": "replyto@thisemail.com"
-        }
+        },
+        "tag_ids": [2, 34]
     }
 
 
@@ -1305,6 +1306,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2019-12-11**
+- Update [event update](#update-event) to include an optional list of `tag_ids`
+
 **2019-12-09**
 - Update [Person attendance object](#person-attendance-object) so that phone number is not required anymore.
 - Update [event creation](#create-event) to include an optional list of `tag_ids`
