@@ -779,7 +779,7 @@ Requires authentication: Yes
 | `accessibility_status` | string     | The level of compliance with the [Americans with Disabilities Act](https://www.access-board.gov/guidelines-and-standards/buildings-and-sites/about-the-ada-standards/guide-to-the-ada-standards/single-file-version) for the event venue, one of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`. If you set this to `ACCESSIBLE`, you are responsible for ensuring that your venue meets ADA standards. | No
 | `accessibility_notes`  | string     | Notes with additional information about accessibility at the event location, including the availability of ramps and wheelchair-accessible restrooms, the height of door thresholds, the number of stairs, and the nature of any parking or seating arrangements. This is helpful even for venues that are not fully ADA accessible.| No
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
-| `tag_ids`              | int[]       | Array of ids of [Tags](#Tags) to apply to the event                                                                                                                                                    | No
+| `tags`              | string[]       | Array of Tag slugs to apply to the event. Available slugs: `official-campaign-event`, `spanish-language-event`, `student-event`, `get-out-the-vote`, `get-out-the-caucus`.                                   | No
 
 ### Request body example
 
@@ -816,7 +816,7 @@ Requires authentication: Yes
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
         "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
-        "tag_ids": [3,34]
+        "tags": ["student-event", "get-out-the-vote"]
 }
 
 ### Response
@@ -854,7 +854,7 @@ Requires authentication: Yes
 | `contact`            | Contact      | A [Contact object](#contact) containing contact info for the event. | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.   | Yes
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
-| `tag_ids`              | int[]       | Array of tag ids to be applied to the event. Any existing tags that are not present in the `tag_ids` array will be deleted.                                   | No
+| `tags`              | string[]       | Array of tag slugs to apply to the event. Available slugs: `official-campaign-event`, `spanish-language-event`, `student-event`, `get-out-the-vote`, `get-out-the-caucus`. Any existing tags that are not present in the `tag_ids` array will be deleted.                                   | No
 
 ### Request body example
 
@@ -889,7 +889,7 @@ Requires authentication: Yes
         "contact": {
             "email_address": "replyto@thisemail.com"
         },
-        "tag_ids": [2, 34]
+        "tags": ["student-event", "get-out-the-vote"]
     }
 
 
@@ -1306,6 +1306,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2019-12-12**
+- Update [event creation](#create-event) and [event update](#update-event) to include tags via tag slug rather than tag id
+
 **2019-12-11**
 - Update [event update](#update-event) to include an optional list of `tag_ids`
 
