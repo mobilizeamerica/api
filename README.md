@@ -725,7 +725,6 @@ Requires authentication: No
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
-- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -734,9 +733,14 @@ Requires authentication: No
 
 Status: LIVE
 
-Fetch all deleted public events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization.
+Fetch deleted events for an organization. This includes both events owned by the organization (as indicated by the `organization` field on the event object) and events of other organizations promoted by this specified organization.
 
-Requires authentication: No
+Requires authentication: No*
+
+While authentication is not required for this endpoint, if it’s not provided then private events
+will be excluded from the results. Additionally, if you have privileged data access (e.g. contact
+details, private location information, and event campaign details) to the returned events, you’ll
+need to send an authenticated request to see that data.
 
 ### Request
 `GET /v1/organizations/:organization_id/events/deleted`
@@ -746,6 +750,7 @@ Requires authentication: No
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -1306,6 +1311,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-01-03**
+- Clarify [list organization events](#list-organization-events) and [list deleted organization events](#list-deleted-organization-events) endpoint docs re: event visibility behavior.
+
 **2019-12-11**
 - Update [event update](#update-event) to include an optional list of `tag_ids`
 
