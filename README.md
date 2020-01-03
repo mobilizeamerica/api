@@ -738,9 +738,7 @@ Fetch deleted events for an organization. This includes both events owned by the
 Requires authentication: No*
 
 While authentication is not required for this endpoint, if it’s not provided then private events
-will be excluded from the results. Additionally, if you have privileged data access (e.g. contact
-details, private location information, and event campaign details) to the returned events, you’ll
-need to send an authenticated request to see that data.
+will be excluded from the results.
 
 ### Request
 `GET /v1/organizations/:organization_id/events/deleted`
