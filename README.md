@@ -561,7 +561,7 @@ need to send an authenticated request to see that data.
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 - `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
-- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
+- `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, a 403 error is returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 - `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
@@ -1308,6 +1308,10 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-01-16**
+- Update [list organization events](#list-organization-events) to return a 403 error if the the user
+  queries for `visibility=PRIVATE` without permissions for the org or the request is unauthenticated. 
+
 **2020-01-03**
 - Clarify [list organization events](#list-organization-events) and [list deleted organization events](#list-deleted-organization-events) endpoint docs re: event visibility behavior.
 
