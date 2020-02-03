@@ -23,10 +23,13 @@ description of each field.
   - [Timeslots](#timeslots)
   - [Sms Opt Ins](#sms-opt-ins)
   - [Event Tags](#event-tags)
+  - [Users](#users)
+  - [VAN Views](#van-views)
   - [VAN Events](#van-events)
   - [VAN Shifts](#van-shifts)
   - [VAN Signups](#van-signups)
   - [VAN Persons](#van-persons)
+  - [VAN Locations](#van-locations)
 - [Changelog](#changelog)
 
 # SQL Views
@@ -76,6 +79,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | deleted_date | timestamptz | Timestamp that the event was deleted (null if not deleted) |
 | visibility | varchar | The visibility of the event, one of: `PUBLIC`, `PRIVATE` |
 | created_by_volunteer_host | boolean | Whether the event was created by a volunteer host using our distributed organizing tool or not |
+| van_name | varchar(500) | A custom name of the event in VAN, if set. If not set, the name of the event in VAN defaults to the `title`. Always `null` for promoted events. |
 | contact__name | varchar(100) | The name of the contact for the event |
 | contact__email_address | varchar(254) | The email address of the contact for the event (reply-to email) |
 | contact__phone_number | varchar(100) | The phone number of the contact for the event |
@@ -204,6 +208,26 @@ The `event_tags` view contains information about what tags have been applied to 
 | tag_id | integer | Unique identifier of the tag |
 | tag__name | citext | Name of the tag |
 
+## Users
+
+The `users` view contains information about members of the Organization.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The primary key of the User |
+| created_date | timestamptz | Time that the User was created |
+| modified_date | timestamptz | Time that the User was last updated |
+| given_name | varchar(255) | User's first name |
+| family_name | varchar(255) | User's last name |
+| email_address | citext | User's email address |
+| phone_number | varchar(15) | User's phone number |
+| postal_code | varchar(10) | User's zip code |
+| membership_id | integer | Foreign Key to the Membership of this User in the Organization |
+| membership__created_date | timestamptz | Time that the Membership was created |
+| membership__modified_date | timestamptz | Time that the Membership was last updated |
+| membership__permission_tier | varchar | The permission tier of the User in the Organization. One of: `ADMIN`, `ORGANIZER`, `TRUSTED_HOST`, `HOST` |
+| membership__organization_id | integer | Foreign Key to the Organization this User's Membership is for |
+
 ## VAN Views
 The following views map roughly to VAN Event, Shift, Signup, and Person [objects](https://developers.ngpvan.com/van-api#events). The following views will only be populated if the organization has a VAN committee set.
 
@@ -267,7 +291,23 @@ The `van_persons` view contains information about VAN persons that have been syn
 | committee_id | integer | The VAN committee ID to which this person belongs |
 | user_id | integer | The ID of the User associated with this VAN person |
 
+## VAN Locations
+
+The `van_locations` view contains information about the mapping of Mobilize Events to VAN locations. Only Events synced for the Organization's VAN committee are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| created_date | timestamptz | Time that the VAN location was first synced |
+| modified_date | timestamptz | Time that the VAN location was last updated |
+| van_id | integer | The ID of the VAN location as seen in VAN |
+| event_id | integer | Foreign Key to the Event this VAN location is for |
+| committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
+
 # Changelog
+
+**2020-02-04**
+- Add `van_name` to [`events`](#events) view
+- Add [`users`](#users) and [`van_locations`](#van-locations) view
 
 **2019-10-15**
 - Add `accessibility_notes`, `accessibility_status`, `is_virtual`, `event_campaign_id`, and `event_campaign__slug` to [`events`](#events) view
