@@ -305,7 +305,7 @@ Requires authentication: Yes
 
 ### Timeslot
 
-When [creating events](#create-event), note that only `start_date` and `end_date` must be provided.
+When [creating events](#create-event), note that only `start_date`, `end_date`, and optionally `max_attendees` should be provided.
 
 | Field           | Type          | Description    |
 | --------------- | ----          | -------------- |
