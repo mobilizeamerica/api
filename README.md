@@ -305,14 +305,15 @@ Requires authentication: Yes
 
 ### Timeslot
 
-When [creating events](#create-event), note that only `start_date` and `end_date` should be provided.
+When [creating events](#create-event), note that only `start_date`, `end_date`, and optionally `max_attendees` should be provided.
 
-| Field        | Type | Description    |
-| ------------ | ---- | -------------- |
-| `id`         | int  |                |
-| `start_date` | int  | Unix timestamp |
-| `end_date`   | int  | Unix timestamp |
-| `is_full`    | bool | Whether the timeslot is full |
+| Field           | Type          | Description    |
+| --------------- | ----          | -------------- |
+| `id`            | int           |                |
+| `start_date`    | int           | Unix timestamp |
+| `end_date`      | int           | Unix timestamp |
+| `max_attendees` | Optional[int] | Max # of people who can sign up for this timeslot. Send null for no maximum. |
+| `is_full`       | bool          | Whether the timeslot is full |
 
 
 ### Location
@@ -772,7 +773,7 @@ Requires authentication: Yes
 | `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
-| `timeslots`          | Timeslot[]   | Array of past and future [Timeslots](#timeslot), containing only `start_date` and `end_date` fields. Timeslots must be in Unix time.                                                                                                                                     | Yes
+| `timeslots`          | Timeslot[]   | Array of past and future [Timeslots](#timeslot), containing `start_date` and `end_date` fields, and optionally `max_attendees` as well. Timeslots must be in Unix time.                                                                                                                                     | Yes
 | `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.  | Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. Note that creating events with event type `ADVOCACY_CALL` is not currently supported in the API. | Yes
@@ -1308,6 +1309,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-02-13**
+- Update [create event](#create-event) and related resources to include information about `max_attendees`.
+
 **2020-01-27**
 - Update [list events](#list-events) and [list organization events](#list-organization-events) to
   specify that search results with `zipcode` param maxes out at 1000 results regardless of pagination.
