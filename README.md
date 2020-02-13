@@ -1310,7 +1310,7 @@ Requires authentication: Yes
 
 # Changelog
 **2020-02-13**
-- Update [create event](#create-event) and related resources to include information about max_attendees.
+- Update [create event](#create-event) and related resources to include information about `max_attendees`.
 
 **2020-01-27**
 - Update [list events](#list-events) and [list organization events](#list-organization-events) to
