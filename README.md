@@ -1071,6 +1071,7 @@ Requires authentication: Yes
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | person            | AttendancePerson   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in        | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
+| transactional_sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means Mobilize will not send transactional text messages, but if the person has opted in elsewhere, will not remove that opt in. | No (defaults to `OPT_IN`) |
 | timeslots         | Timeslot[]    | Array of `timeslot` objects. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
 | referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
 
@@ -1247,18 +1248,19 @@ Requires authentication: Yes
 `POST /v1/organizations/:organization_id/affiliations`
 
 ### Request body
-| Field             | Type   | Description                                       | Required |
-| ----------------- | ------ | ------------------------------------------------- | -------- |
-| given_name        | string | The first name of the person.                     | Yes      |
-| family_name       | string | The last name of the person.                      | Yes      |
-| email_address     | string | The email address of the person.                  | Yes      |
-| phone_number      | string | The phone number of the person.                   | Yes      |
-| address_line_1    | string | The first address line of the person’s location.  | No       |
-| address_line_2    | string | The second address line of the person’s location. | No       |
-| locality          | string | The city of the person’s location.                | No       |
-| region            | string | The U.S. state of the person’s location.          | No       |
-| postal_code       | string | The zipcode of the person’s location.             | Yes      |
-| sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
+| Field                           | Type   | Description                                       | Required |
+| ------------------------------- | ------ | ------------------------------------------------- | -------- |
+| given_name                      | string | The first name of the person.                     | Yes      |
+| family_name                     | string | The last name of the person.                      | Yes      |
+| email_address                   | string | The email address of the person.                  | Yes      |
+| phone_number                    | string | The phone number of the person.                   | Yes      |
+| address_line_1                  | string | The first address line of the person’s location.  | No       |
+| address_line_2                  | string | The second address line of the person’s location. | No       |
+| locality                        | string | The city of the person’s location.                | No       |
+| region                          | string | The U.S. state of the person’s location.          | No       |
+| postal_code                     | string | The zipcode of the person’s location.             | Yes      |
+| sms_opt_in_status               | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
+| transactional_sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means Mobilize will not send transactional text messages, but if the person has opted in elsewhere, will not remove that opt in. | No (defaults to `OPT_IN`) |
 
 
 ### Request body example
@@ -1309,6 +1311,10 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-02-20**
+- Update [Create organization affiliations](#create-organization-affiliations) to allow specifying transactional sms opt in status to `UNSPECIFIED`.
+- Update [Create organization event attendance](#create-organization-event-attendance) to allow specifying transactional sms opt in status to `UNSPECIFIED`.
+
 **2020-02-13**
 - Update [create event](#create-event) and related resources to include information about `max_attendees`.
 
@@ -1318,7 +1324,7 @@ Requires authentication: Yes
 
 **2020-01-16**
 - Update [list organization events](#list-organization-events) to return a 403 error if the the user
-  queries for `visibility=PRIVATE` without permissions for the org or the request is unauthenticated. 
+  queries for `visibility=PRIVATE` without permissions for the org or the request is unauthenticated.
 
 **2020-01-03**
 - Clarify [list organization events](#list-organization-events) and [list deleted organization events](#list-deleted-organization-events) endpoint docs re: event visibility behavior.
