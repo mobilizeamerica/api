@@ -242,7 +242,9 @@ The `van_events` view contains information about VAN events that have been synce
 | modified_date | timestamptz | Time that the VAN event was last updated |
 | van_id | integer | The ID of the VAN event as seen in VAN |
 | committee_id | integer | The VAN committee to which this event belongs |
-| event_id | integer | Foreign Key to the Event to which this event belongs |
+| event_id | integer | Non-null for normal event syncs. Foreign Key to the Event to which this event belongs |
+| event_campaign_id | integer | Only non-null for GOTV event campaign syncs. Foreign Key to the EventCampaign this event is synced as part of |
+| sync_aggregation | varchar | `EVENT` or `EVENT_CAMPAIGN`. Whether this is a normal event sync or a GOTV event campaign sync |
 
 
 ## VAN Shifts
@@ -256,8 +258,13 @@ The `van_shifts` view contains information about VAN shifts that have been synce
 | modified_date | timestamptz | Time that the VAN shift was last updated |
 | van_id | integer | The ID of the VAN shift as seen in VAN |
 | van_event_van_id | integer | The ID of the shift's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
-| timeslot_id | integer | Foreign Key to the Timeslot this VAN shift belongs to |
 | committee_id | integer | The VAN committee ID to which this shift belongs |
+| timeslot_id | integer | Non-null for normal event syncs. Foreign Key to the Timeslot this VAN shift belongs to |
+| event_campaign_id | integer | Only non-null for GOTV event campaign syncs. Foreign Key to the EventCampaign this event is synced as part of |
+| start_date | timestamptz | Only non-null for GOTV event campaign syncs. Normalized start time for this VAN shift. Mapped from Timeslot start times by converting local naive time to the timezone for this event campaign |
+| end_date | timestamptz | Only non-null for GOTV event campaign syncs. Normalized end time for this VAN shift. Mapped from Timeslot start times by converting local naive time to the timezone for this event campaign |
+| van_event_campaign_timezone | varchar | Only non-null for GOTV event campaign syncs. Timezone for event campaign used in start and end time normalization |
+| sync_aggregation | varchar | `EVENT` or `EVENT_CAMPAIGN`. Whether this is a normal event sync or a GOTV event campaign sync |
 
 ## VAN Signups
 
@@ -304,6 +311,10 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 | committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
 
 # Changelog
+
+**2020-02-25**
+- Add `sync_aggregation` and `event_campaign_id` to [`van_events`](#van-events) view
+- Add `sync_aggregation`, `event_campaign_id`, `start_date`, `end_date`, and `van_event_campaign_timezone` to [`van_shifts`](#van-shifts) view
 
 **2020-02-04**
 - Add `van_name` to [`events`](#events) view
