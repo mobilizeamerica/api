@@ -1311,6 +1311,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-02-25**
+- Update [event creation](#create-event) and [event update](#update-event) to no longer delete past timeslots when they're not passed to these requests, and clarify documentation on how to pass in timeslots
+
 **2020-02-20**
 - Update [Create organization affiliations](#create-organization-affiliations) to allow specifying transactional sms opt in status to `UNSPECIFIED`.
 - Update [Create organization event attendance](#create-organization-event-attendance) to allow specifying transactional sms opt in status to `UNSPECIFIED`.
