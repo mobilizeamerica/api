@@ -1336,7 +1336,11 @@ Requires authentication: Yes
 
 # Changelog
 **2020-03-10**
-- Notice of upcoming changes to the API
+- Notice of upcoming changes to the API. See [details here](https://github.com/mobilizeamerica/api/pull/64).
+  - Deprecate [List All Public Events](#list-all-public-events) and [List Deleted Public Events](#list-deleted-public-events)
+  - Remove unused `max_dist` and `zipcode` filters from our List Deleted Organization Events
+  - Add explainer on `search_limited_to` and fields that trigger it
+
 
 **2020-02-25**
 - Update [event creation](#create-event) and [event update](#update-event) to no longer delete past timeslots when they're not passed to these requests, and clarify documentation on how to pass in timeslots
