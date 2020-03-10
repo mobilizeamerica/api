@@ -164,6 +164,17 @@ Here’s an example error response for `/v1/events?organization_id=hello`:
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
 
+### `search_limited_to`
+
+Some endpoints will hit our search backend when filtered on many parameters at
+once (like our our [List Organization Events](#list-organization-events)
+endpoint), which limits the total number of objects we can return for a given
+search. If that happens, we will return a `search_limited_to` field in the
+response which will be an integer with the total number of objects that the
+endpoint will return, usually 1000. This number may not correspond to the
+`count` field, so we advise consumers consult this field to determine whether
+their request will be limited.
+
 ## Comparison filters
 
 Some endpoints will allow for filtering by comparing with a field within an object. In those cases, the format will be `field_name=cmp_####`. For example, to filter out events before Jan 1 2018 GMT, you can include `timeslot_start=gte_1514764800`. Multiple may also be used, e.g. `timeslot_start=gte_1514764800&timeslot_start=lt_1515110400`. The comparison operators are ≥ `gte`, > `gt`, ≤ `lte`, < `lt`. More may be added in the future.
@@ -566,13 +577,17 @@ need to send an authenticated request to see that data.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `zipcode`*: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
+- `max_dist`*: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, a 403 error is returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
-- `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
-- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
-- `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
-- `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
+- `exclude_full`*: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
+- `is_virtual`*: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `event_types`*: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
+- `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
+
+*The presence of any request params marked with a `*` will trigger our search
+backend, which will limit the total results to the value provided in the
+[`search_limited_to`](#search_limited_to) field
 
 ### Response
 `data` is an array of Event objects.
@@ -736,8 +751,6 @@ Requires authentication: No
 
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -758,8 +771,6 @@ While authentication is not required for this endpoint, if it’s not provided t
 ### Request params
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
 
 ### Response
