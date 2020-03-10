@@ -34,7 +34,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Tag](#tag)
     - [EventCampaign](#eventcampaign)
     - [Deleted Event](#deleted-event)
-  - [List all public events](#list-all-public-events)
+  - **[DEPRECATED]** [List all public events](#list-all-public-events)
     - [Request](#request-2)
     - [Request params](#request-params-2)
     - [Response](#response-2)
@@ -50,7 +50,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-5)
     - [Request params](#request-params-5)
     - [Response](#response-5)
-  - [List deleted public events](#list-deleted-public-events)
+  - **[DEPRECATED]** [List deleted public events](#list-deleted-public-events)
     - [Request](#request-6)
     - [Request params](#request-params-6)
     - [Response](#response-6)
@@ -371,7 +371,7 @@ When [creating events](#create-event), note that `owner_user_id` should not be s
 | `id`           | int  |                |
 | `deleted_date` | int  | Unix timestamp |
 
-## List all public events
+## **[DEPRECATED]** List all public events
 
 **DEPRECATION NOTICE: This endpoint is no longer supported, and will soon function as
 an alias for [List Organization Events](#list-organization-events) with
@@ -715,7 +715,7 @@ None
       },
     }
 
-## List deleted public events
+## **[DEPRECATED]** List deleted public events
 
 **DEPRECATION NOTICE: This endpoint is no longer supported, and now functions
 as an alias for [List Deleted Organization
