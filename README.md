@@ -373,7 +373,13 @@ When [creating events](#create-event), note that `owner_user_id` should not be s
 
 ## List all public events
 
-Status: LIVE
+**DEPRECATION NOTICE: This endpoint is no longer supported, and will soon function as
+an alias for [List Organization Events](#list-organization-events) with
+`organization_id` = `1`. See our [Deprecation
+Notice](https://github.com/mobilizeamerica/api/pull/64) for details.**
+
+
+Status: DEPRECATED
 
 Fetch all public events on the platform. To list an organization’s private events, send an
 authenticated request to the [organization events list](#list-organization-events) endpoint instead.
@@ -711,7 +717,13 @@ None
 
 ## List deleted public events
 
-Status: LIVE
+**DEPRECATION NOTICE: This endpoint is no longer supported, and now functions
+as an alias for [List Deleted Organization
+Events](#list-deleted-organization-events) with `organization_id` = `1`. See
+our [Deprecation Notice](https://github.com/mobilizeamerica/api/pull/64) for
+details.**
+
+Status: DEPRECATED
 
 Fetch deleted public events on the platform.
 
