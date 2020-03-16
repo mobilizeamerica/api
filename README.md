@@ -960,6 +960,7 @@ On success, the endpoint will return with status code `200 OK`.
 | `phone_numbers`    | Phone[]   | Array of length 1 with a phone number |
 | `postal_addresses` | Address[] | Array of length 1 with a zip code     |
 | `sms_opt_in_status`| enum      | For the current organization; one of `UNSPECIFIED`, `OPT_IN` or `OPT_OUT` |
+| `blocked_date`     | int       | Unix timestamp. Will be `null` if the person is not blocked by the viewing organization |
 
 ### Email
 
@@ -1341,6 +1342,8 @@ Requires authentication: Yes
   - Remove unused `max_dist` and `zipcode` filters from our List Deleted Organization Events
   - Add explainer on `search_limited_to` and fields that trigger it
 
+**2020-03-11**
+- Include `blocked_date` in [Person objects](#person-object). Available on [list organization people](#list-organization-people) and attendances endpoints.
 
 **2020-02-25**
 - Update [event creation](#create-event) and [event update](#update-event) to no longer delete past timeslots when they're not passed to these requests, and clarify documentation on how to pass in timeslots

@@ -138,6 +138,7 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | user__email_address | citext | User's current email address |
 | user__phone_number | varchar(15) | User's current phone number |
 | user__postal_code | varchar(10) | User's current zip code |
+| user__blocked_date | timestamptz | Timestamp that the User was blocked by the organization. `null` if the User is not blocked |
 | event_id | integer | Foreign Key to the related Event. This field is `null` if the organization and the affiliated organization are cross firewall. |
 | timeslot_id | integer | Foreign Key to the related Timeslot. This field is `null` if the organization and the affiliated organization are cross firewall. |
 | override_start_date | timestamptz | Time that an event's start was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
@@ -222,6 +223,7 @@ The `users` view contains information about members of the Organization.
 | email_address | citext | User's email address |
 | phone_number | varchar(15) | User's phone number |
 | postal_code | varchar(10) | User's zip code |
+| blocked_date | timestamptz | Time that the User was blocked by the organization. `null` if the User is not blocked |
 | membership_id | integer | Foreign Key to the Membership of this User in the Organization |
 | membership__created_date | timestamptz | Time that the Membership was created |
 | membership__modified_date | timestamptz | Time that the Membership was last updated |
@@ -311,6 +313,10 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 | committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
 
 # Changelog
+
+**2020-03-17**
+- Add `blocked_date` to [`users`](#users) view
+- Add `user__blocked_date` to [`participations`](#participations) view
 
 **2020-02-25**
 - Add `sync_aggregation` and `event_campaign_id` to [`van_events`](#van-events) view
