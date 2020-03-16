@@ -14,106 +14,107 @@ To stay updated on new releases or iterations, join the email list [here](https:
   - [Authentication](#authentication)
   - [Errors](#errors)
   - [Paging](#paging)
+     - [search_limited_to](#search_limited_to)
   - [Comparison filters](#comparison-filters)
   - [OSDI compliance](#osdi-compliance)
 - [Organizations](#organizations)
   - [Organization object](#organization-object)
   - [List all organizations](#list-all-organizations)
-    - [Request](#request)
-    - [Request params](#request-params)
-    - [Response](#response)
+     - [Request](#request)
+     - [Request params](#request-params)
+     - [Response](#response)
   - [List all the organizations promoted by an organization](#list-all-the-organizations-promoted-by-an-organization)
-    - [Request](#request-1)
-    - [Request params](#request-params-1)
-    - [Response](#response-1)
+     - [Request](#request-1)
+     - [Request params](#request-params-1)
+     - [Response](#response-1)
 - [Events](#events)
   - [Event object](#event-object)
-    - [Timeslot](#timeslot)
-    - [Location](#location)
-    - [Contact](#contact)
-    - [Tag](#tag)
-    - [EventCampaign](#eventcampaign)
-    - [Deleted Event](#deleted-event)
-  - [List all public events](#list-all-public-events)
-    - [Request](#request-2)
-    - [Request params](#request-params-2)
-    - [Response](#response-2)
+     - [Timeslot](#timeslot)
+     - [Location](#location)
+     - [Contact](#contact)
+     - [Tag](#tag)
+     - [EventCampaign](#eventcampaign)
+     - [Deleted Event](#deleted-event)
+  - [<strong>[DEPRECATED]</strong> List all public events](#deprecated-list-all-public-events)
+     - [Request](#request-2)
+     - [Request params](#request-params-2)
+     - [Response](#response-2)
   - [Get a public event](#get-a-public-event)
-    - [Request](#request-3)
-    - [Request params](#request-params-3)
-    - [Response](#response-3)
+     - [Request](#request-3)
+     - [Request params](#request-params-3)
+     - [Response](#response-3)
   - [List organization events](#list-organization-events)
-    - [Request](#request-4)
-    - [Request params](#request-params-4)
-    - [Response](#response-4)
+     - [Request](#request-4)
+     - [Request params](#request-params-4)
+     - [Response](#response-4)
   - [Get an organization event](#get-an-organization-event)
-    - [Request](#request-5)
-    - [Request params](#request-params-5)
-    - [Response](#response-5)
-  - [List deleted public events](#list-deleted-public-events)
-    - [Request](#request-6)
-    - [Request params](#request-params-6)
-    - [Response](#response-6)
+     - [Request](#request-5)
+     - [Request params](#request-params-5)
+     - [Response](#response-5)
+  - [<strong>[DEPRECATED]</strong> List deleted public events](#deprecated-list-deleted-public-events)
+     - [Request](#request-6)
+     - [Request params](#request-params-6)
+     - [Response](#response-6)
   - [List deleted organization events](#list-deleted-organization-events)
-    - [Request](#request-7)
-    - [Request params](#request-params-7)
-    - [Response](#response-7)
+     - [Request](#request-7)
+     - [Request params](#request-params-7)
+     - [Response](#response-7)
   - [Create event](#create-event)
-    - [Request](#request-8)
-    - [Request body](#request-body)
-    - [Request body example](#request-body-example)
-    - [Response](#response-8)
+     - [Request](#request-8)
+     - [Request body](#request-body)
+     - [Request body example](#request-body-example)
+     - [Response](#response-8)
   - [Update event](#update-event)
-    - [Request](#request-9)
-    - [Request params](#request-params-8)
-    - [Request body](#request-body-1)
-    - [Request body example](#request-body-example-1)
-    - [Response](#response-9)
+     - [Request](#request-9)
+     - [Request params](#request-params-8)
+     - [Request body](#request-body-1)
+     - [Request body example](#request-body-example-1)
+     - [Response](#response-9)
   - [Delete event](#delete-event)
-    - [Request](#request-10)
-    - [Request params](#request-params-9)
-    - [Response](#response-10)
+     - [Request](#request-10)
+     - [Request params](#request-params-9)
+     - [Response](#response-10)
 - [People](#people)
   - [Person object](#person-object)
-    - [Email](#email)
-    - [Phone](#phone)
-    - [Address](#address)
+     - [Email](#email)
+     - [Phone](#phone)
+     - [Address](#address)
   - [List organization people](#list-organization-people)
-    - [Request](#request-11)
-    - [Request params](#request-params-10)
-    - [Response](#response-11)
+     - [Request](#request-11)
+     - [Request params](#request-params-10)
+     - [Response](#response-11)
 - [Attendances](#attendances)
   - [Attendance object](#attendance-object)
-    - [Referrer](#referrer)
+     - [Referrer](#referrer)
   - [Get an organization attendance](#get-an-organization-attendance)
-    - [Request](#request-12)
-    - [Response](#response-12)
+     - [Request](#request-12)
+     - [Response](#response-12)
   - [List organization attendances](#list-organization-attendances)
-    - [Request](#request-13)
-    - [Request params](#request-params-11)
-    - [Response](#response-13)
+     - [Request](#request-13)
+     - [Request params](#request-params-11)
+     - [Response](#response-13)
   - [List organization attendances for an event](#list-organization-attendances-for-an-event)
-    - [Request](#request-14)
-    - [Response](#response-14)
+     - [Request](#request-14)
+     - [Response](#response-14)
   - [Create organization event attendance](#create-organization-event-attendance)
-    - [Request](#request-15)
-    - [Request body](#request-body-2)
-    - [Person attendance object](#person-attendance-object)
-    - [Referrer object](#referrer-object)
-    - [Request body example](#request-body-example-2)
-    - [Response](#response-15)
-    - [Response body example](#response-body-example)
+     - [Request](#request-15)
+     - [Request body](#request-body-2)
+     - [Person attendance object](#person-attendance-object)
+     - [Referrer object](#referrer-object)
+     - [Request body example](#request-body-example-2)
+     - [Response](#response-15)
+     - [Response body example](#response-body-example)
 - [Affiliation](#affiliation)
   - [Create organization affiliations](#create-organization-affiliations)
-    - [Request](#request-16)
-    - [Request body](#request-body-3)
-    - [Request body example](#request-body-example-3)
-    - [Response](#response-16)
+     - [Request](#request-16)
+     - [Request body](#request-body-3)
+     - [Request body example](#request-body-example-3)
+     - [Response](#response-16)
 - [Images](#images)
   - [Upload images](#upload-images)
-    - [Request](#request-17)
-    - [Request body](#request-body-4)
-    - [Response](#response-17)
+     - [Request](#request-17)
+     - [Request body](#request-body-4)
+     - [Response](#response-17)
 - [Changelog](#changelog)
 
 # Overview
@@ -163,6 +164,17 @@ Here’s an example error response for `/v1/events?organization_id=hello`:
 ## Paging
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
+
+### `search_limited_to`
+
+Some endpoints will hit our search backend when filtered on many parameters at
+once (like our our [List Organization Events](#list-organization-events)
+endpoint), which limits the total number of objects we can return for a given
+search. If that happens, we will return a `search_limited_to` field in the
+response which will be an integer with the total number of objects that the
+endpoint will return, usually 1000. This number may not correspond to the
+`count` field, so we advise consumers consult this field to determine whether
+their request will be limited.
 
 ## Comparison filters
 
@@ -371,9 +383,15 @@ When [creating events](#create-event), note that `owner_user_id` should not be s
 | `id`           | int  |                |
 | `deleted_date` | int  | Unix timestamp |
 
-## List all public events
+## **[DEPRECATED]** List all public events
 
-Status: LIVE
+**DEPRECATION NOTICE: This endpoint is no longer supported, and will soon function as
+an alias for [List Organization Events](#list-organization-events) with
+`organization_id` = `1`. See our [Deprecation
+Notice](https://github.com/mobilizeamerica/api/pull/64) for details.**
+
+
+Status: DEPRECATED
 
 Fetch all public events on the platform. To list an organization’s private events, send an
 authenticated request to the [organization events list](#list-organization-events) endpoint instead.
@@ -560,13 +578,17 @@ need to send an authenticated request to see that data.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, a 403 error is returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
-- `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
-- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
-- `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
-- `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
+- `zipcode`*: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
+- `max_dist`*: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
+- `exclude_full`*: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
+- `is_virtual`*: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `event_types`*: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
+- `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
+
+*&nbsp;The presence of any request params marked with a * will trigger our search
+backend, which will limit the total results to the value provided in the
+[`search_limited_to`](#search_limited_to) field
 
 ### Response
 `data` is an array of Event objects.
@@ -709,9 +731,15 @@ None
       },
     }
 
-## List deleted public events
+## **[DEPRECATED]** List deleted public events
 
-Status: LIVE
+**DEPRECATION NOTICE: This endpoint is no longer supported, and now functions
+as an alias for [List Deleted Organization
+Events](#list-deleted-organization-events) with `organization_id` = `1`. See
+our [Deprecation Notice](https://github.com/mobilizeamerica/api/pull/64) for
+details.**
+
+Status: DEPRECATED
 
 Fetch deleted public events on the platform.
 
@@ -724,8 +752,6 @@ Requires authentication: No
 
 - `organization_id`: One or more Organization IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `organization_id=1&organization_id=2`, etc.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 
 ### Response
 `data` is an array of Deleted Event objects.
@@ -746,8 +772,6 @@ While authentication is not required for this endpoint, if it’s not provided t
 ### Request params
 
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned.
-- `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, no events will be returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
 
 ### Response
@@ -1312,6 +1336,12 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-03-10**
+- Notice of upcoming changes to the API. See [details here](https://github.com/mobilizeamerica/api/pull/64).
+  - Deprecate [List All Public Events](#list-all-public-events) and [List Deleted Public Events](#list-deleted-public-events)
+  - Remove unused `max_dist` and `zipcode` filters from our List Deleted Organization Events
+  - Add explainer on `search_limited_to` and fields that trigger it
+
 **2020-03-11**
 - Include `blocked_date` in [Person objects](#person-object). Available on [list organization people](#list-organization-people) and attendances endpoints.
 
