@@ -299,7 +299,7 @@ Requires authentication: Yes
 | `high_priority`      | bool         | Whether the event is marked high priority for the provided organization                                                                                 |
 | `sponsor`            | Organization | The owning Organization, with the fields defined above                                                                                                  |
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
-| `location`           | Location     | The event location, or `null` if the event is virtual                                                                                                   |
+| `location`           | Location     | The event location, or `null` if the event has no location                                                                                              |
 | `timezone`           | string       | A timezone database string for the event, e.g., `America/New_York`.                                                                                     |
 | `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `ADVOCACY_CALL`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. This list may expand. |
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
@@ -308,6 +308,7 @@ Requires authentication: Yes
 | `visibility`         | enum         | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.                                                                                               |
 | `address_visibility` | enum         | The visibility of the event's address (which may be different from the visibility of the event itself). One of `PUBLIC`, `PRIVATE`.                     |
 | `created_by_volunteer_host`      | bool          | Whether the event was created by a volunteer host using our distributed organizing tool or not                                                                                                                                          |
+| `is_virtual`         | bool         | Whether the event is virtual or not                                                                                                                     |
 | `virtual_action_url` | string       | The url the event redirects to if it's an unshifted virtual event. Otherwise, `null`.                                                                   |
 | `contact`            | Contact      | The contact information for the event |
 | `accessibility_status`           | enum          | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `null`           |
@@ -446,6 +447,7 @@ returned events, you'll need to send an authenticated request to see that data.
               "end_date": 4
             },
           ],
+          "is_virtual": false,
           "location": {
             "venue": "",
             "address_lines": [
@@ -526,6 +528,7 @@ None
             "end_date": 4
           },
         ],
+        "is_virtual": false,
         "location": {
           "venue": "",
           "address_lines": [
@@ -619,6 +622,7 @@ backend, which will limit the total results to the value provided in the
               "end_date": 4
             }
           ],
+          "is_virtual": false,
           "location": {
             "venue": "",
             "address_lines": [
@@ -701,6 +705,7 @@ None
             "end_date": 4
           }
         ],
+        "is_virtual": false,
         "location": {
           "venue": "",
           "address_lines": [
@@ -1336,6 +1341,10 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-03-31**
+- Add `is_virtual` to [Event object](#event-object)
+- Virtual events can now have locations; Event endpoints will now include locations for virtual events if they are available.
+
 **2020-03-10**
 - Notice of upcoming changes to the API. See [details here](https://github.com/mobilizeamerica/api/pull/64).
   - Deprecate [List All Public Events](#list-all-public-events) and [List Deleted Public Events](#list-deleted-public-events)
