@@ -14,7 +14,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
   - [Authentication](#authentication)
   - [Errors](#errors)
   - [Paging](#paging)
-     - [search_limited_to](#search_limited_to)
+     - [results_limited_to](#results_limited_to)
   - [Comparison filters](#comparison-filters)
   - [OSDI compliance](#osdi-compliance)
 - [Organizations](#organizations)
@@ -165,12 +165,12 @@ Here’s an example error response for `/v1/events?organization_id=hello`:
 
 All endpoints support paging, using the query params `per_page` and `page`. `per_page` defaults to 25. In the response, `count` describes the number of total objects, so `ceiling(count / per_page)` gives the total number of pages. Also, for convenience, `next` and `previous` will be links to the next and previous pages respectively.
 
-### `search_limited_to`
+### `results_limited_to`
 
 Some endpoints will hit our search backend when filtered on many parameters at
 once (like our our [List Organization Events](#list-organization-events)
 endpoint), which limits the total number of objects we can return for a given
-search. If that happens, we will return a `search_limited_to` field in the
+search. If that happens, we will return a `results_limited_to` field in the
 response which will be an integer with the total number of objects that the
 endpoint will return, usually 1000. This number may not correspond to the
 `count` field, so we advise consumers consult this field to determine whether
@@ -591,7 +591,7 @@ need to send an authenticated request to see that data.
 
 *&nbsp;The presence of any request params marked with a * will trigger our search
 backend, which will limit the total results to the value provided in the
-[`search_limited_to`](#search_limited_to) field
+[`results_limited_to`](#results_limited_to) field
 
 ### Response
 `data` is an array of Event objects.
@@ -1349,7 +1349,7 @@ Requires authentication: Yes
 - Notice of upcoming changes to the API. See [details here](https://github.com/mobilizeamerica/api/pull/64).
   - Deprecate [List All Public Events](#list-all-public-events) and [List Deleted Public Events](#list-deleted-public-events)
   - Remove unused `max_dist` and `zipcode` filters from our List Deleted Organization Events
-  - Add explainer on `search_limited_to` and fields that trigger it
+  - Add explainer on `results_limited_to` and fields that trigger it
 
 **2020-03-11**
 - Include `blocked_date` in [Person objects](#person-object). Available on [list organization people](#list-organization-people) and attendances endpoints.
