@@ -118,6 +118,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | is_virtual | boolean | If `true`, the event is a Virtual event. If `false`, it is an In-Person event. |
 | event_campaign_id | integer | Unique identifier of the Event Campaign that the event belongs to |
 | event_campaign__slug | citext | The URL-safe string for the Event Campaign. This slug is unique for the organization. |
+| virtual_action_url | varchar | The URL the event redirects to if it's an unshifted virtual event. |
 
 ## Participations
 
@@ -164,6 +165,7 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | family_name_at_signup | varchar(100) | The last name the user entered when signing up |
 | phone_number_at_signup | varchar(20) | The phone number the user entered when signing up |
 | postal_code_at_signup | varchar(10) | The zip code the user entered when signing up |
+| custom_field_values | json | The custom field values collected on the signup, if present, otherwise null. Contains a list of objects, each containing the custom field ID, name, and boolean or text value collected for the participation. |
 
 ## Timeslots
 
@@ -313,6 +315,10 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 | committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
 
 # Changelog
+
+**2020-04-08**
+- Add `virtual_action_url` to [`events`](#events) view
+- Add `custom_field_values` to [`participations`](#participations) view
 
 **2020-03-17**
 - Add `blocked_date` to [`users`](#users) view
