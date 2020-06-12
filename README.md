@@ -441,12 +441,14 @@ returned events, you'll need to send an authenticated request to see that data.
             {
               "id": 1,
               "start_date": 2,
-              "end_date": 3
+              "end_date": 3,
+              "instructions": null
             },
             {
               "id": 2,
               "start_date": 3,
-              "end_date": 4
+              "end_date": 4,
+              "instructions": null
             },
           ],
           "is_virtual": false,
@@ -476,6 +478,8 @@ returned events, you'll need to send an authenticated request to see that data.
             "email_address": "replyto@thisemail.org",
             "phone_number": "1234567890"
           },
+          "event_campaign": null,
+          "instructions": null
         },
         ...
       ]
@@ -522,12 +526,14 @@ None
           {
             "id": 1,
             "start_date": 2,
-            "end_date": 3
+            "end_date": 3,
+            "instructions": null
           },
           {
             "id": 2,
             "start_date": 3,
-            "end_date": 4
+            "end_date": 4,
+            "instructions": null
           },
         ],
         "is_virtual": false,
@@ -557,6 +563,8 @@ None
           "email_address": "replyto@thisemail.org",
           "phone_number": "1234567890"
         },
+        "event_campaign": null,
+        "instructions": null
       },
     }
 
@@ -1365,6 +1373,7 @@ Requires authentication: Yes
 
 **2020-06-15**
 - Add `instructions` to [Event object](#event-object) and [Timeslot object](#timeslot), and update [event creation](#create-event) and [event update](#update-event) to support `instructions` as well
+- Add `instructions` and `event_campaign` to sample requests
 
 **2020-03-31**
 - Add `is_virtual` to [Event object](#event-object)
