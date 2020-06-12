@@ -314,8 +314,8 @@ Requires authentication: Yes
 | `accessibility_status`           | enum          | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `null`           |
 | `accessibility_notes`| string       | Additional details about accessibility status and accomodations at the venue                                                                            |
 | `tags`               | Tag[]        | Array of associated tags                                                                                                                                |
-| `event_campaign`               | EventCampaign        | The associated distributed organizing event campaign, if applicable. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
-| `instructions`            | string      | Private instructions sent to attendees of this event after signing up. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
+| `event_campaign`               | EventCampaign        | The associated distributed organizing event campaign, if applicable. Only exposed for authenticated [list organization events](#list-organization-events) or [get organization event](#get-an-organization-event) requests, for events owned by the authenticated user's organization. `null` otherwise. |
+| `instructions`            | string      | Private instructions sent to attendees of this event after signing up. Only exposed for authenticated [list organization events](#list-organization-events) or [get organization event](#get-an-organization-event) requests, for events owned by the authenticated user's organization. `null` otherwise. |
 
 ### Timeslot
 
@@ -616,12 +616,14 @@ backend, which will limit the total results to the value provided in the
             {
               "id": 1,
               "start_date": 2,
-              "end_date": 3
+              "end_date": 3,
+              "instructions": "",
             },
             {
               "id": 2,
               "start_date": 3,
-              "end_date": 4
+              "end_date": 4,
+              "instructions": "Some detailed instructions for the second timeslot",
             }
           ],
           "is_virtual": false,
@@ -652,6 +654,10 @@ backend, which will limit the total results to the value provided in the
             "email_address": "replyto@thisemail.org",
             "phone_number": "1234567890"
           },
+          "event_campaign": {
+            EventCampaign object
+          },
+          "instructions": "Bring a hat"
         },
         ...
       ]
@@ -699,12 +705,14 @@ None
           {
             "id": 1,
             "start_date": 2,
-            "end_date": 3
+            "end_date": 3,
+            "instructions": ""
           },
           {
             "id": 2,
             "start_date": 3,
-            "end_date": 4
+            "end_date": 4,
+            "instructions": "Some detailed instructions for the second timeslot"
           }
         ],
         "is_virtual": false,
@@ -735,7 +743,11 @@ None
           "email_address": "replyto@thisemail.org",
           "phone_number": "1234567890"
         },
-      },
+        "event_campaign": {
+          EventCampaign object
+        },
+        "instructions": "Bring a hat"
+      }
     }
 
 ## **[DEPRECATED]** List deleted public events
@@ -825,12 +837,13 @@ Requires authentication: Yes
         "summary": "This is an event",
         "timeslots": [
             {
-                "start_date": 1576774800,
-                "end_date": 1576782000
+              "start_date": 1576774800,
+              "end_date": 1576782000,
             },
             {
               "start_date": 1576861200,
-              "end_date": 1576868400
+              "end_date": 1576868400,
+              "instructions": "Some instructions for just this timeslot"
             }
         ],
         "location": {
@@ -851,7 +864,8 @@ Requires authentication: Yes
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
         "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
-        "tag_ids": [3,34]
+        "tag_ids": [3, 34],
+        "instructions": "Bring a hat"
 }
 
 ### Response
@@ -928,7 +942,7 @@ Requires authentication: Yes
             "email_address": "replyto@thisemail.com"
         },
         "tag_ids": [2, 34],
-        "instructions": "Bring a hat"
+        "instructions": "Definitely bring a hat"
     }
 
 
