@@ -314,7 +314,8 @@ Requires authentication: Yes
 | `accessibility_status`           | enum          | The degree of compliance with the Americans with Disabilities Act. One of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`, or `null`           |
 | `accessibility_notes`| string       | Additional details about accessibility status and accomodations at the venue                                                                            |
 | `tags`               | Tag[]        | Array of associated tags                                                                                                                                |
-| `event_campaign`               | EventCampaign        | The associated distributed organizing event campaign, if applicable. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
+| `event_campaign`               | EventCampaign        | The associated distributed organizing event campaign, if applicable. Only exposed for authenticated [list organization events](#list-organization-events) or [get organization event](#get-an-organization-event) requests, for events owned by the authenticated user's organization. `null` otherwise. |
+| `instructions`            | string      | Private instructions sent to attendees of this event after signing up. Only exposed for authenticated [list organization events](#list-organization-events) or [get organization event](#get-an-organization-event) requests, for events owned by the authenticated user's organization. `null` otherwise. |
 
 ### Timeslot
 
@@ -327,6 +328,7 @@ When [creating events](#create-event), note that only `start_date`, `end_date`, 
 | `end_date`      | int           | Unix timestamp |
 | `max_attendees` | Optional[int] | Max # of people who can sign up for this timeslot. Send null for no maximum. |
 | `is_full`       | bool          | Whether the timeslot is full |
+| `instructions`  | string        | Private instructions sent to attendees of this timeslot after signing up. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
 
 
 ### Location
@@ -439,12 +441,14 @@ returned events, you'll need to send an authenticated request to see that data.
             {
               "id": 1,
               "start_date": 2,
-              "end_date": 3
+              "end_date": 3,
+              "instructions": null
             },
             {
               "id": 2,
               "start_date": 3,
-              "end_date": 4
+              "end_date": 4,
+              "instructions": null
             },
           ],
           "is_virtual": false,
@@ -474,6 +478,8 @@ returned events, you'll need to send an authenticated request to see that data.
             "email_address": "replyto@thisemail.org",
             "phone_number": "1234567890"
           },
+          "event_campaign": null,
+          "instructions": null
         },
         ...
       ]
@@ -520,12 +526,14 @@ None
           {
             "id": 1,
             "start_date": 2,
-            "end_date": 3
+            "end_date": 3,
+            "instructions": null
           },
           {
             "id": 2,
             "start_date": 3,
-            "end_date": 4
+            "end_date": 4,
+            "instructions": null
           },
         ],
         "is_virtual": false,
@@ -555,6 +563,8 @@ None
           "email_address": "replyto@thisemail.org",
           "phone_number": "1234567890"
         },
+        "event_campaign": null,
+        "instructions": null
       },
     }
 
@@ -614,12 +624,14 @@ backend, which will limit the total results to the value provided in the
             {
               "id": 1,
               "start_date": 2,
-              "end_date": 3
+              "end_date": 3,
+              "instructions": "",
             },
             {
               "id": 2,
               "start_date": 3,
-              "end_date": 4
+              "end_date": 4,
+              "instructions": "Some detailed instructions for the second timeslot",
             }
           ],
           "is_virtual": false,
@@ -650,6 +662,10 @@ backend, which will limit the total results to the value provided in the
             "email_address": "replyto@thisemail.org",
             "phone_number": "1234567890"
           },
+          "event_campaign": {
+            EventCampaign object
+          },
+          "instructions": "Bring a hat"
         },
         ...
       ]
@@ -697,12 +713,14 @@ None
           {
             "id": 1,
             "start_date": 2,
-            "end_date": 3
+            "end_date": 3,
+            "instructions": ""
           },
           {
             "id": 2,
             "start_date": 3,
-            "end_date": 4
+            "end_date": 4,
+            "instructions": "Some detailed instructions for the second timeslot"
           }
         ],
         "is_virtual": false,
@@ -733,7 +751,11 @@ None
           "email_address": "replyto@thisemail.org",
           "phone_number": "1234567890"
         },
-      },
+        "event_campaign": {
+          EventCampaign object
+        },
+        "instructions": "Bring a hat"
+      }
     }
 
 ## **[DEPRECATED]** List deleted public events
@@ -802,7 +824,7 @@ Requires authentication: Yes
 | `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
-| `timeslots`          | Timeslot[]   | Array of future [Timeslots](#timeslot), containing `start_date` and `end_date` fields, and optionally `max_attendees` as well. Timeslots must be in Unix time.                                                                                                                                     | Yes
+| `timeslots`          | Timeslot[]   | Array of future [Timeslots](#timeslot), containing `start_date` and `end_date` fields, and optionally `max_attendees` and `instructions` as well. Timeslots must be in Unix time.                                                                                                                                     | Yes
 | `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.  | Yes
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. Note that creating events with event type `ADVOCACY_CALL` is not currently supported in the API. | Yes
@@ -811,7 +833,8 @@ Requires authentication: Yes
 | `accessibility_status` | string     | The level of compliance with the [Americans with Disabilities Act](https://www.access-board.gov/guidelines-and-standards/buildings-and-sites/about-the-ada-standards/guide-to-the-ada-standards/single-file-version) for the event venue, one of: `ACCESSIBLE`, `NOT_ACCESSIBLE`, `NOT_SURE`. If you set this to `ACCESSIBLE`, you are responsible for ensuring that your venue meets ADA standards. | No
 | `accessibility_notes`  | string     | Notes with additional information about accessibility at the event location, including the availability of ramps and wheelchair-accessible restrooms, the height of door thresholds, the number of stairs, and the nature of any parking or seating arrangements. This is helpful even for venues that are not fully ADA accessible.| No
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
-| `tag_ids`              | int[]       | Array of ids of [Tags](#Tags) to apply to the event                                                                                                                                                    | No
+| `tag_ids`              | int[]       | Array of ids of [Tags](#Tags) to apply to the event      | No                      
+| `instructions`         | string      | Private instructions sent to attendees after signing up. | No
 
 ### Request body example
 
@@ -822,12 +845,13 @@ Requires authentication: Yes
         "summary": "This is an event",
         "timeslots": [
             {
-                "start_date": 1576774800,
-                "end_date": 1576782000
+              "start_date": 1576774800,
+              "end_date": 1576782000,
             },
             {
               "start_date": 1576861200,
-              "end_date": 1576868400
+              "end_date": 1576868400,
+              "instructions": "Some instructions for just this timeslot"
             }
         ],
         "location": {
@@ -848,7 +872,8 @@ Requires authentication: Yes
         "accessibility_status": "ACCESSIBLE",
         "accessibility_notes": "There is a wheelchair ramp at the southern entrance for the staging area. We have two vans with wheelchair lifts.",
         "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
-        "tag_ids": [3,34]
+        "tag_ids": [3, 34],
+        "instructions": "Bring a hat"
 }
 
 ### Response
@@ -887,6 +912,7 @@ Requires authentication: Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`.   | Yes
 | `featured_image_url`   | string      | The Mobilize-hosted image URL for the event. Must be generated using the [Upload images](#upload-images) endpoint. | No
 | `tag_ids`              | int[]       | Array of tag ids to be applied to the event. Any existing tags that are not present in the `tag_ids` array will be deleted.                                   | No
+| `instructions`         | string      | Private instructions sent to attendees of the event after signing up. If omitted, will leave the existing value. | No
 
 ### Request body example
 
@@ -899,11 +925,13 @@ Requires authentication: Yes
             {
                 "id": 2000,
                 "start_date": 1576774900,
-                "end_date": 1576782100
+                "end_date": 1576782100,
+                "instructions": "Updated instructions for timeslot with id 2000"
             },
             {
                 "start_date": 1576861300,
-                "end_date": 1576868500
+                "end_date": 1576868500,
+                "instructions": "New instructions for new timeslot"
             }
         ],
         "location": {
@@ -921,7 +949,8 @@ Requires authentication: Yes
         "contact": {
             "email_address": "replyto@thisemail.com"
         },
-        "tag_ids": [2, 34]
+        "tag_ids": [2, 34],
+        "instructions": "Definitely bring a hat"
     }
 
 
@@ -1341,6 +1370,11 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+
+**2020-06-15**
+- Add `instructions` to [Event object](#event-object) and [Timeslot object](#timeslot), and update [event creation](#create-event) and [event update](#update-event) to support `instructions` as well
+- Add `instructions` and `event_campaign` to sample requests
+
 **2020-03-31**
 - Add `is_virtual` to [Event object](#event-object)
 - Virtual events can now have locations; Event endpoints will now include locations for virtual events if they are available.
