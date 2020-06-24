@@ -598,7 +598,7 @@ need to send an authenticated request to see that data.
 - `is_virtual`*: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
 - `event_types`*: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
-- `event_campaign_id` *: Optional EventCampaign ID to filter to.
+- `event_campaign_id`*: Optional EventCampaign ID to filter to.
 
 *&nbsp;The presence of any request params marked with a * will trigger our search
 backend, which will limit the total results to the value provided in the
