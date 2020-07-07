@@ -316,6 +316,9 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 
 # Changelog
 
+**2020-07-07**
+- Update [`events`](#events) view fields `organization__is_coordinated` and `organization__is_independent` to use our new database field for representing the legal compliance domain that an organization operates in.
+
 **2020-04-08**
 - Add `virtual_action_url` to [`events`](#events) view
 - Add `custom_field_values` to [`participations`](#participations) view
