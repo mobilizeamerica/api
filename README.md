@@ -828,7 +828,8 @@ Requires authentication: Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of future [Timeslots](#timeslot), containing `start_date` and `end_date` fields, and optionally `max_attendees` and `instructions` as well. Timeslots must be in Unix time.                                                                                                                                     | Yes
-| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object; all other `location` fields are optional.  | Yes
+| `location`           | Location     | The event location. Required if `is_virtual` is `false` or unset. `postal_code` is a required field in the `location` object; all other `location` fields are optional. | No
+| `is_virtual`         | bool         | Whether the event is virtual or not. Defaults to `false`. Cannot be updated after event creation. | No
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. Note that creating events with event type `ADVOCACY_CALL` is not currently supported in the API. | Yes
 | `visibility`         | string       | The visibility of the event, one of: `PUBLIC`, `PRIVATE`. | Yes
@@ -908,7 +909,8 @@ Requires authentication: Yes
 | `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of future timeslots. Timeslots must be a valid Unix timestamp. Any existing, upcoming timeslots that are not present in the `timeslots` array will be deleted. Existing, upcoming timeslots may be updated by including the `id` field in the `timeslot` object. Past timeslots will not be modified by this endpoint.                                                                                                                                     | Yes
-| `location`           | Location     | The event location. Note that only in-person events can be created using the public API at this time. `postal_code` is a required field in the `location` object. | Yes
+| `location`           | Location     | The event location. Required if `is_virtual` is `false` or unset. `postal_code` is a required field in the `location` object; all other `location` fields are optional. | No
+| `is_virtual`         | bool         | Whether the event is virtual or not. Defaults to `false`. Cannot be updated after event creation. | No
 | `timezone`           | string       | A timezone database string for the event, one of: `America/New_York`, `Pacific/Honolulu`, `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Chicago`.                                | Yes
 | `event_type`         | string       | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `OTHER`. Note that updating events to event type `ADVOCACY_CALL` is not currently supported in the API.  | Yes
 | `contact`            | Contact      | A [Contact object](#contact) containing contact info for the event. | Yes
@@ -1373,6 +1375,10 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+
+**2020-07-22**
+- Add `is_virtual` to [Create event](#create-event) and [Update event](#update-event)
+- Make `location` optional for virtual events for [Create event](#create-event) and [Update event](#update-event)
 
 **2020-06-26**
 - Add `approval_status` to [Event object](#event-object)
