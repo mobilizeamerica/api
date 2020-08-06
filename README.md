@@ -600,7 +600,7 @@ need to send an authenticated request to see that data.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 - `event_campaign_id`: Optional EventCampaign ID to filter to.
-- `approval_status`: One or more approval statuses to filter to (see possible values in `approval_status` on the [Event object](#event-object)).
+- `approval_status`: One or more approval statuses to filter to (see possible values in `approval_status` on the [Event object](#event-object)). Defaults to approved events only. Non-approved events will only be returned if explicitly specified, the calling user is authenticated, and the user has permission to view the given organization's non-approved events in the dashboard. For example, to request both approved and needs approval events, specify `approval_status=APPROVED&approval_status=NEEDS_APPROVAL`.
 
 *&nbsp;The presence of any request params marked with a * will trigger our search
 backend, which will limit the total results to the value provided in the
