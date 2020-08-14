@@ -1121,7 +1121,7 @@ Status: RESTRICTED
 
 Please email support@mobilize.us to request access to this endpoint.
 
-This endpoint creates a new signup for a given person and future event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
+This endpoint creates a new signup for a given person and event timeslot. If multiple timeslots are provided, an Attendance object will be created for each timeslot. The person is matched and deduplicated by their email address.
 
 
 Requires authentication: Yes
@@ -1136,7 +1136,7 @@ Requires authentication: Yes
 | person            | AttendancePerson   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in        | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
 | transactional_sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
-| timeslots         | Timeslot[]    | Array of `timeslot` objects. Must be existing upcoming timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
+| timeslots         | Timeslot[]    | Array of `timeslot` objects. Must be existing timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
 | referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
 
 ### Person attendance object
@@ -1375,6 +1375,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+
+**2020-08-14**
+- Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots 
 
 **2020-07-22**
 - Add `is_virtual` to [Create event](#create-event) and [Update event](#update-event)
