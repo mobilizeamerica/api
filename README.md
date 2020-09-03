@@ -1377,7 +1377,7 @@ Requires authentication: Yes
 
 # Changelog
 **2020-09-03**
-- Fix a typo in [Create organization affiliations](#create-organization-affiliations) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
+- Fix typos in [Create organization affiliations](#create-organization-affiliations) and [Create organization event attendance](#create-organization-event-attendance) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
 
 **2020-08-14**
 - Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots 
