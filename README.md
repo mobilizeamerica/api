@@ -1135,7 +1135,7 @@ Requires authentication: Yes
 | ----------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | person            | AttendancePerson   | Person attendance object. A person is matched and deduplicated by their email address; a record for the person will be created if the `email_address` is not already associated with a person, otherwise the remaining person fields will be updated. | Yes    |
 | sms_opt_in        | string   | One of `OPT_IN`, `UNSPECIFIED`.                                                                                                                                                                                                                                                                                                                 | No (defaults to `UNSPECIFIED`) |
-| transactional_sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
+| transactional_sms_opt_in | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
 | timeslots         | Timeslot[]    | Array of `timeslot` objects. Must be existing timeslots for the given Event.                                                                                                                                                                                                                                                               | Yes                            |
 | referrer          | Referrer | Referrer object used to add additional tracking to request.                                                           | No                             |
 
@@ -1323,8 +1323,8 @@ Requires authentication: Yes
 | locality                        | string | The city of the person’s location.                | No       |
 | region                          | string | The U.S. state of the person’s location.          | No       |
 | postal_code                     | string | The zipcode of the person’s location.             | Yes      |
-| sms_opt_in_status               | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
-| transactional_sms_opt_in_status | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
+| sms_opt_in                      | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
+| transactional_sms_opt_in        | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
 
 
 ### Request body example
@@ -1341,7 +1341,8 @@ Requires authentication: Yes
             "region": "NY",
             "postal_code": "10001"
         },
-        "sms_opt_in_status": "OPT_IN"
+        "sms_opt_in": "OPT_IN",
+        "transactional_sms_opt_in": "UNSPECIFIED"
     }
 
 ### Response
@@ -1375,6 +1376,8 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-09-03**
+- Fix typos in [Create organization affiliations](#create-organization-affiliations) and [Create organization event attendance](#create-organization-event-attendance) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
 
 **2020-08-14**
 - Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots 
