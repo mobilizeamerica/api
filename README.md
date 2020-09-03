@@ -1323,7 +1323,7 @@ Requires authentication: Yes
 | locality                        | string | The city of the person’s location.                | No       |
 | region                          | string | The U.S. state of the person’s location.          | No       |
 | postal_code                     | string | The zipcode of the person’s location.             | Yes      |
-| sms_opt_in_status               | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
+| sms_opt_in                      | string | One of `OPT_IN`, `UNSPECIFIED`.                   | Yes      |
 | transactional_sms_opt_in        | string | One of `OPT_IN`, `UNSPECIFIED`. `UNSPECIFIED` means the person will not be opted in to transactional text messages, but if the person has opted in previously, will not remove that opt in. | No (defaults to `OPT_IN`) |
 
 
@@ -1341,7 +1341,7 @@ Requires authentication: Yes
             "region": "NY",
             "postal_code": "10001"
         },
-        "sms_opt_in_status": "OPT_IN",
+        "sms_opt_in": "OPT_IN",
         "transactional_sms_opt_in": "UNSPECIFIED"
     }
 
@@ -1377,7 +1377,7 @@ Requires authentication: Yes
 
 # Changelog
 **2020-09-03**
-- Fix a typo in references to `transactional_sms_opt_in_status`. The correct field name is `transactional_sms_opt_in`.
+- Fix a typo in [Create organization affiliations](#create-organization-affiliations) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
 
 **2020-08-14**
 - Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots 
