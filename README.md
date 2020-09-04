@@ -414,10 +414,10 @@ returned events, you'll need to send an authenticated request to see that data.
 - `updated_since`: Unix timestamp to filter by Events’ `modified_date`
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
-- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
+- `zipcode`: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. To improve performance, query results are limited to a maximum of 1000.
 - `max_dist`: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `exclude_full`: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
-- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 
@@ -593,10 +593,10 @@ need to send an authenticated request to see that data.
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, a 403 error is returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
-- `zipcode`*: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. When zipcode is provided, virtual events will not be returned. To improve performance, query results are limited to a maximum of 1000.
+- `zipcode`*: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. To improve performance, query results are limited to a maximum of 1000.
 - `max_dist`*: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `exclude_full`*: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
-- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events. Note that providing a `zipcode` also implies `is_virtual=false`.
+- `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 - `event_campaign_id`: Optional EventCampaign ID to filter to.
@@ -1376,6 +1376,9 @@ Requires authentication: Yes
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
 # Changelog
+**2020-09-04**
+- Update [List organization events](#list-organization-events) to return virtual and in-person events when a `zipcode` is provided. (Previously, including `zipcode` would exclude virtual events.) In order to limit a search to only in-person events, set `is_virtual=false`.
+
 **2020-09-03**
 - Fix typos in [Create organization affiliations](#create-organization-affiliations) and [Create organization event attendance](#create-organization-event-attendance) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
 
