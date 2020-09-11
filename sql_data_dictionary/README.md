@@ -24,6 +24,7 @@ description of each field.
   - [Sms Opt Ins](#sms-opt-ins)
   - [Event Tags](#event-tags)
   - [Users](#users)
+  - [Users](#affiliations)
   - [VAN Views](#van-views)
   - [VAN Events](#van-events)
   - [VAN Shifts](#van-shifts)
@@ -166,6 +167,7 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | phone_number_at_signup | varchar(20) | The phone number the user entered when signing up |
 | postal_code_at_signup | varchar(10) | The zip code the user entered when signing up |
 | custom_field_values | json | The custom field values collected on the signup, if present, otherwise null. Contains a list of objects, each containing the custom field ID, name, and boolean or text value collected for the participation. |
+| event_type_name | varchar | The string value that corresponds with the `event_type` integer. |
 
 ## Timeslots
 
@@ -231,6 +233,35 @@ The `users` view contains information about members of the Organization.
 | membership__modified_date | timestamptz | Time that the Membership was last updated |
 | membership__permission_tier | varchar | The permission tier of the User in the Organization. One of: `ADMIN`, `ORGANIZER`, `TRUSTED_HOST`, `HOST` |
 | membership__organization_id | integer | Foreign Key to the Organization this User's Membership is for |
+| globally_blocked_date | timestamptz | Time that the User was globally blocked from all Mobilize organizations |
+
+## Affiliations
+
+The `affiliations` view contains information about users who have a relationship with the Organization. In addition to volunteers who have signed up for the organization's events (who are visible in the Participations view), this view also includes users who have become affiliated through other means such as filling out the hot leads form or expressing interest in hosting an event.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The Affiliation's primary key |
+| organization_id | integer | The id of the current organization |
+| created_date | timestamptz | Time that the Affiliation was created. |
+| modified_date | timestamptz | Time that the Affiliation was last updated. |
+| blocked_date | timestamptz | Timestamp that the User was blocked by the organization. `null` if the User is not blocked |
+| deleted_date | timestamptz | Time that the Affiliation was deleted. `null` if the affiliation was not deleted. |
+| source | varchar | The source of the user's affiliation. One of: `PARTICIPATION, HOT_LEAD, C4_FORM, PUBLIC_API, HOST_MEMBERSHIP, HOST_COMMITMENT` |
+| host_commitment_source | varchar | The method the user used to commit to host events for the org. One of: `EVENT_CAMPAIGN_DISCOVERY_PAGE, SMS, EMAIL` |
+| committed_to_host_date | timestamptz | The timestamp that the user committed to hosting events for the org. |
+| declined_to_commit_to_host_date | timestamptz | The timestamp that the user declined to host events for the org. |
+| user_id | integer | Unique identifier of the User who signed up for this participation |
+| user__modified_date | timestamptz | Timestamp the User was last updated |
+| user__given_name | varchar(255) | User's current first name |
+| user__family_name | varchar(255) | User's current last name |
+| user__email_address | citext | User's current email address |
+| user__phone_number | varchar(15) | User's current phone number |
+| user__locality | varchar(10) | User's city. This data is only available when collected through certain sources such as `HOT_LEAD`. |
+| user__region | varchar(10) | User's state. This data is only available when collected through certain sources such as `HOT_LEAD`. |
+| user__postal_code | varchar(10) | User's current zip code |
+| user__globally_blocked_date | timestamptz | Timestamp that the User was globally blocked from all Mobilize organizations. `null` if the User is not blocked |
+
 
 ## VAN Views
 The following views map roughly to VAN Event, Shift, Signup, and Person [objects](https://developers.ngpvan.com/van-api#events). The following views will only be populated if the organization has a VAN committee set.
@@ -315,6 +346,11 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 | committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
 
 # Changelog
+
+**2020-09-11**
+- Add the [`affiliations`](#affiliations) view
+- Add `globally_blocked_at` to [`users`](#users) view
+- Add `event_type_name` to [`participations`](#participations) view
 
 **2020-07-07**
 - Update [`events`](#events) view fields `organization__is_coordinated` and `organization__is_independent` to use our new database field for representing the legal compliance domain that an organization operates in.
