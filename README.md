@@ -115,6 +115,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-17)
     - [Request body](#request-body-4)
     - [Response](#response-17)
+- [Staging and Development](#staging-and-development)
 - [Changelog](#changelog)
 
 # Overview
@@ -1374,6 +1375,13 @@ Requires authentication: Yes
 
 ### Response
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
+
+### Staging and Development
+
+For testing and development purposes, there is also a staging api server:
+
+ * Web Interface: https://staging.mobilize.us
+ * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
 **2020-09-04**
