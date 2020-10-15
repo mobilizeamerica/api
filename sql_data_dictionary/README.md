@@ -354,7 +354,6 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 | ----------- | ---- | ----------- |
 | created_date | timestamptz | Time that the co-host was first added |
 | modified_date | timestamptz | Time that the co-host was last updated |
-| deleted_date | timestamptz | Time that the co-host was removed from the event. `null` if not removed. |
 | event_id | integer | The ID of the event |
 | user_id | integer | The User ID of the co-host of the event |
 | email | integer | The email address of the co-host of the event |
