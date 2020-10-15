@@ -1147,7 +1147,7 @@ Requires authentication: Yes
 | `given_name`     | string |             | Yes
 | `family_name`  | string |             | Yes
 | `email_address`  | string |             | Yes
-| `phone_number`   | string |             | No
+| `phone_number`   | string |             | Yes, but you can pass the empty string if you don't have the phone number
 | `postal_code`    | string |             | Yes
 
 ### Referrer object
