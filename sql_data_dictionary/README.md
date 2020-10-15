@@ -31,6 +31,7 @@ description of each field.
   - [VAN Signups](#van-signups)
   - [VAN Persons](#van-persons)
   - [VAN Locations](#van-locations)
+  - [Event Co-Hosts](#event-co-hosts)
 - [Changelog](#changelog)
 
 # SQL Views
@@ -345,7 +346,23 @@ The `van_locations` view contains information about the mapping of Mobilize Even
 | event_id | integer | Foreign Key to the Event this VAN location is for |
 | committee_id | integer | Foreign Key to the VAN committee to which this VAN location was synced |
 
+## Event Co-Hosts
+
+The `event_co_hosts` view contains information about co-hosts added to events. Only co-hosts on events owned by the Organization are included.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| created_date | timestamptz | Time that the co-host was first added |
+| modified_date | timestamptz | Time that the co-host was last updated |
+| deleted_date | timestamptz | Time that the co-host was removed from the event. `null` if not removed. |
+| event_id | integer | The ID of the event |
+| user_id | integer | The User ID of the co-host of the event |
+| email | integer | The email address of the co-host of the event |
+
 # Changelog
+
+**2020-10-15**
+- Add the [`event_co_hosts`](#event-co-hosts) view
 
 **2020-09-11**
 - Add the [`affiliations`](#affiliations) view
