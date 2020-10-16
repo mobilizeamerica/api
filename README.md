@@ -294,7 +294,6 @@ Requires authentication: Yes
 | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                 | int          |                                                                                                                                                         |
 | `title`              | string       | The public name of the event                                                                                                                            |
-| `summary`            | string       | The public subheading of the event                                                                                                                      |
 | `description`        | string       | Long-form HTML description of the event                                                                                                                 |
 | `featured_image_url` | string       | Path to the image for the event                                                                                                                         |
 | `high_priority`      | bool         | Whether the event is marked high priority for the provided organization                                                                                 |
@@ -433,7 +432,6 @@ returned events, you'll need to send an authenticated request to see that data.
           "description": "example",
           "timezone": "America/New_York",
           "title": "Example",
-          "summary": "",
           "featured_image_url": "",
           "high_priority": null,
           "sponsor": {
@@ -518,7 +516,6 @@ None
         "description": "example",
         "timezone": "America/New_York",
         "title": "Example",
-        "summary": "",
         "featured_image_url": "",
         "high_priority": null,
         "sponsor": {
@@ -618,7 +615,6 @@ backend, which will limit the total results to the value provided in the
           "description": "example",
           "timezone": "America/New_York",
           "title": "Example",
-          "summary": "",
           "featured_image_url": "",
           "high_priority": true,
           "sponsor": {
@@ -707,7 +703,6 @@ None
         "description": "example",
         "timezone": "America/New_York",
         "title": "Example",
-        "summary": "",
         "featured_image_url": "",
         "high_priority": true,
         "sponsor": {
@@ -826,7 +821,6 @@ Requires authentication: Yes
 | Field                | Type         | Description                                                                                                                                             | Required |
 | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
 | `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
-| `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of future [Timeslots](#timeslot), containing `start_date` and `end_date` fields, and optionally `max_attendees` and `instructions` as well. Timeslots must be in Unix time.                                                                                                                                     | Yes
 | `location`           | Location     | The event location. Required if `is_virtual` is `false` or unset. `postal_code` is a required field in the `location` object; all other `location` fields are optional. | No
@@ -847,7 +841,6 @@ Requires authentication: Yes
         "title": "Example",
         "description": "example",
         "timezone": "America/New_York",
-        "summary": "This is an event",
         "timeslots": [
             {
               "start_date": 1576774800,
@@ -892,7 +885,7 @@ Please email support@mobilize.us to request access to this endpoint.
 
 Update an in-person event for an organization. `event_id` refers to the `id` field in the Event object.
 
-Note that all editable fields must be specified, otherwise they will be removed (e.g. an existing `timeslot`) or set to null (e.g. the `summary` field).
+Note that all editable fields must be specified, otherwise they will be removed (e.g. an existing `timeslot`) or set to null (e.g. the `featured_image_url` field).
 
 Requires authentication: Yes
 
@@ -907,7 +900,6 @@ Requires authentication: Yes
 | Field                | Type         | Description                                                                                                                                             | Required |
 | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
 | `title`              | string       | The public name of the event                                                                                                                                                                            | Yes
-| `summary`            | string       | The public subheading of the event                                                                                                                                                                      | No
 | `description`        | string       | Long-form HTML description of the event                                                                                                                                                                 | Yes
 | `timeslots`          | Timeslot[]   | Array of future timeslots. Timeslots must be a valid Unix timestamp. Any existing, upcoming timeslots that are not present in the `timeslots` array will be deleted. Existing, upcoming timeslots may be updated by including the `id` field in the `timeslot` object. Past timeslots will not be modified by this endpoint.                                                                                                                                     | Yes
 | `location`           | Location     | The event location. Required if `is_virtual` is `false` or unset. `postal_code` is a required field in the `location` object; all other `location` fields are optional. | No
@@ -926,7 +918,6 @@ Requires authentication: Yes
         "title": "Example",
         "description": "example",
         "timezone": "America/New_York",
-        "summary": "Short summary for my event",
         "timeslots": [
             {
                 "id": 2000,
@@ -1233,7 +1224,6 @@ On a successful request, the endpoint will return a 201 Created status code and 
                     "description": "abacde",
                     "timezone": "America/Chicago",
                     "title": "abcdef",
-                    "summary": "",
                     "featured_image_url": "",
                     "sponsor": {
                         "id": 15,
@@ -1384,6 +1374,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2020-10-16**
+- Remove long-deprecated `summary` field from Event object and related create/update requests. It was not required, and has not appeared anywhere in the product for some time.
+
 **2020-10-15**
 - Clarify that phone number is required but can be the empty string in [Create organization event attendance](#create-organization-event-attendance)
 - Add new `event_type` options [Event object](#event-object): `WORKSHOP`, `PETITION`, `AUTOMATED_PHONE_BANK`, `LETTER_WRITING`, `LITERATURE_DROP_OFF`, `VISIBILITY_EVENT`
