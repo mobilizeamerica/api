@@ -352,6 +352,7 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
+| id | integer | The primary key of the event-co-host relation |
 | created_date | timestamptz | Time that the co-host was first added |
 | modified_date | timestamptz | Time that the co-host was last updated |
 | event_id | integer | The ID of the event |
