@@ -836,7 +836,7 @@ Requires authentication: Yes
 | `instructions`         | string      | Private instructions sent to attendees after signing up. | No
 
 ### Request body example
-
+```json
     {
         "title": "Example",
         "description": "example",
@@ -872,7 +872,8 @@ Requires authentication: Yes
         "featured_image_url": "https://mobilize-staging.imgix.net/uploads/event/test_20191203233112123932.jpg",
         "tag_ids": [3, 34],
         "instructions": "Bring a hat"
-}
+    }
+```
 
 ### Response
 `data` will contain the newly created Event object.
