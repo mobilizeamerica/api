@@ -361,7 +361,7 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 
 # Changelog
 
-**2020-10-15**
+**2020-10-16**
 - Add the [`event_co_hosts`](#event-co-hosts) view
 
 **2020-09-11**
