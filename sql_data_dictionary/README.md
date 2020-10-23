@@ -311,9 +311,9 @@ The `van_signups` view contains information about VAN signups that have been syn
 | id | integer | The primary key of the VAN signup |
 | created_date | timestamptz | Time that the VAN signup was first synced |
 | modified_date | timestamptz | Time that the VAN signup was last updated |
-| timeslot_id | integer | Foreign Key to the Timeslot this VAN signup belongs to |
+| timeslot_id | integer | Foreign Key to the Timeslot this VAN signup belongs to, if the signup is for an event owner and `null` otherwise |
 | user_id | integer | The ID of the User associated with this VAN person; will match the `user_id` on the associated Participation |
-| participation_id | integer | Foreign Key to the Participation this VAN signup belongs to |
+| participation_id | integer | Foreign Key to the Participation this VAN signup belongs to, if the signup is for a participation and `null` otherwise |
 | signup_type | varchar | The type of signup. One of `PARTICIPATION`, `EVENT_OWNER` |
 | van_id | integer | The ID of the VAN signup as seen in VAN |
 | van_event_van_id | integer | The ID of the signup's VAN event as seen in VAN; Foreign Key to the `van_id` field in the `van_events` view |
