@@ -142,8 +142,8 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | user__phone_number | varchar(15) | User's current phone number |
 | user__postal_code | varchar(10) | User's current zip code |
 | user__blocked_date | timestamptz | Timestamp that the User was blocked by the organization. `null` if the User is not blocked |
-| event_id | integer | Foreign Key to the related Event. This field is `null` if the organization and the affiliated organization are cross firewall. |
-| timeslot_id | integer | Foreign Key to the related Timeslot. This field is `null` if the organization and the affiliated organization are cross firewall. |
+| event_id | integer | Foreign Key to the related Event. Unless the querying org is the event owner or co-owner, this field is `null` if the organization and the affiliated organization are cross firewall. |
+| timeslot_id | integer | Foreign Key to the related Timeslot. Unless the querying org is the event owner or co-owner, this field is `null` if the organization and the affiliated organization are cross firewall. |
 | override_start_date | timestamptz | Time that an event's start was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
 | override_end_date | timestamptz | Time that an event's end was overridden to. This only applies for "pick a time" virtual events that were synced from VAN. |
 | organization_id | integer | Unique identifier of the Organization that owns the event. This may be the same organization that is querying the view or an organization that it is promoting. This field is `null` if cross firewall unless the viewing organization owns the event. |
@@ -152,10 +152,10 @@ viewing organization is the org in the `affiliation_id`), but some of the fields
 | affiliation_id | integer | Unique identifier of the Organization whose feed the User signed up for the event on. This may be the same as the `organization_id` that owns the event. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
 | affiliation__name | varchar(100) | The public-facing name of the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
 | affiliation__slug | citext | The URL-safe string for the organization. This field is `null` if cross firewall unless the viewing organization is the affiliated org. |
-| status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED`. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
-| attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
-| experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND`. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
-| experience_feedback_text | text | The user-reported qualitative feedback on the event. This field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| status | varchar | The user's RSVP status before the event has occurred. One of: `REGISTERED`, `CANCELLED`, `CONFIRMED`. Unless the querying org is the event owner or co-owner, this field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| attended | boolean | Whether the volunteer actually attended or not. Will be `null` if not set. Unless the querying org is the event owner or co-owner, this field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| experience_feedback_type | varchar | The user-reported feedback on the event. One of: `APPROVED_OF_SHIFT`, `DISAPPROVED_OF_SHIFT`, `DID_NOT_ATTEND`. Unless the querying org is the event owner or co-owner, this field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
+| experience_feedback_text | text | The user-reported qualitative feedback on the event. Unless the querying org is the event owner or co-owner, this field is `null` if the organization that owns the event and the affiliated organization are cross firewall. |
 | referrer__utm_source | varchar | Value of the `utm_source` parameter in the url that was used to sign up for the event. `null` for promoted events. |
 | referrer__utm_medium | varchar | Value of the `utm_medium` parameter in the url that was used to sign up for the event. `null` for promoted events. |
 | referrer__utm_campaign | varchar | Value of the `utm_campaign` parameter in the url that was used to sign up for the event. `null` for promoted events. |
@@ -360,6 +360,9 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 | email | integer | The email address of the co-host of the event |
 
 # Changelog
+
+**2020-12-29**
+- Fixed an issue with the [`participations`](#participations) view where the following fields were being incorrectly masked (set to null) for the event owner if the org that drove the signup was across the firewall: `event_id`, `timeslot_id`, `status`, `attended`, `experience_feedback_type`, `experience_feedback_text`
 
 **2020-10-16**
 - Add the [`event_co_hosts`](#event-co-hosts) view
