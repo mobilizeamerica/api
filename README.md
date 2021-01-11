@@ -115,6 +115,10 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [Request](#request-17)
     - [Request body](#request-body-4)
     - [Response](#response-17)
+- [Enums](#enums)
+  - [Get enums](#get-enums)
+    - [Request](#request-18)
+    - [Response](#response-18)
 - [Staging and Development](#staging-and-development)
 - [Changelog](#changelog)
 
@@ -1367,7 +1371,23 @@ Requires authentication: Yes
 ### Response
 `data` contains the Mobilize-hosted image URL, which can then be used as the `featured_image_url` when creating or updating events.
 
-### Staging and Development
+# Enums
+
+## Get enums
+
+Status: LIVE
+
+Fetch a list of enums and their available values to be passed to event and attendance creation endpoints.
+
+Requires authentication: No
+
+### Request
+`GET /v1/enums`
+
+### Response
+`data` contains keys and values for the `event_type`, `visibility`, `accessibility_status`, `approval_status`, `timezone`, `sms_opt_in`, and `transactional_sms_opt_in` fields.
+
+# Staging and Development
 
 For testing and development purposes, there is also a staging api server:
 
@@ -1375,6 +1395,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2021-01-11**
+- Add [Get enums](#get-enums) endpoint
+
 **2020-10-16**
 - Remove long-deprecated `summary` field from Event object and related create/update requests. It was not required, and has not appeared anywhere in the product for some time.
 
