@@ -86,6 +86,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
 - [Attendances](#attendances)
   - [Attendance object](#attendance-object)
     - [Referrer](#referrer)
+    - [CustomSignupFieldValue](#customsignupfieldvalue)
   - [Get an organization attendance](#get-an-organization-attendance)
     - [Request](#request-12)
     - [Response](#response-12)
@@ -1054,7 +1055,7 @@ Requires authentication: Yes
 | `status`                          | enum                       | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
 | `attended`                        | bool                       | Whether the person actually attended or not. Will be `null` if not set.     |                                                                                                                             |
 | `referrer`                        | Referrer                   | UTM tracking information                                                    |                                                                                                                             |
-| `custom_signup_field_values`      | CustomSignupFieldValue[]   | The person's responses to any custom signup fields attached to the event    |                                                                                                                             |
+| `custom_signup_field_values`      | CustomSignupFieldValue[]   | Any additional fields collected on event signups                            |                                                                                                                             |
 
 ### Referrer
 
@@ -1405,6 +1406,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2021-04-01**
+- Add `custom_signup_field_values` to [Attendance](#attendance-object) object
+
 **2021-01-11**
 - Add [Get enums](#get-enums) endpoint
 
