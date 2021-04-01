@@ -1042,18 +1042,19 @@ Requires authentication: Yes
 # Attendances
 ## Attendance object
 
-| Field           | Type         | Description                                                                 | Coordinated/Independent notes                                                                                               |
-| --------------- | ------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `id`            | int          |                                                                             | If the requesting organization is independent and the event’s organization is coordinated, this is omitted.                                                                                                                                                                                                               |
-| `created_date`  | int          | Unix timestamp                                                              |                                                                                                                             |
-| `modified_date` | int          | Unix timestamp                                                              |                                                                                                                             |
-| `person`        | Person       | Person who attended the event                                               |                                                                                                                             |
-| `event`         | Event        | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted.  |
-| `timeslot`      | Timeslot     | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.              |
-| `sponsor`       | Organization | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.              |
-| `status`        | enum         | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
-| `attended`      | bool         | Whether the person actually attended or not. Will be `null` if not set.     |                                                                                                                             |
-| `referrer`      | Referrer     | UTM tracking information                                                    |                                                                                                                             |
+| Field                             | Type                       | Description                                                                 | Coordinated/Independent notes                                                                                               |
+| --------------------------------- | -------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `id`                              | int                        |                                                                             | If the requesting organization is independent and the event’s organization is coordinated, this is omitted.                                                                                                                                                                                                               |
+| `created_date`                    | int                        | Unix timestamp                                                              |                                                                                                                             |
+| `modified_date`                   | int                        | Unix timestamp                                                              |                                                                                                                             |
+| `person`                          | Person                     | Person who attended the event                                               |                                                                                                                             |
+| `event`                           | Event                      | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted.  |
+| `timeslot`                        | Timeslot                   | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.              |
+| `sponsor`                         | Organization               | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.              |
+| `status`                          | enum                       | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
+| `attended`                        | bool                       | Whether the person actually attended or not. Will be `null` if not set.     |                                                                                                                             |
+| `referrer`                        | Referrer                   | UTM tracking information                                                    |                                                                                                                             |
+| `custom_signup_field_values`      | CustomSignupFieldValue[]   | The person's responses to any custom signup fields attached to the event    |                                                                                                                             |
 
 ### Referrer
 
@@ -1065,6 +1066,15 @@ Requires authentication: Yes
 | `utm_term`     | string |             |
 | `utm_content`  | string |             |
 | `url`          | string |             |
+
+### CustomSignupFieldValue
+
+| Field               | Type   | Description                                                                                                 |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| `custom_field_id`   | int    | The id of the custom signup field to which the attendee responded                                           |
+| `custom_field_name` | string | The unique name used internally for the custom field                                                        |
+| `text_value`        | string | Text value of the attendee's response. Exactly one of `text_value` and `boolean_value` will be non-null     |
+| `boolean_value`     | bool   | Boolean value of the attendee's response. Exactly one of `text_value` and `boolean_value` will be non-null  |
 
 ## Get an organization attendance
 
