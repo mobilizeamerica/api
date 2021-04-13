@@ -17,6 +17,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
     - [`results_limited_to`](#results_limited_to)
   - [Comparison filters](#comparison-filters)
   - [OSDI compliance](#osdi-compliance)
+  - [Rate limits](#rate-limits)
 - [Organizations](#organizations)
   - [Organization object](#organization-object)
   - [List all organizations](#list-all-organizations)
@@ -191,6 +192,10 @@ For timestamp comparisons, the string "now" can be passed in place of a Unix tim
 ## OSDI compliance
 
 OSDI is an exciting and important attempt to bring interoperability to the progressive data ecosystem, a cause we heartily support. However, there are a number of data model and format constraints of OSDI that made it a less-than-perfect fit for us and our consumers. While we have opted not to follow strict OSDI formats for our API responses at this stage, we have made our best effort to align field names and structure where possible. For example, many of the Event fields map directly onto OSDI field names. We hope this will make the job of anyone attempting to build an OSDI layer on top of our API easier.
+
+## Rate limits
+
+We currently rate-limit API requests per origin IP to 15 requests per second for GET (read) endpoints and 5 requests per second for POST/PUT (write) endpoints. We strongly encourage you to keep requests well under these limits, as we may adjust the limits at short notice. Rate limited requests will receive an HTTP 429 response code. We are happy to work with developers who are concerned about their use-case hitting limits, just reach out to support@mobilize.us.
 
 # Organizations
 ## Organization object
