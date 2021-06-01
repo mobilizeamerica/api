@@ -15,6 +15,7 @@ To stay updated on new releases or iterations, join the email list [here](https:
   - [Errors](#errors)
   - [Paging](#paging)
     - [`results_limited_to`](#results_limited_to)
+    - [`cursor`](#cursor)
   - [Comparison filters](#comparison-filters)
   - [OSDI compliance](#osdi-compliance)
   - [Rate limits](#rate-limits)
@@ -182,6 +183,11 @@ response which will be an integer with the total number of objects that the
 endpoint will return, usually 1000. This number may not correspond to the
 `count` field, so we advise consumers consult this field to determine whether
 their request will be limited.
+
+### `cursor`
+We've started rolling out cursor based pagination for performance reasons on certain endpoints. This uses the `cursor` query param, and will populate in the `next` and `previous` links. This will still respect `per_page`. The data returned should be the same as if you increment the `page` query param.
+
+You can still use the `page` param to select a starting page, and cursor pagination will start from there with the `next` and `previous` links.
 
 ## Comparison filters
 
@@ -1411,6 +1417,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2021-06-01**
+- Add [cursor based pagination](#cursor)
+
 **2021-04-01**
 - Add `custom_signup_field_values` to [Attendance](#attendance-object) object
 
@@ -1431,7 +1440,7 @@ For testing and development purposes, there is also a staging api server:
 - Fix typos in [Create organization affiliations](#create-organization-affiliations) and [Create organization event attendance](#create-organization-event-attendance) that references `sms_opt_in_status` and `transactional_sms_opt_in_status`. The correct field name are `sms_opt_in` and `transactional_sms_opt_in`.
 
 **2020-08-14**
-- Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots 
+- Update [Create organization event attendance](#create-organization-event-attendance) to allow adding attendances to past timeslots
 
 **2020-07-22**
 - Add `is_virtual` to [Create event](#create-event) and [Update event](#update-event)
