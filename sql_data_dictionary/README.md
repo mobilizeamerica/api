@@ -81,6 +81,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | deleted_date | timestamptz | Timestamp that the event was deleted (null if not deleted) |
 | visibility | varchar | The visibility of the event, one of: `PUBLIC`, `PRIVATE` |
 | created_by_volunteer_host | boolean | Whether the event was created by a volunteer host using our distributed organizing tool or not |
+| registration_mode | varchar | Whether an event allows or requires donations on signup. `DEFAULT` means no donations allowed. `DONATE_TO_RSVP` means donations required. `DONATE_TO_RSVP_OPTIONAL` means donations allowed but not required. |
 | van_name | varchar(500) | A custom name of the event in VAN, if set. If not set, the name of the event in VAN defaults to the `title`. Always `null` for promoted events. |
 | contact__name | varchar(100) | The name of the contact for the event |
 | contact__email_address | varchar(254) | The email address of the contact for the event (reply-to email) |
@@ -360,6 +361,9 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 | email | integer | The email address of the co-host of the event |
 
 # Changelog
+
+**2020-06-22**
+- Add `registration_mode` to [`events`](#events) view
 
 **2020-12-29**
 - Fixed an issue with the [`participations`](#participations) view where the following fields were being incorrectly masked (set to null) for the event owner if the org that drove the signup was across the firewall: `event_id`, `timeslot_id`, `status`, `attended`, `experience_feedback_type`, `experience_feedback_text`
