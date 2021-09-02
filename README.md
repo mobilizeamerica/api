@@ -185,7 +185,7 @@ endpoint will return, usually 1000. This number may not correspond to the
 their request will be limited.
 
 ### `cursor`
-We've started rolling out cursor based pagination for performance reasons on certain endpoints. This uses the `cursor` query param, and will populate in the `next` and `previous` links. This will still respect `per_page`. The data returned should be the same as if you increment the `page` query param.
+We default to using cursor based pagination for performance reasons. This uses the `cursor` query param, and will populate in the `next` and `previous` links. This still respects `per_page`. The data returned should be the same as if you increment the `page` query param.
 
 You can still use the `page` param to select a starting page, and cursor pagination will start from there with the `next` and `previous` links.
 
@@ -1417,6 +1417,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2021-09-02**
+- Update to use [cursor based pagination](#cursor) everywhere
+
 **2021-06-01**
 - Add [cursor based pagination](#cursor)
 
