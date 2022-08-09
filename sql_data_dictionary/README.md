@@ -217,7 +217,7 @@ The `event_tags` view contains information about what tags have been applied to 
 
 ## Users
 
-The `users` view contains information about members of the Organization.
+The `users` view contains information about members of the Organization. Note that for schemas used to monitor multiple organizations, `membership_id` is the only guaranteed unique identifier for this table.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
@@ -360,6 +360,17 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 | user_id | integer | The User ID of the co-host of the event |
 | email | integer | The email address of the co-host of the event |
 
+## Organizations
+
+The `organizations` view contains information about the Organization, including the Van committee ID used for its events.
+
+| column name | type | description |
+| ----------- | ---- | ----------- |
+| id | integer | The organization's primary key |
+| name | varchar(100) | The public-facing name of the organization |
+| slug | citext | The URL-safe string for this organization |
+| committee_id | integer | The VAN committee to which this organization's events belong |
+
 # Changelog
 
 **2020-06-22**
@@ -419,3 +430,7 @@ The `event_co_hosts` view contains information about co-hosts added to events. O
 
 **2019-05-14**
 - Add `max_attendees` to `timeslots` view
+
+**2022-08-04**
+- Add `organizations` view
+
