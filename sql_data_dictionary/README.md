@@ -32,6 +32,7 @@ description of each field.
   - [VAN Persons](#van-persons)
   - [VAN Locations](#van-locations)
   - [Event Co-Hosts](#event-co-hosts)
+  - [Organizations](#organizations)
 - [Changelog](#changelog)
 
 # SQL Views
