@@ -24,7 +24,7 @@ description of each field.
   - [Sms Opt Ins](#sms-opt-ins)
   - [Event Tags](#event-tags)
   - [Users](#users)
-  - [Users](#affiliations)
+  - [Affiliations](#affiliations)
   - [VAN Views](#van-views)
   - [VAN Events](#van-events)
   - [VAN Shifts](#van-shifts)
