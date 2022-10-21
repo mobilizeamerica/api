@@ -343,7 +343,7 @@ When [creating events](#create-event), note that only `start_date`, `end_date`, 
 | `id`            | int           |                |
 | `start_date`    | int           | Unix timestamp |
 | `end_date`      | int           | Unix timestamp |
-| `max_attendees` | Optional[int] | Max # of people who can sign up for this timeslot. Send null for no maximum. |
+| `max_attendees` | Optional[int] | Max # of people who can sign up for this timeslot (a.k.a. capacity). Send null for no maximum. |
 | `is_full`       | bool          | Whether the timeslot is full |
 | `instructions`  | string        | Private instructions sent to attendees of this timeslot after signing up. Only exposed for authenticated [list organization events](#list-organization-events) requests, for events owned by the authenticated user's organization. `null` otherwise. |
 
