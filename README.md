@@ -317,7 +317,7 @@ Requires authentication: Yes
 | `timeslots`          | Timeslot[]   | Array of past and future timeslots                                                                                                                      |
 | `location`           | Location     | The event location, or `null` if the event has no location                                                                                              |
 | `timezone`           | string       | A timezone database string for the event, e.g., `America/New_York`.                                                                                     |
-| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `ADVOCACY_CALL`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `WORKSHOP`, `PETITION`, `AUTOMATED_PHONE_BANK`, `LETTER_WRITING`, `LITERATURE_DROP_OFF`, `VISIBILITY_EVENT`, `OTHER`. This list may expand. |
+| `event_type`         | enum         | The type of the event, one of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `CiUNITY`, `FUNDRAISER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `DEBATE_WATCH_PARTY`, `ADVOCACY_CALL`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `WORKSHOP`, `PETITION`, `AUTOMATED_PHONE_BANK`, `LETTER_WRITING`, `LITERATURE_DROP_OFF`, `VISIBILITY_EVENT`, `OTHER`. This list may expand. |
 | `browser_url`        | string       | Canonical URL of the event                                                                                                                              |
 | `created_date`       | int          | Unix timestamp                                                                                                                                          |
 | `modified_date`      | int          | Unix timestamp                                                                                                                                          |
@@ -1054,19 +1054,19 @@ Requires authentication: Yes
 # Attendances
 ## Attendance object
 
-| Field                             | Type                       | Description                                                                 | Coordinated/Independent notes                                                                                               |
-| --------------------------------- | -------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `id`                              | int                        |                                                                             | If the requesting organization is independent and the event’s organization is coordinated, this is omitted.                                                                                                                                                                                                               |
+| Field                             | Type                       | Description                                                                 | Omission notes                                                                                                              |
+| --------------------------------- | -------------------------- | --------------------------------------------------------------------------- |-----------------------------------------------------------------------------------------------------------------------------|
+| `id`                              | int                        |                                                                             | If the requesting organization is independent and the event’s organization is coordinated, this is omitted.                 |
 | `created_date`                    | int                        | Unix timestamp                                                              |                                                                                                                             |
 | `modified_date`                   | int                        | Unix timestamp                                                              |                                                                                                                             |
 | `person`                          | Person                     | Person who attended the event                                               |                                                                                                                             |
-| `event`                           | Event                      | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted.  |
-| `timeslot`                        | Timeslot                   | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.              |
-| `sponsor`                         | Organization               | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.              |
+| `event`                           | Event                      | Associated event                                                            | If the requesting organization is independent and the event’s organization is coordinated, all but `event_type` is omitted. |
+| `timeslot`                        | Timeslot                   | Selected timeslot on event                                                  | If the requesting organization is independent and the event’s organization is coordinated, `id` is omitted.                 |
+| `sponsor`                         | Organization               | The promoting organization if it exists, otherwise the event’s organization | If the requesting organization is coordinated and the promoting organization is independent, this is omitted.               |
 | `status`                          | enum                       | `REGISTERED`, `CANCELLED`, or `CONFIRMED`                                   |                                                                                                                             |
 | `attended`                        | bool                       | Whether the person actually attended or not. Will be `null` if not set.     |                                                                                                                             |
-| `referrer`                        | Referrer                   | UTM tracking information                                                    |                                                                                                                             |
-| `custom_signup_field_values`      | CustomSignupFieldValue[]   | Any additional fields collected on event signups                            |                                                                                                                             |
+| `referrer`                        | Referrer                   | UTM tracking information                                                    | If this attendance came through a promotion and the requesting organization is not the promoter, this is omitted.           |
+| `custom_signup_field_values`      | CustomSignupFieldValue[]   | Any additional fields collected on event signups                            | If the requesting organization is not the event owner or co-owner, this is omitted.                                         |
 
 ### Referrer
 
@@ -1417,6 +1417,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2023-05-11**
+- Omit referrer fields (UTM fields) from Attendances when the Attendance came through promotion and the requesting organization is not the promoter.
+
 **2021-09-02**
 - Update to use [cursor based pagination](#cursor) everywhere
 
