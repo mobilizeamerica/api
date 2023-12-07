@@ -607,11 +607,12 @@ need to send an authenticated request to see that data.
 - `timeslot_start`: Comparison to filter by Events' Timeslots' start date. Will only return Timeslots on those Events that meet the filter conditions
 - `timeslot_end`: Comparison to filter by Events' Timeslots' end date. Will only return Timeslots on those Events that meet the filter conditions
 - `visibility`: Type of event visibility to filter by; either `PUBLIC` or `PRIVATE`. Private events will only be returned if `visibility=PRIVATE` is specified, the calling user is authenticated, and the user has permission to view the given organization's private events in the dashboard. If `visibility=PRIVATE` is specified and the calling user does not have permission, a 403 error is returned. Defaults to public events only. Note also that both can be specified, ie `visibility=PRIVATE&visibility=PUBLIC`.
-- `organization_id`: One or more Organization IDs, which will filter the events by the event owning org (since this endpoint's results include events from other organizations that are promoted by the organization specified in the path).
+- `organization_id`: One or more Organization IDs, which will filter the events down to who the owning organization is (since normally results would include events that are owned, co-owned, OR promoted by the organization in the URL path).
 - `zipcode`*: Zipcode to filter by Events' Locations' postal code. If present, will return Events sorted by distance from zipcode. To improve performance, query results are limited to a maximum of 1000.
 - `max_dist`*: Maximum distance (in miles) to filter by Events' Locations' distance from provided zipcode.
 - `exclude_full`*: Boolean; whether to filter out full Timeslots (and Events, if all of an Event's Timeslots are full), e.g. `exclude_full=true`
 - `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events.
+- `high_priority_only`: Optional boolean, e.g. `high_priority_only=true` will return only high priority ("pinned") events. If excluded or false, return high priority and non-high-priority events.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`*: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
 - `event_campaign_id`: Optional EventCampaign ID to filter to.
