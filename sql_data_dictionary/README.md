@@ -271,7 +271,7 @@ The following views map roughly to VAN Event, Shift, Signup, and Person [objects
 
 ## VAN Events
 
-The `van_events` view contains information about VAN events that have been synced to Mobilize. Only VAN events that belong to the organization's VAN committee are included.
+The `van_events` view contains information about VAN events that have been synced from Mobilize. Only VAN events that belong to the organization's VAN committee are included.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
@@ -287,7 +287,7 @@ The `van_events` view contains information about VAN events that have been synce
 
 ## VAN Shifts
 
-The `van_shifts` view contains information about VAN shifts that have been synced to Mobilize. Only VAN shifts that belong to the organization's VAN committee are included.
+The `van_shifts` view contains information about VAN shifts that have been synced from Mobilize. Only VAN shifts that belong to the organization's VAN committee are included.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
@@ -306,7 +306,7 @@ The `van_shifts` view contains information about VAN shifts that have been synce
 
 ## VAN Signups
 
-The `van_signups` view contains information about VAN signups that have been synced to Mobilize. Only VAN signups that belong to the organization's VAN committee are included.
+The `van_signups` view contains information about VAN signups that have been synced from Mobilize. Only VAN signups that belong to the organization's VAN committee are included.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
@@ -325,7 +325,7 @@ The `van_signups` view contains information about VAN signups that have been syn
 
 ## VAN Persons
 
-The `van_persons` view contains information about VAN persons that have been synced to Mobilize. Only VAN persons that belong to the organization's VAN committee are included.
+The `van_persons` view contains information about VAN persons that have been synced from Mobilize. Only VAN persons that belong to the organization's VAN committee are included.
 
 | column name | type | description |
 | ----------- | ---- | ----------- |
