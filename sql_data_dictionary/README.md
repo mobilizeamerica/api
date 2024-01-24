@@ -75,7 +75,7 @@ The `events` view includes events owned by the Organization and events owned by 
 | location__state_leg_district | varchar(50) | The state lower house district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts)|
 | location__state_senate_district | varchar(50) | The state upper house district that the location is in or null if geocoding failed or has not yet completed (a full street address is required to geocode districts)|
 | timezone | varchar(100) |	A timezone database string for the event, e.g., `America/New_York` |
-| event_type | varchar | The type of event. One of: `ADVOCACY_CALL`, `CANVASS`, `COMMUNITY`, `DEBATE_WATCH_PARTY`, `FRIEND_TO_FRIEND_OUTREACH`, `FUNDRAISER`, `HOUSE_PARTY`, `MEET_GREET`, `MEETING`, `OTHER`, `PHONE_BANK`, `TEXT_BANK`, `TRAINING`, `VOTER_REG` |
+| event_type | varchar | The type of event. One of: `CANVASS`, `PHONE_BANK`, `TEXT_BANK`, `MEETING`, `COMMUNITY`, `FUNDRAISER`, `OTHER`, `MEET_GREET`, `HOUSE_PARTY`, `VOTER_REG`, `TRAINING`, `FRIEND_TO_FRIEND_OUTREACH`, `ADVOCACY_CALL`, `DEBATE_WATCH_PARTY`, `RALLY`, `TOWN_HALL`, `OFFICE_OPENING`, `BARNSTORM`, `SOLIDARITY_EVENT`, `COMMUNITY_CANVASS`, `SIGNATURE_GATHERING`, `CARPOOL`, `WORKSHOP`, `PETITION`, `AUTOMATED_PHONE_BANK`, `LETTER_WRITING`, `LITERATURE_DROP_OFF`, `VISIBILITY_EVENT`, `PLEDGE`, `INTEREST_FORM`, `DONATION_CAMPAIGN`, `SOCIAL_MEDIA_CAMPAIGN`, `POSTCARD_WRITING`, `GROUP`, `VOLUNTEER_SHIFT` |
 | browser_url | text | Canonical URL of the event |
 | created_date | timestamptz | Timestamp that the event was created |
 | modified_date | timestamptz | Timestamp that the event was last updated |
