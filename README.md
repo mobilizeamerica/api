@@ -1420,6 +1420,9 @@ For testing and development purposes, there is also a staging api server:
  * Api entrypoint: `staging-api.mobilize.us/v1`
 
 # Changelog
+**2024-03-27**
+- Allow filtering by `state` in [List organization events](#list-organization-events)
+
 **2023-05-11**
 - Omit referrer fields (UTM fields) from Attendances when the Attendance came through promotion and the requesting organization is not the promoter.
 
