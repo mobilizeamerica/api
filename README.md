@@ -436,6 +436,7 @@ returned events, you'll need to send an authenticated request to see that data.
 - `is_virtual`: Optional boolean, e.g. `is_virtual=false` will return only in-person events, while `is_virtual=true` will return only virtual events. If excluded, return virtual and in-person events.
 - `event_types`: One or more event types to filter to (see possible values in `event_type` on the [Event object](#event-object)). If multiple, should be supplied as multiple query params, e.g. `event_types=CANVASS&event_types=PHONE_BANK`.
 - `tag_id`: One or more Tag IDs to filter to. If multiple, should be supplied as multiple query params, e.g., `tag_id=1&tag_id=2`, etc.
+- `state`: The two-letter state abbreviation code to filter Events' Locations by. If present, will only return Events with their location set to this state.
 
 ### Response
 `data` is an array of Event objects.
